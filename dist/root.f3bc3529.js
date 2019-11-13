@@ -56855,12 +56855,41 @@ class Map extends _react.Component {
       center: [37.617635, 55.755814],
       minZoom: 9
     });
+    this.translate(map);
+    this.map = map;
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    let geojson = this.props.pointsData;
+
+    if (geojson) {
+      console.log('geojson^ ', geojson);
+      this.map.on('load', () => {
+        // Add the data to your map as a layer
+        this.map.addLayer({
+          id: 'locations',
+          type: 'symbol',
+          source: geojson,
+          layout: {
+            'icon-image': ['concat', 'cafe', "-15"],
+            'text-field': ['get', 'title'],
+            'text-font': ["Open Sans Semibold", "Arial Unicode MS Bold"],
+            'text-offset': [0, 0.6],
+            'text-anchor': 'top',
+            'icon-allow-overlap': true
+          }
+        });
+      });
+    }
+  } //Change language of label layers
+
+
+  translate(map) {
     map.on('styledata', function () {
       let label_layers = map.getStyle().layers.filter(el => el.id.includes('-label'));
       let leyer_names = label_layers.map(el => el.id);
       leyer_names.forEach(el => map.setLayoutProperty(el, 'text-field', ['get', 'name_ru']));
     });
-    this.map = map;
   }
 
   render() {
@@ -56873,7 +56902,653 @@ class Map extends _react.Component {
 
 var _default = Map;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","mapbox-gl":"../node_modules/mapbox-gl/dist/mapbox-gl.js"}],"root.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","mapbox-gl":"../node_modules/mapbox-gl/dist/mapbox-gl.js"}],"../node_modules/d3-fetch/src/blob.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+function responseBlob(response) {
+  if (!response.ok) throw new Error(response.status + " " + response.statusText);
+  return response.blob();
+}
+
+function _default(input, init) {
+  return fetch(input, init).then(responseBlob);
+}
+},{}],"../node_modules/d3-fetch/src/buffer.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+function responseArrayBuffer(response) {
+  if (!response.ok) throw new Error(response.status + " " + response.statusText);
+  return response.arrayBuffer();
+}
+
+function _default(input, init) {
+  return fetch(input, init).then(responseArrayBuffer);
+}
+},{}],"../node_modules/d3-dsv/src/dsv.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+var EOL = {},
+    EOF = {},
+    QUOTE = 34,
+    NEWLINE = 10,
+    RETURN = 13;
+
+function objectConverter(columns) {
+  return new Function("d", "return {" + columns.map(function (name, i) {
+    return JSON.stringify(name) + ": d[" + i + "]";
+  }).join(",") + "}");
+}
+
+function customConverter(columns, f) {
+  var object = objectConverter(columns);
+  return function (row, i) {
+    return f(object(row), i, columns);
+  };
+} // Compute unique columns in order of discovery.
+
+
+function inferColumns(rows) {
+  var columnSet = Object.create(null),
+      columns = [];
+  rows.forEach(function (row) {
+    for (var column in row) {
+      if (!(column in columnSet)) {
+        columns.push(columnSet[column] = column);
+      }
+    }
+  });
+  return columns;
+}
+
+function pad(value, width) {
+  var s = value + "",
+      length = s.length;
+  return length < width ? new Array(width - length + 1).join(0) + s : s;
+}
+
+function formatYear(year) {
+  return year < 0 ? "-" + pad(-year, 6) : year > 9999 ? "+" + pad(year, 6) : pad(year, 4);
+}
+
+function formatDate(date) {
+  var hours = date.getUTCHours(),
+      minutes = date.getUTCMinutes(),
+      seconds = date.getUTCSeconds(),
+      milliseconds = date.getUTCMilliseconds();
+  return isNaN(date) ? "Invalid Date" : formatYear(date.getUTCFullYear(), 4) + "-" + pad(date.getUTCMonth() + 1, 2) + "-" + pad(date.getUTCDate(), 2) + (milliseconds ? "T" + pad(hours, 2) + ":" + pad(minutes, 2) + ":" + pad(seconds, 2) + "." + pad(milliseconds, 3) + "Z" : seconds ? "T" + pad(hours, 2) + ":" + pad(minutes, 2) + ":" + pad(seconds, 2) + "Z" : minutes || hours ? "T" + pad(hours, 2) + ":" + pad(minutes, 2) + "Z" : "");
+}
+
+function _default(delimiter) {
+  var reFormat = new RegExp("[\"" + delimiter + "\n\r]"),
+      DELIMITER = delimiter.charCodeAt(0);
+
+  function parse(text, f) {
+    var convert,
+        columns,
+        rows = parseRows(text, function (row, i) {
+      if (convert) return convert(row, i - 1);
+      columns = row, convert = f ? customConverter(row, f) : objectConverter(row);
+    });
+    rows.columns = columns || [];
+    return rows;
+  }
+
+  function parseRows(text, f) {
+    var rows = [],
+        // output rows
+    N = text.length,
+        I = 0,
+        // current character index
+    n = 0,
+        // current line number
+    t,
+        // current token
+    eof = N <= 0,
+        // current token followed by EOF?
+    eol = false; // current token followed by EOL?
+    // Strip the trailing newline.
+
+    if (text.charCodeAt(N - 1) === NEWLINE) --N;
+    if (text.charCodeAt(N - 1) === RETURN) --N;
+
+    function token() {
+      if (eof) return EOF;
+      if (eol) return eol = false, EOL; // Unescape quotes.
+
+      var i,
+          j = I,
+          c;
+
+      if (text.charCodeAt(j) === QUOTE) {
+        while (I++ < N && text.charCodeAt(I) !== QUOTE || text.charCodeAt(++I) === QUOTE);
+
+        if ((i = I) >= N) eof = true;else if ((c = text.charCodeAt(I++)) === NEWLINE) eol = true;else if (c === RETURN) {
+          eol = true;
+          if (text.charCodeAt(I) === NEWLINE) ++I;
+        }
+        return text.slice(j + 1, i - 1).replace(/""/g, "\"");
+      } // Find next delimiter or newline.
+
+
+      while (I < N) {
+        if ((c = text.charCodeAt(i = I++)) === NEWLINE) eol = true;else if (c === RETURN) {
+          eol = true;
+          if (text.charCodeAt(I) === NEWLINE) ++I;
+        } else if (c !== DELIMITER) continue;
+        return text.slice(j, i);
+      } // Return last token before EOF.
+
+
+      return eof = true, text.slice(j, N);
+    }
+
+    while ((t = token()) !== EOF) {
+      var row = [];
+
+      while (t !== EOL && t !== EOF) row.push(t), t = token();
+
+      if (f && (row = f(row, n++)) == null) continue;
+      rows.push(row);
+    }
+
+    return rows;
+  }
+
+  function preformatBody(rows, columns) {
+    return rows.map(function (row) {
+      return columns.map(function (column) {
+        return formatValue(row[column]);
+      }).join(delimiter);
+    });
+  }
+
+  function format(rows, columns) {
+    if (columns == null) columns = inferColumns(rows);
+    return [columns.map(formatValue).join(delimiter)].concat(preformatBody(rows, columns)).join("\n");
+  }
+
+  function formatBody(rows, columns) {
+    if (columns == null) columns = inferColumns(rows);
+    return preformatBody(rows, columns).join("\n");
+  }
+
+  function formatRows(rows) {
+    return rows.map(formatRow).join("\n");
+  }
+
+  function formatRow(row) {
+    return row.map(formatValue).join(delimiter);
+  }
+
+  function formatValue(value) {
+    return value == null ? "" : value instanceof Date ? formatDate(value) : reFormat.test(value += "") ? "\"" + value.replace(/"/g, "\"\"") + "\"" : value;
+  }
+
+  return {
+    parse: parse,
+    parseRows: parseRows,
+    format: format,
+    formatBody: formatBody,
+    formatRows: formatRows
+  };
+}
+},{}],"../node_modules/d3-dsv/src/csv.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.csvFormatRows = exports.csvFormatBody = exports.csvFormat = exports.csvParseRows = exports.csvParse = void 0;
+
+var _dsv = _interopRequireDefault(require("./dsv"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var csv = (0, _dsv.default)(",");
+var csvParse = csv.parse;
+exports.csvParse = csvParse;
+var csvParseRows = csv.parseRows;
+exports.csvParseRows = csvParseRows;
+var csvFormat = csv.format;
+exports.csvFormat = csvFormat;
+var csvFormatBody = csv.formatBody;
+exports.csvFormatBody = csvFormatBody;
+var csvFormatRows = csv.formatRows;
+exports.csvFormatRows = csvFormatRows;
+},{"./dsv":"../node_modules/d3-dsv/src/dsv.js"}],"../node_modules/d3-dsv/src/tsv.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.tsvFormatRows = exports.tsvFormatBody = exports.tsvFormat = exports.tsvParseRows = exports.tsvParse = void 0;
+
+var _dsv = _interopRequireDefault(require("./dsv"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var tsv = (0, _dsv.default)("\t");
+var tsvParse = tsv.parse;
+exports.tsvParse = tsvParse;
+var tsvParseRows = tsv.parseRows;
+exports.tsvParseRows = tsvParseRows;
+var tsvFormat = tsv.format;
+exports.tsvFormat = tsvFormat;
+var tsvFormatBody = tsv.formatBody;
+exports.tsvFormatBody = tsvFormatBody;
+var tsvFormatRows = tsv.formatRows;
+exports.tsvFormatRows = tsvFormatRows;
+},{"./dsv":"../node_modules/d3-dsv/src/dsv.js"}],"../node_modules/d3-dsv/src/autoType.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = autoType;
+
+function autoType(object) {
+  for (var key in object) {
+    var value = object[key].trim(),
+        number;
+    if (!value) value = null;else if (value === "true") value = true;else if (value === "false") value = false;else if (value === "NaN") value = NaN;else if (!isNaN(number = +value)) value = number;else if (/^([-+]\d{2})?\d{4}(-\d{2}(-\d{2})?)?(T\d{2}:\d{2}(:\d{2}(\.\d{3})?)?(Z|[-+]\d{2}:\d{2})?)?$/.test(value)) value = new Date(value);else continue;
+    object[key] = value;
+  }
+
+  return object;
+}
+},{}],"../node_modules/d3-dsv/src/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "dsvFormat", {
+  enumerable: true,
+  get: function () {
+    return _dsv.default;
+  }
+});
+Object.defineProperty(exports, "csvParse", {
+  enumerable: true,
+  get: function () {
+    return _csv.csvParse;
+  }
+});
+Object.defineProperty(exports, "csvParseRows", {
+  enumerable: true,
+  get: function () {
+    return _csv.csvParseRows;
+  }
+});
+Object.defineProperty(exports, "csvFormat", {
+  enumerable: true,
+  get: function () {
+    return _csv.csvFormat;
+  }
+});
+Object.defineProperty(exports, "csvFormatBody", {
+  enumerable: true,
+  get: function () {
+    return _csv.csvFormatBody;
+  }
+});
+Object.defineProperty(exports, "csvFormatRows", {
+  enumerable: true,
+  get: function () {
+    return _csv.csvFormatRows;
+  }
+});
+Object.defineProperty(exports, "tsvParse", {
+  enumerable: true,
+  get: function () {
+    return _tsv.tsvParse;
+  }
+});
+Object.defineProperty(exports, "tsvParseRows", {
+  enumerable: true,
+  get: function () {
+    return _tsv.tsvParseRows;
+  }
+});
+Object.defineProperty(exports, "tsvFormat", {
+  enumerable: true,
+  get: function () {
+    return _tsv.tsvFormat;
+  }
+});
+Object.defineProperty(exports, "tsvFormatBody", {
+  enumerable: true,
+  get: function () {
+    return _tsv.tsvFormatBody;
+  }
+});
+Object.defineProperty(exports, "tsvFormatRows", {
+  enumerable: true,
+  get: function () {
+    return _tsv.tsvFormatRows;
+  }
+});
+Object.defineProperty(exports, "autoType", {
+  enumerable: true,
+  get: function () {
+    return _autoType.default;
+  }
+});
+
+var _dsv = _interopRequireDefault(require("./dsv"));
+
+var _csv = require("./csv");
+
+var _tsv = require("./tsv");
+
+var _autoType = _interopRequireDefault(require("./autoType"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./dsv":"../node_modules/d3-dsv/src/dsv.js","./csv":"../node_modules/d3-dsv/src/csv.js","./tsv":"../node_modules/d3-dsv/src/tsv.js","./autoType":"../node_modules/d3-dsv/src/autoType.js"}],"../node_modules/d3-fetch/src/text.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+function responseText(response) {
+  if (!response.ok) throw new Error(response.status + " " + response.statusText);
+  return response.text();
+}
+
+function _default(input, init) {
+  return fetch(input, init).then(responseText);
+}
+},{}],"../node_modules/d3-fetch/src/dsv.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = dsv;
+exports.tsv = exports.csv = void 0;
+
+var _d3Dsv = require("d3-dsv");
+
+var _text = _interopRequireDefault(require("./text"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function dsvParse(parse) {
+  return function (input, init, row) {
+    if (arguments.length === 2 && typeof init === "function") row = init, init = undefined;
+    return (0, _text.default)(input, init).then(function (response) {
+      return parse(response, row);
+    });
+  };
+}
+
+function dsv(delimiter, input, init, row) {
+  if (arguments.length === 3 && typeof init === "function") row = init, init = undefined;
+  var format = (0, _d3Dsv.dsvFormat)(delimiter);
+  return (0, _text.default)(input, init).then(function (response) {
+    return format.parse(response, row);
+  });
+}
+
+var csv = dsvParse(_d3Dsv.csvParse);
+exports.csv = csv;
+var tsv = dsvParse(_d3Dsv.tsvParse);
+exports.tsv = tsv;
+},{"d3-dsv":"../node_modules/d3-dsv/src/index.js","./text":"../node_modules/d3-fetch/src/text.js"}],"../node_modules/d3-fetch/src/image.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+function _default(input, init) {
+  return new Promise(function (resolve, reject) {
+    var image = new Image();
+
+    for (var key in init) image[key] = init[key];
+
+    image.onerror = reject;
+
+    image.onload = function () {
+      resolve(image);
+    };
+
+    image.src = input;
+  });
+}
+},{}],"../node_modules/d3-fetch/src/json.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+function responseJson(response) {
+  if (!response.ok) throw new Error(response.status + " " + response.statusText);
+  return response.json();
+}
+
+function _default(input, init) {
+  return fetch(input, init).then(responseJson);
+}
+},{}],"../node_modules/d3-fetch/src/xml.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.svg = exports.html = exports.default = void 0;
+
+var _text = _interopRequireDefault(require("./text"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function parser(type) {
+  return function (input, init) {
+    return (0, _text.default)(input, init).then(function (text) {
+      return new DOMParser().parseFromString(text, type);
+    });
+  };
+}
+
+var _default = parser("application/xml");
+
+exports.default = _default;
+var html = parser("text/html");
+exports.html = html;
+var svg = parser("image/svg+xml");
+exports.svg = svg;
+},{"./text":"../node_modules/d3-fetch/src/text.js"}],"../node_modules/d3-fetch/src/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "blob", {
+  enumerable: true,
+  get: function () {
+    return _blob.default;
+  }
+});
+Object.defineProperty(exports, "buffer", {
+  enumerable: true,
+  get: function () {
+    return _buffer.default;
+  }
+});
+Object.defineProperty(exports, "dsv", {
+  enumerable: true,
+  get: function () {
+    return _dsv.default;
+  }
+});
+Object.defineProperty(exports, "csv", {
+  enumerable: true,
+  get: function () {
+    return _dsv.csv;
+  }
+});
+Object.defineProperty(exports, "tsv", {
+  enumerable: true,
+  get: function () {
+    return _dsv.tsv;
+  }
+});
+Object.defineProperty(exports, "image", {
+  enumerable: true,
+  get: function () {
+    return _image.default;
+  }
+});
+Object.defineProperty(exports, "json", {
+  enumerable: true,
+  get: function () {
+    return _json.default;
+  }
+});
+Object.defineProperty(exports, "text", {
+  enumerable: true,
+  get: function () {
+    return _text.default;
+  }
+});
+Object.defineProperty(exports, "xml", {
+  enumerable: true,
+  get: function () {
+    return _xml.default;
+  }
+});
+Object.defineProperty(exports, "html", {
+  enumerable: true,
+  get: function () {
+    return _xml.html;
+  }
+});
+Object.defineProperty(exports, "svg", {
+  enumerable: true,
+  get: function () {
+    return _xml.svg;
+  }
+});
+
+var _blob = _interopRequireDefault(require("./blob"));
+
+var _buffer = _interopRequireDefault(require("./buffer"));
+
+var _dsv = _interopRequireWildcard(require("./dsv"));
+
+var _image = _interopRequireDefault(require("./image"));
+
+var _json = _interopRequireDefault(require("./json"));
+
+var _text = _interopRequireDefault(require("./text"));
+
+var _xml = _interopRequireWildcard(require("./xml"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./blob":"../node_modules/d3-fetch/src/blob.js","./buffer":"../node_modules/d3-fetch/src/buffer.js","./dsv":"../node_modules/d3-fetch/src/dsv.js","./image":"../node_modules/d3-fetch/src/image.js","./json":"../node_modules/d3-fetch/src/json.js","./text":"../node_modules/d3-fetch/src/text.js","./xml":"../node_modules/d3-fetch/src/xml.js"}],"data_test.csv":[function(require,module,exports) {
+module.exports = "/data_test.9c24891d.csv";
+},{}],"MapContainer.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _Map = _interopRequireDefault(require("./Map"));
+
+var d3 = _interopRequireWildcard(require("d3-fetch"));
+
+var _data_test = _interopRequireDefault(require("./data_test.csv"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+class MapContainer extends _react.Component {
+  constructor() {
+    super(...arguments);
+
+    _defineProperty(this, "state", {
+      points: []
+    });
+  }
+
+  async componentDidMount() {
+    ///  GET DATA HERE
+    await d3.csv(_data_test.default).then(data => {
+      let geoJSON = makeGeoJSON(data);
+      this.setState({
+        points: geoJSON
+      });
+    });
+  }
+
+  render() {
+    //return "container"
+    return _react.default.createElement(_Map.default, {
+      pointsData: this.state.points
+    });
+  }
+
+}
+
+function makeGeoJSON(data) {
+  let features = data.map(d => {
+    return {
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: [+d['Координаты, долгота'], +d['Координаты, широта']]
+      },
+      properties: {
+        title: d['Наименование организации'],
+        description: 'Washington, D.C.'
+      }
+    };
+  });
+  let geoJSON = {
+    "type": "geojson",
+    "data": {
+      "type": "FeatureCollection",
+      "features": features
+    }
+  };
+  return geoJSON;
+}
+
+var _default = MapContainer;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","./Map":"Map.jsx","d3-fetch":"../node_modules/d3-fetch/src/index.js","./data_test.csv":"data_test.csv"}],"root.jsx":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireWildcard(require("react"));
@@ -56882,7 +57557,7 @@ var _reactDom = _interopRequireDefault(require("react-dom"));
 
 require("./styles.scss");
 
-var _Map = _interopRequireDefault(require("./Map"));
+var _MapContainer = _interopRequireDefault(require("./MapContainer"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -56902,7 +57577,7 @@ class App extends _react.Component {
     const {
       selectedPoint
     } = this.state;
-    return _react.default.createElement("div", null, _react.default.createElement(_Map.default, {
+    return _react.default.createElement("div", null, _react.default.createElement(_MapContainer.default, {
       selectedPoint: selectedPoint
     }));
   }
@@ -56910,7 +57585,7 @@ class App extends _react.Component {
 }
 
 _reactDom.default.render(_react.default.createElement(App, null), document.getElementById('root'));
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./styles.scss":"styles.scss","./Map":"Map.jsx"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./styles.scss":"styles.scss","./MapContainer":"MapContainer.jsx"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -56938,7 +57613,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "37863" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "19521" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

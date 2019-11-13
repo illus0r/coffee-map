@@ -48,5 +48,12 @@ body {
     margin: 0;
   }
 }
+.marker {
+  background-size: cover;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+}
 
 /*# sourceMappingURL=/root.f3bc3529.css.map */

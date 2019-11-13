@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 import './styles.scss'
 
-import Map from './Map';
+import MapContainer from "./MapContainer";
 
 class App extends Component {
 	constructor(props) {
@@ -15,7 +15,7 @@ class App extends Component {
 		const {selectedPoint} = this.state;
 		return (
 			<div>
-				<Map
+				<MapContainer
 					selectedPoint={selectedPoint}
 				/>
 			</div>
