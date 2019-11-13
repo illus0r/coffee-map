@@ -41,7 +41,7 @@ function makeGeoJSON(data) {
             },
             properties: {
                 title: d['Наименование организации'],
-                description: 'Washington, D.C.'
+                description: d['Улица']+', '+d['Номер дома']
             }
         }
     })

@@ -56857,6 +56857,7 @@ class Map extends _react.Component {
     });
     this.translate(map);
     this.map = map;
+    this.zoomThreshold = 11;
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -56884,7 +56885,6 @@ class Map extends _react.Component {
     }
 
     if (geojsonConturs) {
-      console.log('contur', geojsonConturs);
       this.map.on('load', () => {
         this.map.addSource('cafeRating', {
           'type': 'geojson',
@@ -56894,6 +56894,7 @@ class Map extends _react.Component {
           'id': 'cafeRating',
           'source': 'cafeRating',
           'type': 'fill',
+          'maxzoom': this.zoomThreshold,
           //'filter': ['==', 'isState', true],
           'paint': {
             'fill-color': ['interpolate', ['linear'], ['get', 'value'], 0, '#F2F12D', 10, '#EED322', 20, '#E6B71E', 30, '#DA9C20', 40, '#CA8323', 50, '#B86B25', 75, '#A25626', 85, '#8B4225', 100, '#723122'],
@@ -56903,6 +56904,9 @@ class Map extends _react.Component {
         }, 'waterway-label');
       });
     }
+
+    createCafePopUp(this.map);
+    createConturPopUp(this.map);
   } //Change language of label layers
 
 
@@ -56924,6 +56928,40 @@ class Map extends _react.Component {
 
 var _default = Map;
 exports.default = _default;
+
+function createCafePopUp(map) {
+  let popup = new _mapboxGl.default.Popup({
+    closeButton: false,
+    closeOnClick: false
+  });
+  map.on('mouseenter', 'locations', function (e) {
+    let coordinates = e.features[0].geometry.coordinates.slice();
+    let description = e.features[0].properties.description;
+
+    while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+      coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+    }
+
+    popup.setLngLat(coordinates).setHTML(description).addTo(map);
+  });
+  map.on('mouseleave', 'locations', function () {
+    popup.remove();
+  });
+}
+
+function createConturPopUp(map) {
+  let popups = new _mapboxGl.default.Popup({
+    closeButton: true
+  });
+  map.on('mouseover', 'cafeRating', function (e) {
+    let description = e.features[0].properties["NAME"];
+    console.log(description);
+    popups.setLngLat(e.lngLat).setHTML(description).addTo(map);
+  });
+  map.on('mouseleave', 'cafeRating', function () {
+    popups.remove();
+  });
+}
 },{"react":"../node_modules/react/index.js","mapbox-gl":"../node_modules/mapbox-gl/dist/mapbox-gl.js"}],"../node_modules/d3-fetch/src/blob.js":[function(require,module,exports) {
 "use strict";
 
@@ -57563,7 +57601,7 @@ function makeGeoJSON(data) {
       },
       properties: {
         title: d['Наименование организации'],
-        description: 'Washington, D.C.'
+        description: d['Улица'] + ', ' + d['Номер дома']
       }
     };
   });
@@ -57650,7 +57688,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "19521" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "21161" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

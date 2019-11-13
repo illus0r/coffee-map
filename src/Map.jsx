@@ -16,6 +16,7 @@ class Map extends Component {
 
 		this.translate(map)
 		this.map=map
+		this.zoomThreshold =11
 	}
 
 	componentDidUpdate(prevProps, prevState, snapshot) {
@@ -43,12 +44,9 @@ class Map extends Component {
 				}
 			});
 		});
-
-
 	}
 
 		if (geojsonConturs){
-			console.log('contur', geojsonConturs)
 			this.map.on('load', () => {
 				this.map.addSource('cafeRating', {
 				'type': 'geojson',
@@ -59,6 +57,7 @@ class Map extends Component {
 				'id': 'cafeRating',
 				'source': 'cafeRating',
 				'type': 'fill',
+				'maxzoom': this.zoomThreshold,
 				//'filter': ['==', 'isState', true],
 				'paint': {
 					'fill-color': [
@@ -81,6 +80,8 @@ class Map extends Component {
 			}, 'waterway-label');
 		})
 		}
+		createCafePopUp(this.map)
+		createConturPopUp(this.map)
 
 	}
 
@@ -102,3 +103,48 @@ class Map extends Component {
 	}
 }
 export default Map;
+
+function createCafePopUp(map) {
+
+	let popup = new mapboxgl.Popup({
+		closeButton: false,
+		closeOnClick: false
+	});
+
+	map.on('mouseenter', 'locations', function(e) {
+
+		let coordinates = e.features[0].geometry.coordinates.slice();
+		let description = e.features[0].properties.description;
+
+		while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+			coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+		}
+
+		popup.setLngLat(coordinates)
+			.setHTML(description)
+			.addTo(map);
+	});
+
+	map.on('mouseleave', 'locations', function() {
+		popup.remove();
+	});
+}
+
+function createConturPopUp(map) {
+
+	let popups = new mapboxgl.Popup({
+		closeButton: true
+	});
+
+	map.on('mouseover', 'cafeRating', function(e) {
+		let description = e.features[0].properties["NAME"];
+		console.log(description)
+		popups.setLngLat(e.lngLat)
+			.setHTML(description)
+			.addTo(map);
+	});
+
+	map.on('mouseleave', 'cafeRating', function() {
+		popups.remove();
+	});
+}
