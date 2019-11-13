@@ -56860,16 +56860,17 @@ class Map extends _react.Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    let geojson = this.props.pointsData;
+    let geojsonPoints = this.props.pointsData;
+    let geojsonConturs = this.props.contursData;
 
-    if (geojson) {
-      console.log('geojson^ ', geojson);
+    if (geojsonPoints) {
+      console.log('geojson^ ', geojsonPoints);
       this.map.on('load', () => {
         // Add the data to your map as a layer
         this.map.addLayer({
           id: 'locations',
           type: 'symbol',
-          source: geojson,
+          source: geojsonPoints,
           layout: {
             'icon-image': ['concat', 'cafe', "-15"],
             'text-field': ['get', 'title'],
@@ -56879,6 +56880,27 @@ class Map extends _react.Component {
             'icon-allow-overlap': true
           }
         });
+      });
+    }
+
+    if (geojsonConturs) {
+      console.log('contur', geojsonConturs);
+      this.map.on('load', () => {
+        this.map.addSource('cafeRating', {
+          'type': 'geojson',
+          'data': geojsonConturs
+        });
+        this.map.addLayer({
+          'id': 'cafeRating',
+          'source': 'cafeRating',
+          'type': 'fill',
+          //'filter': ['==', 'isState', true],
+          'paint': {
+            'fill-color': ['interpolate', ['linear'], ['get', 'value'], 0, '#F2F12D', 10, '#EED322', 20, '#E6B71E', 30, '#DA9C20', 40, '#CA8323', 50, '#B86B25', 75, '#A25626', 85, '#8B4225', 100, '#723122'],
+            'fill-opacity': 0.3,
+            'fill-outline-color': '#000'
+          }
+        }, 'waterway-label');
       });
     }
   } //Change language of label layers
@@ -57470,6 +57492,8 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 },{"./blob":"../node_modules/d3-fetch/src/blob.js","./buffer":"../node_modules/d3-fetch/src/buffer.js","./dsv":"../node_modules/d3-fetch/src/dsv.js","./image":"../node_modules/d3-fetch/src/image.js","./json":"../node_modules/d3-fetch/src/json.js","./text":"../node_modules/d3-fetch/src/text.js","./xml":"../node_modules/d3-fetch/src/xml.js"}],"data_test.csv":[function(require,module,exports) {
 module.exports = "/data_test.9c24891d.csv";
+},{}],"mo.geojson":[function(require,module,exports) {
+module.exports = "/mo.e449eaee.geojson";
 },{}],"MapContainer.jsx":[function(require,module,exports) {
 "use strict";
 
@@ -57485,6 +57509,8 @@ var _Map = _interopRequireDefault(require("./Map"));
 var d3 = _interopRequireWildcard(require("d3-fetch"));
 
 var _data_test = _interopRequireDefault(require("./data_test.csv"));
+
+var _mo = _interopRequireDefault(require("./mo.geojson"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -57506,9 +57532,13 @@ class MapContainer extends _react.Component {
   async componentDidMount() {
     ///  GET DATA HERE
     await d3.csv(_data_test.default).then(data => {
-      let geoJSON = makeGeoJSON(data);
-      this.setState({
-        points: geoJSON
+      d3.json(_mo.default).then(geoMoscow => {
+        let geoJSON = makeGeoJSON(data);
+        addValues(geoMoscow);
+        this.setState({
+          points: geoJSON,
+          conturs: geoMoscow
+        });
       });
     });
   }
@@ -57516,7 +57546,8 @@ class MapContainer extends _react.Component {
   render() {
     //return "container"
     return _react.default.createElement(_Map.default, {
-      pointsData: this.state.points
+      pointsData: this.state.points,
+      contursData: this.state.conturs
     });
   }
 
@@ -57546,9 +57577,15 @@ function makeGeoJSON(data) {
   return geoJSON;
 }
 
+function addValues(data) {
+  data.features.forEach(feature => {
+    feature.properties.value = +(Math.random() * 100).toFixed(2);
+  });
+}
+
 var _default = MapContainer;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","./Map":"Map.jsx","d3-fetch":"../node_modules/d3-fetch/src/index.js","./data_test.csv":"data_test.csv"}],"root.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","./Map":"Map.jsx","d3-fetch":"../node_modules/d3-fetch/src/index.js","./data_test.csv":"data_test.csv","./mo.geojson":"mo.geojson"}],"root.jsx":[function(require,module,exports) {
 "use strict";
 
 var _react = _interopRequireWildcard(require("react"));

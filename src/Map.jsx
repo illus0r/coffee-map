@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import mapboxgl from 'mapbox-gl';
 
+
 mapboxgl.accessToken = 'pk.eyJ1IjoiZXJvaGluYWVsZW5hIiwiYSI6InNWVFJmZFUifQ.ZjRE101FtM3fXPJiw2Fq9g';
 
 class Map extends Component {
@@ -19,17 +20,19 @@ class Map extends Component {
 
 	componentDidUpdate(prevProps, prevState, snapshot) {
 
-		let geojson = this.props.pointsData
+		let geojsonPoints = this.props.pointsData
+		let geojsonConturs = this.props.contursData
 
-		if (geojson) {
-			console.log('geojson^ ', geojson)
+
+		if (geojsonPoints) {
+			console.log('geojson^ ', geojsonPoints)
 
 		this.map.on('load', () => {
 			// Add the data to your map as a layer
 			this.map.addLayer({
 				id: 'locations',
 				type: 'symbol',
-				source: geojson,
+				source: geojsonPoints,
 				layout: {
 					'icon-image': ['concat', 'cafe', "-15"],
 					'text-field': ['get', 'title'],
@@ -40,7 +43,45 @@ class Map extends Component {
 				}
 			});
 		});
+
+
 	}
+
+		if (geojsonConturs){
+			console.log('contur', geojsonConturs)
+			this.map.on('load', () => {
+				this.map.addSource('cafeRating', {
+				'type': 'geojson',
+				'data': geojsonConturs
+			});
+
+				this.map.addLayer({
+				'id': 'cafeRating',
+				'source': 'cafeRating',
+				'type': 'fill',
+				//'filter': ['==', 'isState', true],
+				'paint': {
+					'fill-color': [
+						'interpolate',
+						['linear'],
+						['get', 'value'],
+						0, '#F2F12D',
+						10, '#EED322',
+						20, '#E6B71E',
+						30, '#DA9C20',
+						40, '#CA8323',
+						50, '#B86B25',
+						75, '#A25626',
+						85, '#8B4225',
+						100, '#723122'
+					],
+					'fill-opacity': 0.3,
+					'fill-outline-color': '#000'
+				}
+			}, 'waterway-label');
+		})
+		}
+
 	}
 
 	//Change language of label layers
