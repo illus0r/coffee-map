@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "@mapbox/mapbox-gl-language": "^0.10.1",
     "d3-dsv": "^1.1.1",
     "d3-fetch": "^1.1.2",
     "gh-pages": "^2.1.1",
