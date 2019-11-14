@@ -57145,7 +57145,11 @@ class Map extends _react.Component {
               'text-font': ["Open Sans Semibold", "Arial Unicode MS Bold"],
               'text-offset': [0, 0.6],
               'text-anchor': 'top',
-              'icon-allow-overlap': true
+              "text-size": {
+                "stops": [[0, 0], [10, 0], [14, 20]]
+              },
+              'icon-allow-overlap': true,
+              'text-allow-overlap': true
             }
           });
         });
@@ -57153,7 +57157,7 @@ class Map extends _react.Component {
           let currentFeature = e.features[0];
           this.map.flyTo({
             center: currentFeature.geometry.coordinates,
-            zoom: 12
+            zoom: 11
           });
         });
       }
@@ -57240,12 +57244,13 @@ function createCafePopUp(map) {
   map.on('mouseenter', 'locations', function (e) {
     let coordinates = e.features[0].geometry.coordinates.slice();
     let description = e.features[0].properties.description;
+    let title = e.features[0].properties.title;
 
     while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
       coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
     }
 
-    popup.setLngLat(coordinates).setHTML(description).addTo(map);
+    popup.setLngLat(coordinates).setHTML(title + '<br>' + description).addTo(map);
   });
   map.on('mouseleave', 'locations', function () {
     popup.remove();
@@ -58037,7 +58042,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "8349" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65182" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

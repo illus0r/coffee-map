@@ -42,7 +42,15 @@ class Map extends Component {
                             'text-font': ["Open Sans Semibold", "Arial Unicode MS Bold"],
                             'text-offset': [0, 0.6],
                             'text-anchor': 'top',
+                            "text-size": {
+                                "stops": [
+                                    [0, 0],
+                                    [10, 0],
+                                    [14, 20]
+                                ]
+                            },
                             'icon-allow-overlap': true,
+                            'text-allow-overlap':true,
                         }
                     });
                 });
@@ -50,7 +58,7 @@ class Map extends Component {
                     let currentFeature = e.features[0]
                     this.map.flyTo({
                         center: currentFeature.geometry.coordinates,
-                        zoom: 12
+                        zoom: 11
                     });
                 });
             }
@@ -147,13 +155,14 @@ function createCafePopUp(map) {
 
         let coordinates = e.features[0].geometry.coordinates.slice();
         let description = e.features[0].properties.description;
+        let title = e.features[0].properties.title;
 
         while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
             coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
         }
 
         popup.setLngLat(coordinates)
-            .setHTML(description)
+            .setHTML(title + '<br>' +description)
             .addTo(map);
     });
 
