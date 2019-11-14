@@ -7,7 +7,10 @@ import moscow from './mo.geojson'
 
 class MapContainer extends Component {
     state = {
-        points: []
+        points: [],
+        conturs: [],
+        activeItem: null,
+        activePoints: null,
     }
 
     async componentDidMount() {

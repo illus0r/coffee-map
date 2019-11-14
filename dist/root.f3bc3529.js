@@ -57256,7 +57256,47 @@ function createCafePopUp(map) {
     popup.remove();
   });
 }
-},{"react":"../node_modules/react/index.js","mapbox-gl":"../node_modules/mapbox-gl/dist/mapbox-gl.js","@mapbox/mapbox-gl-language":"../node_modules/@mapbox/mapbox-gl-language/index.js"}],"List.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","mapbox-gl":"../node_modules/mapbox-gl/dist/mapbox-gl.js","@mapbox/mapbox-gl-language":"../node_modules/@mapbox/mapbox-gl-language/index.js"}],"Search.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+class Search extends _react.Component {
+  constructor() {
+    super(...arguments);
+
+    _defineProperty(this, "handleInputChange", event => {
+      this.props.searchText(event.target.value);
+    });
+  }
+
+  render() {
+    return _react.default.createElement("div", {
+      className: "searchbar"
+    }, _react.default.createElement("input", {
+      type: "text",
+      className: "form-control",
+      placeholder: "Search...",
+      onChange: this.handleInputChange
+    }));
+  }
+
+}
+
+var _default = Search;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js"}],"List.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -57268,28 +57308,62 @@ var _react = _interopRequireWildcard(require("react"));
 
 var _reactDom = _interopRequireDefault(require("react-dom"));
 
+var _Search = _interopRequireDefault(require("./Search"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 class List extends _react.Component {
+  constructor() {
+    super(...arguments);
+
+    _defineProperty(this, "state", {
+      searchText: ""
+    });
+
+    _defineProperty(this, "searchHandler", value => {
+      this.setState({
+        searchText: value
+      });
+    });
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {}
+
   render() {
     let numbers = this.props.activePoints;
+    const searchedText = this.state.searchText.toLowerCase();
+
+    if (searchedText != null && numbers) {
+      numbers = numbers.filter(cafe => {
+        if (cafe) {
+          const cafeName = cafe.properties.title.toLowerCase();
+          const cafeDesc = cafe.properties.description.toLowerCase();
+          return cafeName.includes(searchedText) || cafeDesc.includes(searchedText);
+        }
+      });
+    }
+
     if (!numbers) numbers = [];
     const listItems = numbers.map((number, i) => _react.default.createElement("li", {
       key: i,
       onClick: () => this.props.activeItem(number)
     }, number.properties.title));
-    return _reactDom.default.createPortal(_react.default.createElement("ul", null, listItems), document.getElementById('list'));
+    return _reactDom.default.createPortal(_react.default.createElement("div", null, _react.default.createElement(_Search.default, {
+      searchText: this.searchHandler
+    }), _react.default.createElement("ul", null, listItems)), document.getElementById('list'));
   }
 
 }
 
 var _default = List;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js"}],"../node_modules/d3-fetch/src/blob.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./Search":"Search.js"}],"../node_modules/d3-fetch/src/blob.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -57892,7 +57966,10 @@ class MapContainer extends _react.Component {
     super(...arguments);
 
     _defineProperty(this, "state", {
-      points: []
+      points: [],
+      conturs: [],
+      activeItem: null,
+      activePoints: null
     });
 
     _defineProperty(this, "activePointsHandler", value => {
@@ -58042,7 +58119,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65182" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34979" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

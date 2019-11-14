@@ -125,6 +125,7 @@ class Map extends Component {
                 speed: 3,
                 zoom: 13
             });
+
             this.props.clearActiveItem()
         }
     }
