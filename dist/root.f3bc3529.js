@@ -56851,7 +56851,7 @@ class Map extends _react.Component {
   componentDidMount() {
     let map = new _mapboxGl.default.Map({
       container: 'map',
-      style: 'mapbox://styles/mapbox/streets-v11',
+      style: 'mapbox://styles/mapbox/light-v9',
       center: [37.617635, 55.755814],
       minZoom: 9
     });
@@ -56882,6 +56882,13 @@ class Map extends _react.Component {
           }
         });
       });
+      this.map.on('click', 'locations', e => {
+        let currentFeature = e.features[0];
+        this.map.flyTo({
+          center: currentFeature.geometry.coordinates,
+          zoom: 12
+        });
+      });
     }
 
     if (geojsonConturs) {
@@ -56903,10 +56910,21 @@ class Map extends _react.Component {
           }
         }, 'waterway-label');
       });
+      this.map.on('click', 'cafeRating', e => {
+        const coordinates = e.features[0].geometry.coordinates[0];
+        debugger;
+        const bounds = coordinates.reduce(function (bounds, coord) {
+          return bounds.extend(coord);
+        }, new _mapboxGl.default.LngLatBounds(coordinates[0], coordinates[0]));
+        debugger;
+        this.map.flyTo({
+          center: bounds.getCenter(),
+          zoom: 12
+        });
+      });
     }
 
     createCafePopUp(this.map);
-    createConturPopUp(this.map);
   } //Change language of label layers
 
 
@@ -56946,20 +56964,6 @@ function createCafePopUp(map) {
   });
   map.on('mouseleave', 'locations', function () {
     popup.remove();
-  });
-}
-
-function createConturPopUp(map) {
-  let popups = new _mapboxGl.default.Popup({
-    closeButton: true
-  });
-  map.on('mouseover', 'cafeRating', function (e) {
-    let description = e.features[0].properties["NAME"];
-    console.log(description);
-    popups.setLngLat(e.lngLat).setHTML(description).addTo(map);
-  });
-  map.on('mouseleave', 'cafeRating', function () {
-    popups.remove();
   });
 }
 },{"react":"../node_modules/react/index.js","mapbox-gl":"../node_modules/mapbox-gl/dist/mapbox-gl.js"}],"../node_modules/d3-fetch/src/blob.js":[function(require,module,exports) {
@@ -57688,7 +57692,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "21161" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53108" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
