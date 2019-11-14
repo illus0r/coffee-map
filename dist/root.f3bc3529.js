@@ -57184,7 +57184,7 @@ class Map extends _react.Component {
           }, new _mapboxGl.default.LngLatBounds(coordinates[0], coordinates[0]));
           this.map.flyTo({
             center: bounds.getCenter(),
-            zoom: 12
+            zoom: 11
           });
         });
       }
@@ -57200,6 +57200,15 @@ class Map extends _react.Component {
           this.props.activePoints(features);
         }
       });
+    }
+
+    if (this.props.activeItem) {
+      this.map.flyTo({
+        center: this.props.activeItem.geometry.coordinates,
+        speed: 3,
+        zoom: 13
+      });
+      this.props.clearActiveItem();
     }
   } //Change language of label layers
 
@@ -57265,7 +57274,8 @@ class List extends _react.Component {
     let numbers = this.props.activePoints;
     if (!numbers) numbers = [];
     const listItems = numbers.map((number, i) => _react.default.createElement("li", {
-      key: i
+      key: i,
+      onClick: () => this.props.activeItem(number)
     }, number.properties.title));
     return _reactDom.default.createPortal(_react.default.createElement("ul", null, listItems), document.getElementById('list'));
   }
@@ -57885,6 +57895,18 @@ class MapContainer extends _react.Component {
         activePoints: value
       });
     });
+
+    _defineProperty(this, "activeItemHandler", value => {
+      this.setState({
+        activeItem: value
+      });
+    });
+
+    _defineProperty(this, "clearActiveItemHandler", () => {
+      this.setState({
+        activeItem: null
+      });
+    });
   }
 
   async componentDidMount() {
@@ -57905,11 +57927,14 @@ class MapContainer extends _react.Component {
   render() {
     //return "container"
     return _react.default.createElement("div", null, _react.default.createElement(_List.default, {
-      activePoints: this.state.activePoints
+      activePoints: this.state.activePoints,
+      activeItem: this.activeItemHandler
     }), _react.default.createElement(_Map.default, {
       pointsData: this.state.points,
       contursData: this.state.conturs,
-      activePoints: this.activePointsHandler
+      activePoints: this.activePointsHandler,
+      activeItem: this.state.activeItem,
+      clearActiveItem: this.clearActiveItemHandler
     }));
   }
 
@@ -58012,7 +58037,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50254" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "8349" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

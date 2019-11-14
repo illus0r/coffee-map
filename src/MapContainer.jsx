@@ -26,14 +26,24 @@ class MapContainer extends Component {
         this.setState({activePoints: value})
     }
 
+    activeItemHandler = (value) => {
+        this.setState({activeItem: value})
+    }
+    clearActiveItemHandler = () =>{
+        this.setState({activeItem: null})
+    }
+
 
     render() {
         //return "container"
         return (<div>
-            <List activePoints={this.state.activePoints}/>
+            <List activePoints={this.state.activePoints}
+                  activeItem={this.activeItemHandler}/>
             <Map pointsData={this.state.points}
                  contursData={this.state.conturs}
-                 activePoints={this.activePointsHandler}/>
+                 activePoints={this.activePointsHandler}
+                 activeItem={this.state.activeItem}
+                 clearActiveItem={this.clearActiveItemHandler} />
         </div>);
     }
 }

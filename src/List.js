@@ -7,7 +7,7 @@ class List extends Component {
         let numbers = this.props.activePoints;
         if (!numbers) numbers = []
         const listItems = numbers.map((number, i) =>
-            <li key={i}>{number.properties.title}</li>
+            <li key={i} onClick={()=>this.props.activeItem(number)}>{number.properties.title}</li>
         );
 
         return ReactDOM.createPortal(
