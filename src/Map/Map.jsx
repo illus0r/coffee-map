@@ -6,11 +6,16 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiZXJvaGluYWVsZW5hIiwiYSI6InNWVFJmZFUifQ.ZjRE10
 
 class Map extends Component {
     componentDidMount() {
+        const bounds = [
+            [36.7839, 55.134], // Southwest coordinates
+            [38.0038, 56.0559]  // Northeast coordinates
+        ];
         const map = new mapboxgl.Map({
             container: 'map',
             style: 'mapbox://styles/mapbox/light-v9',
             center: [37.617635, 55.755814],
-            minZoom: 9
+            minZoom: 9,
+            maxBounds: bounds,
         });
 
         this.translate(map);

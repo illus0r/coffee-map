@@ -57607,11 +57607,15 @@ _mapboxGl.default.accessToken = 'pk.eyJ1IjoiZXJvaGluYWVsZW5hIiwiYSI6InNWVFJmZFUi
 
 class Map extends _react.Component {
   componentDidMount() {
+    const bounds = [[36.7839, 55.134], // Southwest coordinates
+    [38.0038, 56.0559] // Northeast coordinates
+    ];
     const map = new _mapboxGl.default.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/light-v9',
       center: [37.617635, 55.755814],
-      minZoom: 9
+      minZoom: 9,
+      maxBounds: bounds
     });
     this.translate(map);
     this.map = map;
@@ -77329,7 +77333,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51652" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "4844" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
