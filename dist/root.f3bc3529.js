@@ -57149,7 +57149,17 @@ class Map extends _react.Component {
                 "stops": [[0, 0], [10, 0], [14, 20]]
               },
               'icon-allow-overlap': true,
-              'text-allow-overlap': true
+              'text-allow-overlap': true,
+              'visibility': 'visible'
+            }
+          }); //faked layer without filtering
+
+          this.map.addLayer({
+            id: 'locationsFake',
+            type: 'circle',
+            source: geojsonPoints,
+            paint: {
+              'circle-radius': 0
             }
           });
         });
@@ -57195,15 +57205,23 @@ class Map extends _react.Component {
 
       createCafePopUp(this.map);
       this.map.on('moveend', () => {
-        var features = this.map.queryRenderedFeatures({
-          layers: ['locations']
+        const features = this.map.queryRenderedFeatures({
+          layers: ['locationsFake']
         });
+        debugger;
 
         if (features) {
           //var uniqueFeatures = getUniqueFeatures(features, "iata_code");
-          this.props.activePoints(features);
+          this.props.visiblePoints(features);
         }
       });
+    }
+
+    if (this.map.getLayer('locations')) {
+      const filterNames = this.props.filteredItemsList;
+      const filterIds = filterNames.map(el => el.properties.id);
+      let filter = ['match', ['get', 'id'], filterIds, true, false];
+      this.map.setFilter('locations', filter);
     }
 
     if (this.props.activeItem) {
@@ -57333,14 +57351,23 @@ class List extends _react.Component {
     });
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {}
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if (JSON.stringify(prevProps.filteredItemsList) != JSON.stringify(this.numbers)) {
+      this.props.filteredItems(this.numbers);
+      if (!this.numbers) this.props.filteredItems(this.props.visiblePoints);
+    }
+
+    if (prevProps.filteredItemsList == undefined && this.props.filteredItemsList == undefined) {
+      this.props.filteredItems(this.numbers);
+    }
+  }
 
   render() {
-    let numbers = this.props.activePoints;
+    let linesOfList = this.props.visiblePoints;
     const searchedText = this.state.searchText.toLowerCase();
 
-    if (searchedText != null && numbers) {
-      numbers = numbers.filter(cafe => {
+    if (searchedText != null && linesOfList) {
+      linesOfList = linesOfList.filter(cafe => {
         if (cafe) {
           const cafeName = cafe.properties.title.toLowerCase();
           const cafeDesc = cafe.properties.description.toLowerCase();
@@ -57349,8 +57376,9 @@ class List extends _react.Component {
       });
     }
 
-    if (!numbers) numbers = [];
-    const listItems = numbers.map((number, i) => _react.default.createElement("li", {
+    if (!linesOfList) linesOfList = [];
+    this.numbers = linesOfList;
+    const listItems = linesOfList.map((number, i) => _react.default.createElement("li", {
       key: i,
       onClick: () => this.props.activeItem(number)
     }, number.properties.title));
@@ -57969,12 +57997,13 @@ class MapContainer extends _react.Component {
       points: [],
       conturs: [],
       activeItem: null,
-      activePoints: null
+      visiblePoints: null,
+      filteredItemsList: []
     });
 
-    _defineProperty(this, "activePointsHandler", value => {
+    _defineProperty(this, "visiblePointsHandler", value => {
       this.setState({
-        activePoints: value
+        visiblePoints: value
       });
     });
 
@@ -57989,6 +58018,13 @@ class MapContainer extends _react.Component {
         activeItem: null
       });
     });
+
+    _defineProperty(this, "filteredItemsHandler", list => {
+      //console.log(this.state.filteredItems, list)
+      this.setState({
+        filteredItems: list
+      });
+    });
   }
 
   async componentDidMount() {
@@ -58000,7 +58036,8 @@ class MapContainer extends _react.Component {
         this.setState({
           points: geoJSON,
           conturs: geoMoscow,
-          activePoints: geoJSON.data.features
+          visiblePoints: geoJSON.data.features,
+          filteredItemsList: geoJSON.data.features
         });
       });
     });
@@ -58009,21 +58046,24 @@ class MapContainer extends _react.Component {
   render() {
     //return "container"
     return _react.default.createElement("div", null, _react.default.createElement(_List.default, {
-      activePoints: this.state.activePoints,
-      activeItem: this.activeItemHandler
+      visiblePoints: this.state.visiblePoints,
+      activeItem: this.activeItemHandler,
+      filteredItems: this.filteredItemsHandler,
+      filteredItemsList: this.state.filteredItems
     }), _react.default.createElement(_Map.default, {
       pointsData: this.state.points,
       contursData: this.state.conturs,
-      activePoints: this.activePointsHandler,
+      visiblePoints: this.visiblePointsHandler,
       activeItem: this.state.activeItem,
-      clearActiveItem: this.clearActiveItemHandler
+      clearActiveItem: this.clearActiveItemHandler,
+      filteredItemsList: this.state.filteredItems
     }));
   }
 
 }
 
 function makeGeoJSON(data) {
-  let features = data.map(d => {
+  let features = data.map((d, i) => {
     return {
       type: 'Feature',
       geometry: {
@@ -58031,6 +58071,7 @@ function makeGeoJSON(data) {
         coordinates: [+d['Координаты, долгота'], +d['Координаты, широта']]
       },
       properties: {
+        id: i,
         title: d['Наименование организации'],
         description: d['Улица'] + ', ' + d['Номер дома']
       }
@@ -58119,7 +58160,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34979" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "9342" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -10,7 +10,9 @@ class MapContainer extends Component {
         points: [],
         conturs: [],
         activeItem: null,
-        activePoints: null,
+        visiblePoints: null,
+        filteredItemsList: [],
+
     }
 
     async componentDidMount() {
@@ -19,14 +21,14 @@ class MapContainer extends Component {
             d3.json(moscow).then((geoMoscow) => {
                 let geoJSON = makeGeoJSON(data)
                 addValues(geoMoscow)
-                this.setState({points: geoJSON, conturs: geoMoscow, activePoints: geoJSON.data.features})
+                this.setState({points: geoJSON, conturs: geoMoscow, visiblePoints: geoJSON.data.features, filteredItemsList: geoJSON.data.features})
             })
 
         });
     }
 
-    activePointsHandler = (value) => {
-        this.setState({activePoints: value})
+    visiblePointsHandler = (value) => {
+        this.setState({visiblePoints: value})
     }
 
     activeItemHandler = (value) => {
@@ -36,23 +38,33 @@ class MapContainer extends Component {
         this.setState({activeItem: null})
     }
 
+    filteredItemsHandler = (list) => {
+
+        //console.log(this.state.filteredItems, list)
+        this.setState({filteredItems: list})
+    }
+
 
     render() {
         //return "container"
         return (<div>
-            <List activePoints={this.state.activePoints}
-                  activeItem={this.activeItemHandler}/>
+            <List visiblePoints={this.state.visiblePoints}
+                  activeItem={this.activeItemHandler}
+                  filteredItems={this.filteredItemsHandler}
+                  filteredItemsList={this.state.filteredItems}/>
+
             <Map pointsData={this.state.points}
                  contursData={this.state.conturs}
-                 activePoints={this.activePointsHandler}
+                 visiblePoints={this.visiblePointsHandler}
                  activeItem={this.state.activeItem}
-                 clearActiveItem={this.clearActiveItemHandler} />
+                 clearActiveItem={this.clearActiveItemHandler}
+                 filteredItemsList={this.state.filteredItems}/>
         </div>);
     }
 }
 
 function makeGeoJSON(data) {
-    let features = data.map(d => {
+    let features = data.map((d,i) => {
         return {
             type: 'Feature',
             geometry: {
@@ -60,8 +72,9 @@ function makeGeoJSON(data) {
                 coordinates: [+d['Координаты, долгота'], +d['Координаты, широта']]
             },
             properties: {
+                id: i,
                 title: d['Наименование организации'],
-                description: d['Улица'] + ', ' + d['Номер дома']
+                description: d['Улица'] + ', ' + d['Номер дома'],
             }
         }
     })

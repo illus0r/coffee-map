@@ -11,15 +11,26 @@ class List extends Component {
         this.setState({searchText: value})
     }
 
+
     componentDidUpdate(prevProps, prevState, snapshot) {
+
+        if (JSON.stringify(prevProps.filteredItemsList) != JSON.stringify(this.numbers) ) {
+            this.props.filteredItems(this.numbers)
+            if (!this.numbers)  this.props.filteredItems(this.props.visiblePoints)
+        }
+
+        if (prevProps.filteredItemsList==undefined &&  this.props.filteredItemsList==undefined ) {
+            this.props.filteredItems(this.numbers)
+        }
 
     }
 
+
     render() {
-        let numbers = this.props.activePoints;
+        let linesOfList = this.props.visiblePoints;
         const searchedText = this.state.searchText.toLowerCase()
-        if (searchedText != null && numbers){
-            numbers = numbers.filter(cafe => {
+        if (searchedText != null && linesOfList){
+            linesOfList = linesOfList.filter(cafe => {
                 if (cafe) {
                     const cafeName = cafe.properties.title.toLowerCase()
                     const cafeDesc = cafe.properties.description.toLowerCase()
@@ -27,8 +38,10 @@ class List extends Component {
                 }
             })
         }
-        if (!numbers) numbers = []
-        const listItems = numbers.map((number, i) =>
+        if (!linesOfList) linesOfList = []
+        this.numbers = linesOfList
+
+        const listItems = linesOfList.map((number, i) =>
             <li key={i} onClick={()=>this.props.activeItem(number)}>{number.properties.title}</li>
         );
 

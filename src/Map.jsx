@@ -51,9 +51,21 @@ class Map extends Component {
                             },
                             'icon-allow-overlap': true,
                             'text-allow-overlap':true,
+                            'visibility':'visible'
+                        }
+                    });
+                    //faked layer without filtering
+                    this.map.addLayer({
+                        id: 'locationsFake',
+                        type: 'circle',
+                        source: geojsonPoints,
+                        paint:{
+                            'circle-radius': 0,
                         }
                     });
                 });
+
+                
                 this.map.on('click', 'locations', (e) => {
                     let currentFeature = e.features[0]
                     this.map.flyTo({
@@ -111,13 +123,24 @@ class Map extends Component {
 
 
             this.map.on('moveend', () => {
-                var features = this.map.queryRenderedFeatures({layers: ['locations']});
+                const features = this.map.queryRenderedFeatures({layers: ['locationsFake']});
+                debugger
                 if (features) {
                     //var uniqueFeatures = getUniqueFeatures(features, "iata_code");
-                    this.props.activePoints(features)
+                    this.props.visiblePoints(features)
                 }
             });
+            
         }
+        if (this.map.getLayer('locations')) {
+
+            const filterNames = this.props.filteredItemsList
+            const filterIds = filterNames.map(el => el.properties.id)
+
+            let filter = ['match', ['get', 'id'], filterIds, true, false]
+            this.map.setFilter('locations', filter)
+        }
+
 
         if (this.props.activeItem){
             this.map.flyTo({
