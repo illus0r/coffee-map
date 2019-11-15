@@ -1,9 +1,8 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
-
+import Map from './Map/index.jsx';
 import './styles.scss'
 
-import MapContainer from "./MapContainer";
 
 class App extends Component {
 	constructor(props) {
@@ -15,13 +14,12 @@ class App extends Component {
 		const {selectedPoint} = this.state;
 		return (
 			<div>
-				<MapContainer
+				<Map
 					selectedPoint={selectedPoint}
 				/>
 			</div>
 		)
 	}
-
 }
 
 ReactDOM.render(
