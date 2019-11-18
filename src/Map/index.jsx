@@ -74,7 +74,7 @@ function makeGeoJSON(data) {
             type: 'Feature',
             geometry: {
                 type: 'Point',
-                coordinates: [+d['Координаты, долгота'], +d['Координаты, широта']]
+                coordinates: [+d['Longitude'], +d['Latitude']]
             },
             properties: {
                 id: i,

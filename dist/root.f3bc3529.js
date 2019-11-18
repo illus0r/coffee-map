@@ -57636,19 +57636,35 @@ class Map extends _react.Component {
             // Add the data to your map as a layer
             this.map.addLayer({
               id: 'locations',
+              type: 'circle',
+              source: geojsonPoints,
+              'paint': {
+                'circle-radius': {
+                  'base': 2,
+                  'stops': [[12, 2], [14, 4]]
+                },
+                'circle-color': '#223b53',
+                "circle-opacity": 1,
+                "circle-stroke-width": 0,
+                "circle-stroke-color": "#00bf7c",
+                "circle-stroke-opacity": 1
+              }
+            });
+            this.map.addLayer({
+              id: 'locations-text',
               type: 'symbol',
               source: geojsonPoints,
               layout: {
-                'icon-image': ['concat', 'cafe', "-15"],
+                'icon-image': 'none',
                 'text-field': ['get', 'title'],
                 'text-font': ["Open Sans Semibold", "Arial Unicode MS Bold"],
                 'text-offset': [0, 0.6],
                 'text-anchor': 'top',
                 "text-size": {
-                  "stops": [[0, 0], [10, 0], [14, 20]]
+                  "stops": [[0, 0], [12, 0], [16, 20]]
                 },
                 'icon-allow-overlap': true,
-                'text-allow-overlap': true,
+                'text-allow-overlap': false,
                 'visibility': 'visible'
               }
             }); //faked layer without filtering
@@ -57720,6 +57736,7 @@ class Map extends _react.Component {
       const filterIds = filterNames.map(el => el.properties.id);
       const filter = ['match', ['get', 'id'], filterIds, true, false];
       this.map.setFilter('locations', filter);
+      this.map.setFilter('locations-text', filter);
     }
 
     if (this.props.activeItem) {
@@ -77170,7 +77187,7 @@ function makeGeoJSON(data) {
     type: 'Feature',
     geometry: {
       type: 'Point',
-      coordinates: [+d['Координаты, долгота'], +d['Координаты, широта']]
+      coordinates: [+d['Longitude'], +d['Latitude']]
     },
     properties: {
       id: i,
@@ -77333,7 +77350,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "4844" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "27296" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -58,7 +58,7 @@ class List extends Component {
                     {linesOfList.map((number, i) =>
                         <li
                             key={i}
-                            onClick={()=>this.props.activeItem(number)}
+                            onClick={() => this.props.activeItem(number)}
                         >
                             {number.properties.title}
                         </li>

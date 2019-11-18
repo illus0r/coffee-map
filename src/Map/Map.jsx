@@ -40,10 +40,26 @@ class Map extends Component {
                     // Add the data to your map as a layer
                     this.map.addLayer({
                         id: 'locations',
+                        type: 'circle',
+                        source: geojsonPoints,
+                        'paint': {
+                            'circle-radius': {
+                                'base': 2,
+                                'stops': [[12, 2], [14, 4]]
+                            },
+                            'circle-color':  '#223b53',
+                            "circle-opacity": 1,
+                            "circle-stroke-width": 0,
+                            "circle-stroke-color": "#00bf7c",
+                            "circle-stroke-opacity": 1,
+                        },
+                    });
+                    this.map.addLayer({
+                        id: 'locations-text',
                         type: 'symbol',
                         source: geojsonPoints,
                         layout: {
-                            'icon-image': ['concat', 'cafe', "-15"],
+                            'icon-image': 'none',
                             'text-field': ['get', 'title'],
                             'text-font': ["Open Sans Semibold", "Arial Unicode MS Bold"],
                             'text-offset': [0, 0.6],
@@ -51,12 +67,12 @@ class Map extends Component {
                             "text-size": {
                                 "stops": [
                                     [0, 0],
-                                    [10, 0],
-                                    [14, 20]
+                                    [12, 0],
+                                    [16, 20]
                                 ]
                             },
                             'icon-allow-overlap': true,
-                            'text-allow-overlap': true,
+                            'text-allow-overlap': false,
                             'visibility': 'visible'
                         }
                     });
@@ -142,6 +158,7 @@ class Map extends Component {
 
             const filter = ['match', ['get', 'id'], filterIds, true, false];
             this.map.setFilter('locations', filter)
+            this.map.setFilter('locations-text', filter)
         }
 
         if (this.props.activeItem) {
