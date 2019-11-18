@@ -39,6 +39,7 @@ body {
     font-size: 16px;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .right-column {
@@ -89,5 +90,15 @@ body {
             float: right;
             color:coral;
         }
+    }
+    ul.scrollable{
+        position: absolute;
+        top: 1.5em;
+        bottom: 0;
+        left:0.5em;
+        right:0;
+        display: block;
+        overflow-y: scroll;
+        padding-left: 0;
     }
 }

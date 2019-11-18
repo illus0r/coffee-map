@@ -77132,7 +77132,10 @@ class List extends _react.Component {
         display: this.state.clicked ? 'none' : null
       },
       searchText: this.searchHandler
-    }), _react.default.createElement("ul", null, linesOfList.map((number, i) => _react.default.createElement("li", {
+    }), _react.default.createElement("ul", {
+      className: 'scrollable'
+    }, linesOfList.map((number, i) => _react.default.createElement("li", {
+      className: 'listItem',
       key: i,
       onClick: () => this.handleClick(number)
     }, number.properties.title))))), document.getElementById('list'));
@@ -77415,7 +77418,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "28590" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "34980" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -33,6 +33,7 @@ body {
   font-size: 16px;
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .right-column {
@@ -71,6 +72,16 @@ body {
 .sidebar .cafeCard .closeBtn {
   float: right;
   color: coral;
+}
+.sidebar ul.scrollable {
+  position: absolute;
+  top: 1.5em;
+  bottom: 0;
+  left: 0.5em;
+  right: 0;
+  display: block;
+  overflow-y: scroll;
+  padding-left: 0;
 }
 
 /*# sourceMappingURL=/root.f3bc3529.css.map */

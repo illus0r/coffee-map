@@ -73,9 +73,10 @@ class List extends Component {
                     <div><Search
                         style={{display: this.state.clicked ? 'none' : null}}
                         searchText={this.searchHandler}
-                    /><ul>
+                    /><ul className={'scrollable'}>
                     {linesOfList.map((number, i) =>
                         <li
+                            className={'listItem'}
                             key={i}
                             onClick={() => this.handleClick(number) }
                         >
