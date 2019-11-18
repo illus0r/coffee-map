@@ -1,18 +1,22 @@
 import React, {Component} from 'react';
 import {csv, json}  from 'd3-fetch';
 import {interpolateMagma} from 'd3-scale-chromatic';
+import {scaleSequential} from 'd3-scale';
 import Map from './Map';
 import List from '../List';
 import data from '../data/data_test.csv'
 import moscow from '../data/mo.geojson'
+import CafeCard from "../CafeCard";
 
 class MapContainer extends Component {
     state = {
         points: null,
         conturs: null,
         activeItem: null,
+        currentItem: null,
         visiblePoints: null,
         filteredItemsList: [],
+        rawData:[],
     };
 
     componentDidMount() {
@@ -23,6 +27,7 @@ class MapContainer extends Component {
                 const geoJSON = makeGeoJSON(data);
                 addValues(geoMoscow);
                 this.setState({
+                    rawData: data,
                     points: geoJSON,
                     conturs: geoMoscow,
                     visiblePoints: geoJSON.data.features,
@@ -41,21 +46,35 @@ class MapContainer extends Component {
         this.setState({activeItem: value})
     };
 
+    currentItemHandler = (value) => {
+        this.setState({currentItem: value})
+    };
+
     clearActiveItemHandler = () =>{
         this.setState({activeItem: null})
     };
 
     filteredItemsHandler = (list) => {
-        //console.log(this.state.filteredItems, list)
         this.setState({filteredItems: list})
     };
+
+    handleClose = () => {
+        this.setState({currentItem: null});
+        //this.searchHandler("")
+    }
 
 
     render() {
         return (
             <div>
+                {this.state.currentItem ?
+                    <CafeCard target = {this.state.currentItem}
+                              all = {this.state.rawData}
+                              closeCard = {() => this.handleClose()}
+                    /> : null}
                 <List visiblePoints={this.state.visiblePoints}
-                      activeItem={this.activeItemHandler}
+                      activeItem={this.activeItemHandler} // to fly on map, it will be null after flight
+                      currentItem={this.currentItemHandler} // to open card
                       filteredItems={this.filteredItemsHandler}
                       filteredItemsList={this.state.filteredItems}/>
 
@@ -73,6 +92,7 @@ class MapContainer extends Component {
 function makeGeoJSON(data) {
     const features = data.map((d, i) => {
         let rating = +d['FlampRating'].replace(',', '.') || 0
+        let x = scaleSequential([3, 5], interpolateMagma);
         return {
             type: 'Feature',
             geometry: {
@@ -81,10 +101,11 @@ function makeGeoJSON(data) {
             },
             properties: {
                 id: i,
+                rawId: d['Id карточки'],
                 title: d['Наименование организации'],
                 description: d['Улица'] + ', ' + d['Номер дома'],
                 rating: rating,
-                color: (rating) ? interpolateMagma(1 / rating) : 'gray',
+                color: (rating) ? x(rating) : 'gray',
             }
         }
         }

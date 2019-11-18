@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import Search from './Search.jsx'
-import CafeCard from './CafeCard.jsx'
 import lodash from 'lodash';
 
 class List extends Component {
@@ -26,6 +25,7 @@ class List extends Component {
             const linesOfList = this.getLinesOfList();
             this.updateLinesOfList(linesOfList);
         }
+        else('nothing to update')
 
     }
 
@@ -52,24 +52,23 @@ class List extends Component {
 
     handleClick = (number) => {
         this.props.activeItem(number)
-        this.setState({clicked: true, activeItem: number});
-        this.searchHandler(number.properties.title)
+        this.props.currentItem(number)
+        //this.setState({clicked: true, activeItem: number});
+        //this.searchHandler(number.properties.title)
     }
-
+/*
     handleClose = () => {
         this.setState({clicked: false});
         this.searchHandler("")
-    }
+    }*/
 
     render() {
         const {linesOfList} = this.state;
 
         return ReactDOM.createPortal(
             <div className={'sidebar'}>
-                {this.state.clicked ?
-                    <CafeCard content={this.state.activeItem}
-                              closeCard={() => this.handleClose()}
-                    /> :
+                {this.props.clicked ?
+                    '1' :
                     <div><Search
                         style={{display: this.state.clicked ? 'none' : null}}
                         searchText={this.searchHandler}
@@ -86,7 +85,7 @@ class List extends Component {
                     </ul></div>
                 }
             </div>,
-            document.getElementById('list')
+            document.getElementById('cafeList')
         );
     }
 }

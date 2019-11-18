@@ -76,21 +76,23 @@ body {
 
 
 
-
+#cafeCard{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background: lavender;
+    .closeBtn{
+        float: right;
+        color:coral;
+    }
+}
 
 .sidebar{
     display: flex;
     flex-direction: column;
     align-items: stretch;
     flex-grow: 1;
-    .cafeCard{
-        background: lavender;
-        flex-grow: 1;
-        .closeBtn{
-            float: right;
-            color:coral;
-        }
-    }
+
     ul.scrollable{
         position: absolute;
         top: 1.5em;

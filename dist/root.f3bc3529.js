@@ -35460,7 +35460,5667 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-},{"./categorical/category10.js":"../node_modules/d3-scale-chromatic/src/categorical/category10.js","./categorical/Accent.js":"../node_modules/d3-scale-chromatic/src/categorical/Accent.js","./categorical/Dark2.js":"../node_modules/d3-scale-chromatic/src/categorical/Dark2.js","./categorical/Paired.js":"../node_modules/d3-scale-chromatic/src/categorical/Paired.js","./categorical/Pastel1.js":"../node_modules/d3-scale-chromatic/src/categorical/Pastel1.js","./categorical/Pastel2.js":"../node_modules/d3-scale-chromatic/src/categorical/Pastel2.js","./categorical/Set1.js":"../node_modules/d3-scale-chromatic/src/categorical/Set1.js","./categorical/Set2.js":"../node_modules/d3-scale-chromatic/src/categorical/Set2.js","./categorical/Set3.js":"../node_modules/d3-scale-chromatic/src/categorical/Set3.js","./categorical/Tableau10.js":"../node_modules/d3-scale-chromatic/src/categorical/Tableau10.js","./diverging/BrBG.js":"../node_modules/d3-scale-chromatic/src/diverging/BrBG.js","./diverging/PRGn.js":"../node_modules/d3-scale-chromatic/src/diverging/PRGn.js","./diverging/PiYG.js":"../node_modules/d3-scale-chromatic/src/diverging/PiYG.js","./diverging/PuOr.js":"../node_modules/d3-scale-chromatic/src/diverging/PuOr.js","./diverging/RdBu.js":"../node_modules/d3-scale-chromatic/src/diverging/RdBu.js","./diverging/RdGy.js":"../node_modules/d3-scale-chromatic/src/diverging/RdGy.js","./diverging/RdYlBu.js":"../node_modules/d3-scale-chromatic/src/diverging/RdYlBu.js","./diverging/RdYlGn.js":"../node_modules/d3-scale-chromatic/src/diverging/RdYlGn.js","./diverging/Spectral.js":"../node_modules/d3-scale-chromatic/src/diverging/Spectral.js","./sequential-multi/BuGn.js":"../node_modules/d3-scale-chromatic/src/sequential-multi/BuGn.js","./sequential-multi/BuPu.js":"../node_modules/d3-scale-chromatic/src/sequential-multi/BuPu.js","./sequential-multi/GnBu.js":"../node_modules/d3-scale-chromatic/src/sequential-multi/GnBu.js","./sequential-multi/OrRd.js":"../node_modules/d3-scale-chromatic/src/sequential-multi/OrRd.js","./sequential-multi/PuBuGn.js":"../node_modules/d3-scale-chromatic/src/sequential-multi/PuBuGn.js","./sequential-multi/PuBu.js":"../node_modules/d3-scale-chromatic/src/sequential-multi/PuBu.js","./sequential-multi/PuRd.js":"../node_modules/d3-scale-chromatic/src/sequential-multi/PuRd.js","./sequential-multi/RdPu.js":"../node_modules/d3-scale-chromatic/src/sequential-multi/RdPu.js","./sequential-multi/YlGnBu.js":"../node_modules/d3-scale-chromatic/src/sequential-multi/YlGnBu.js","./sequential-multi/YlGn.js":"../node_modules/d3-scale-chromatic/src/sequential-multi/YlGn.js","./sequential-multi/YlOrBr.js":"../node_modules/d3-scale-chromatic/src/sequential-multi/YlOrBr.js","./sequential-multi/YlOrRd.js":"../node_modules/d3-scale-chromatic/src/sequential-multi/YlOrRd.js","./sequential-single/Blues.js":"../node_modules/d3-scale-chromatic/src/sequential-single/Blues.js","./sequential-single/Greens.js":"../node_modules/d3-scale-chromatic/src/sequential-single/Greens.js","./sequential-single/Greys.js":"../node_modules/d3-scale-chromatic/src/sequential-single/Greys.js","./sequential-single/Purples.js":"../node_modules/d3-scale-chromatic/src/sequential-single/Purples.js","./sequential-single/Reds.js":"../node_modules/d3-scale-chromatic/src/sequential-single/Reds.js","./sequential-single/Oranges.js":"../node_modules/d3-scale-chromatic/src/sequential-single/Oranges.js","./sequential-multi/cividis.js":"../node_modules/d3-scale-chromatic/src/sequential-multi/cividis.js","./sequential-multi/cubehelix.js":"../node_modules/d3-scale-chromatic/src/sequential-multi/cubehelix.js","./sequential-multi/rainbow.js":"../node_modules/d3-scale-chromatic/src/sequential-multi/rainbow.js","./sequential-multi/sinebow.js":"../node_modules/d3-scale-chromatic/src/sequential-multi/sinebow.js","./sequential-multi/turbo.js":"../node_modules/d3-scale-chromatic/src/sequential-multi/turbo.js","./sequential-multi/viridis.js":"../node_modules/d3-scale-chromatic/src/sequential-multi/viridis.js"}],"../node_modules/mapbox-gl/dist/mapbox-gl.js":[function(require,module,exports) {
+},{"./categorical/category10.js":"../node_modules/d3-scale-chromatic/src/categorical/category10.js","./categorical/Accent.js":"../node_modules/d3-scale-chromatic/src/categorical/Accent.js","./categorical/Dark2.js":"../node_modules/d3-scale-chromatic/src/categorical/Dark2.js","./categorical/Paired.js":"../node_modules/d3-scale-chromatic/src/categorical/Paired.js","./categorical/Pastel1.js":"../node_modules/d3-scale-chromatic/src/categorical/Pastel1.js","./categorical/Pastel2.js":"../node_modules/d3-scale-chromatic/src/categorical/Pastel2.js","./categorical/Set1.js":"../node_modules/d3-scale-chromatic/src/categorical/Set1.js","./categorical/Set2.js":"../node_modules/d3-scale-chromatic/src/categorical/Set2.js","./categorical/Set3.js":"../node_modules/d3-scale-chromatic/src/categorical/Set3.js","./categorical/Tableau10.js":"../node_modules/d3-scale-chromatic/src/categorical/Tableau10.js","./diverging/BrBG.js":"../node_modules/d3-scale-chromatic/src/diverging/BrBG.js","./diverging/PRGn.js":"../node_modules/d3-scale-chromatic/src/diverging/PRGn.js","./diverging/PiYG.js":"../node_modules/d3-scale-chromatic/src/diverging/PiYG.js","./diverging/PuOr.js":"../node_modules/d3-scale-chromatic/src/diverging/PuOr.js","./diverging/RdBu.js":"../node_modules/d3-scale-chromatic/src/diverging/RdBu.js","./diverging/RdGy.js":"../node_modules/d3-scale-chromatic/src/diverging/RdGy.js","./diverging/RdYlBu.js":"../node_modules/d3-scale-chromatic/src/diverging/RdYlBu.js","./diverging/RdYlGn.js":"../node_modules/d3-scale-chromatic/src/diverging/RdYlGn.js","./diverging/Spectral.js":"../node_modules/d3-scale-chromatic/src/diverging/Spectral.js","./sequential-multi/BuGn.js":"../node_modules/d3-scale-chromatic/src/sequential-multi/BuGn.js","./sequential-multi/BuPu.js":"../node_modules/d3-scale-chromatic/src/sequential-multi/BuPu.js","./sequential-multi/GnBu.js":"../node_modules/d3-scale-chromatic/src/sequential-multi/GnBu.js","./sequential-multi/OrRd.js":"../node_modules/d3-scale-chromatic/src/sequential-multi/OrRd.js","./sequential-multi/PuBuGn.js":"../node_modules/d3-scale-chromatic/src/sequential-multi/PuBuGn.js","./sequential-multi/PuBu.js":"../node_modules/d3-scale-chromatic/src/sequential-multi/PuBu.js","./sequential-multi/PuRd.js":"../node_modules/d3-scale-chromatic/src/sequential-multi/PuRd.js","./sequential-multi/RdPu.js":"../node_modules/d3-scale-chromatic/src/sequential-multi/RdPu.js","./sequential-multi/YlGnBu.js":"../node_modules/d3-scale-chromatic/src/sequential-multi/YlGnBu.js","./sequential-multi/YlGn.js":"../node_modules/d3-scale-chromatic/src/sequential-multi/YlGn.js","./sequential-multi/YlOrBr.js":"../node_modules/d3-scale-chromatic/src/sequential-multi/YlOrBr.js","./sequential-multi/YlOrRd.js":"../node_modules/d3-scale-chromatic/src/sequential-multi/YlOrRd.js","./sequential-single/Blues.js":"../node_modules/d3-scale-chromatic/src/sequential-single/Blues.js","./sequential-single/Greens.js":"../node_modules/d3-scale-chromatic/src/sequential-single/Greens.js","./sequential-single/Greys.js":"../node_modules/d3-scale-chromatic/src/sequential-single/Greys.js","./sequential-single/Purples.js":"../node_modules/d3-scale-chromatic/src/sequential-single/Purples.js","./sequential-single/Reds.js":"../node_modules/d3-scale-chromatic/src/sequential-single/Reds.js","./sequential-single/Oranges.js":"../node_modules/d3-scale-chromatic/src/sequential-single/Oranges.js","./sequential-multi/cividis.js":"../node_modules/d3-scale-chromatic/src/sequential-multi/cividis.js","./sequential-multi/cubehelix.js":"../node_modules/d3-scale-chromatic/src/sequential-multi/cubehelix.js","./sequential-multi/rainbow.js":"../node_modules/d3-scale-chromatic/src/sequential-multi/rainbow.js","./sequential-multi/sinebow.js":"../node_modules/d3-scale-chromatic/src/sequential-multi/sinebow.js","./sequential-multi/turbo.js":"../node_modules/d3-scale-chromatic/src/sequential-multi/turbo.js","./sequential-multi/viridis.js":"../node_modules/d3-scale-chromatic/src/sequential-multi/viridis.js"}],"../node_modules/d3-array/src/ascending.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+function _default(a, b) {
+  return a < b ? -1 : a > b ? 1 : a >= b ? 0 : NaN;
+}
+},{}],"../node_modules/d3-array/src/bisector.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+var _ascending = _interopRequireDefault(require("./ascending.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _default(compare) {
+  if (compare.length === 1) compare = ascendingComparator(compare);
+  return {
+    left: function (a, x, lo, hi) {
+      if (lo == null) lo = 0;
+      if (hi == null) hi = a.length;
+
+      while (lo < hi) {
+        var mid = lo + hi >>> 1;
+        if (compare(a[mid], x) < 0) lo = mid + 1;else hi = mid;
+      }
+
+      return lo;
+    },
+    right: function (a, x, lo, hi) {
+      if (lo == null) lo = 0;
+      if (hi == null) hi = a.length;
+
+      while (lo < hi) {
+        var mid = lo + hi >>> 1;
+        if (compare(a[mid], x) > 0) hi = mid;else lo = mid + 1;
+      }
+
+      return lo;
+    }
+  };
+}
+
+function ascendingComparator(f) {
+  return function (d, x) {
+    return (0, _ascending.default)(f(d), x);
+  };
+}
+},{"./ascending.js":"../node_modules/d3-array/src/ascending.js"}],"../node_modules/d3-array/src/bisect.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.bisectLeft = exports.bisectRight = void 0;
+
+var _ascending = _interopRequireDefault(require("./ascending.js"));
+
+var _bisector = _interopRequireDefault(require("./bisector.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var ascendingBisect = (0, _bisector.default)(_ascending.default);
+var bisectRight = ascendingBisect.right;
+exports.bisectRight = bisectRight;
+var bisectLeft = ascendingBisect.left;
+exports.bisectLeft = bisectLeft;
+var _default = bisectRight;
+exports.default = _default;
+},{"./ascending.js":"../node_modules/d3-array/src/ascending.js","./bisector.js":"../node_modules/d3-array/src/bisector.js"}],"../node_modules/d3-array/src/count.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = count;
+
+function count(values, valueof) {
+  let count = 0;
+
+  if (valueof === undefined) {
+    for (let value of values) {
+      if (value != null && (value = +value) >= value) {
+        ++count;
+      }
+    }
+  } else {
+    let index = -1;
+
+    for (let value of values) {
+      if ((value = valueof(value, ++index, values)) != null && (value = +value) >= value) {
+        ++count;
+      }
+    }
+  }
+
+  return count;
+}
+},{}],"../node_modules/d3-array/src/cross.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = cross;
+
+function length(array) {
+  return array.length | 0;
+}
+
+function empty(length) {
+  return !(length > 0);
+}
+
+function arrayify(values) {
+  return typeof values !== "object" || "length" in values ? values : Array.from(values);
+}
+
+function reducer(reduce) {
+  return values => reduce(...values);
+}
+
+function cross(...values) {
+  const reduce = typeof values[values.length - 1] === "function" && reducer(values.pop());
+  values = values.map(arrayify);
+  const lengths = values.map(length);
+  const j = values.length - 1;
+  const index = new Array(j + 1).fill(0);
+  const product = [];
+  if (j < 0 || lengths.some(empty)) return product;
+
+  while (true) {
+    product.push(index.map((j, i) => values[i][j]));
+    let i = j;
+
+    while (++index[i] === lengths[i]) {
+      if (i === 0) return reduce ? product.map(reduce) : product;
+      index[i--] = 0;
+    }
+  }
+}
+},{}],"../node_modules/d3-array/src/cumsum.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = cumsum;
+
+function cumsum(values, valueof) {
+  var sum = 0,
+      index = 0;
+  return Float64Array.from(values, valueof === undefined ? v => sum += +v || 0 : v => sum += +valueof(v, index++, values) || 0);
+}
+},{}],"../node_modules/d3-array/src/descending.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+function _default(a, b) {
+  return b < a ? -1 : b > a ? 1 : b >= a ? 0 : NaN;
+}
+},{}],"../node_modules/d3-array/src/variance.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = variance;
+
+function variance(values, valueof) {
+  let count = 0;
+  let delta;
+  let mean = 0;
+  let sum = 0;
+
+  if (valueof === undefined) {
+    for (let value of values) {
+      if (value != null && (value = +value) >= value) {
+        delta = value - mean;
+        mean += delta / ++count;
+        sum += delta * (value - mean);
+      }
+    }
+  } else {
+    let index = -1;
+
+    for (let value of values) {
+      if ((value = valueof(value, ++index, values)) != null && (value = +value) >= value) {
+        delta = value - mean;
+        mean += delta / ++count;
+        sum += delta * (value - mean);
+      }
+    }
+  }
+
+  if (count > 1) return sum / (count - 1);
+}
+},{}],"../node_modules/d3-array/src/deviation.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = deviation;
+
+var _variance = _interopRequireDefault(require("./variance.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function deviation(values, valueof) {
+  const v = (0, _variance.default)(values, valueof);
+  return v ? Math.sqrt(v) : v;
+}
+},{"./variance.js":"../node_modules/d3-array/src/variance.js"}],"../node_modules/d3-array/src/extent.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+function _default(values, valueof) {
+  let min;
+  let max;
+
+  if (valueof === undefined) {
+    for (const value of values) {
+      if (value != null) {
+        if (min === undefined) {
+          if (value >= value) min = max = value;
+        } else {
+          if (min > value) min = value;
+          if (max < value) max = value;
+        }
+      }
+    }
+  } else {
+    let index = -1;
+
+    for (let value of values) {
+      if ((value = valueof(value, ++index, values)) != null) {
+        if (min === undefined) {
+          if (value >= value) min = max = value;
+        } else {
+          if (min > value) min = value;
+          if (max < value) max = value;
+        }
+      }
+    }
+  }
+
+  return [min, max];
+}
+},{}],"../node_modules/d3-array/src/identity.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+function _default(x) {
+  return x;
+}
+},{}],"../node_modules/d3-array/src/group.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = group;
+exports.groups = groups;
+exports.rollup = rollup;
+exports.rollups = rollups;
+
+var _identity = _interopRequireDefault(require("./identity.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function group(values, ...keys) {
+  return nest(values, _identity.default, _identity.default, keys);
+}
+
+function groups(values, ...keys) {
+  return nest(values, Array.from, _identity.default, keys);
+}
+
+function rollup(values, reduce, ...keys) {
+  return nest(values, _identity.default, reduce, keys);
+}
+
+function rollups(values, reduce, ...keys) {
+  return nest(values, Array.from, reduce, keys);
+}
+
+function nest(values, map, reduce, keys) {
+  return function regroup(values, i) {
+    if (i >= keys.length) return reduce(values);
+    const groups = new Map();
+    const keyof = keys[i++];
+    let index = -1;
+
+    for (const value of values) {
+      const key = keyof(value, ++index, values);
+      const group = groups.get(key);
+      if (group) group.push(value);else groups.set(key, [value]);
+    }
+
+    for (const [key, values] of groups) {
+      groups.set(key, regroup(values, i));
+    }
+
+    return map(groups);
+  }(values, 0);
+}
+},{"./identity.js":"../node_modules/d3-array/src/identity.js"}],"../node_modules/d3-array/src/array.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.map = exports.slice = void 0;
+var array = Array.prototype;
+var slice = array.slice;
+exports.slice = slice;
+var map = array.map;
+exports.map = map;
+},{}],"../node_modules/d3-array/src/constant.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+function _default(x) {
+  return function () {
+    return x;
+  };
+}
+},{}],"../node_modules/d3-array/src/range.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+function _default(start, stop, step) {
+  start = +start, stop = +stop, step = (n = arguments.length) < 2 ? (stop = start, start = 0, 1) : n < 3 ? 1 : +step;
+  var i = -1,
+      n = Math.max(0, Math.ceil((stop - start) / step)) | 0,
+      range = new Array(n);
+
+  while (++i < n) {
+    range[i] = start + i * step;
+  }
+
+  return range;
+}
+},{}],"../node_modules/d3-array/src/ticks.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+exports.tickIncrement = tickIncrement;
+exports.tickStep = tickStep;
+var e10 = Math.sqrt(50),
+    e5 = Math.sqrt(10),
+    e2 = Math.sqrt(2);
+
+function _default(start, stop, count) {
+  var reverse,
+      i = -1,
+      n,
+      ticks,
+      step;
+  stop = +stop, start = +start, count = +count;
+  if (start === stop && count > 0) return [start];
+  if (reverse = stop < start) n = start, start = stop, stop = n;
+  if ((step = tickIncrement(start, stop, count)) === 0 || !isFinite(step)) return [];
+
+  if (step > 0) {
+    start = Math.ceil(start / step);
+    stop = Math.floor(stop / step);
+    ticks = new Array(n = Math.ceil(stop - start + 1));
+
+    while (++i < n) ticks[i] = (start + i) * step;
+  } else {
+    start = Math.floor(start * step);
+    stop = Math.ceil(stop * step);
+    ticks = new Array(n = Math.ceil(start - stop + 1));
+
+    while (++i < n) ticks[i] = (start - i) / step;
+  }
+
+  if (reverse) ticks.reverse();
+  return ticks;
+}
+
+function tickIncrement(start, stop, count) {
+  var step = (stop - start) / Math.max(0, count),
+      power = Math.floor(Math.log(step) / Math.LN10),
+      error = step / Math.pow(10, power);
+  return power >= 0 ? (error >= e10 ? 10 : error >= e5 ? 5 : error >= e2 ? 2 : 1) * Math.pow(10, power) : -Math.pow(10, -power) / (error >= e10 ? 10 : error >= e5 ? 5 : error >= e2 ? 2 : 1);
+}
+
+function tickStep(start, stop, count) {
+  var step0 = Math.abs(stop - start) / Math.max(0, count),
+      step1 = Math.pow(10, Math.floor(Math.log(step0) / Math.LN10)),
+      error = step0 / step1;
+  if (error >= e10) step1 *= 10;else if (error >= e5) step1 *= 5;else if (error >= e2) step1 *= 2;
+  return stop < start ? -step1 : step1;
+}
+},{}],"../node_modules/d3-array/src/threshold/sturges.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+var _count = _interopRequireDefault(require("../count.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _default(values) {
+  return Math.ceil(Math.log((0, _count.default)(values)) / Math.LN2) + 1;
+}
+},{"../count.js":"../node_modules/d3-array/src/count.js"}],"../node_modules/d3-array/src/bin.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+var _array = require("./array.js");
+
+var _bisect = _interopRequireDefault(require("./bisect.js"));
+
+var _constant = _interopRequireDefault(require("./constant.js"));
+
+var _extent = _interopRequireDefault(require("./extent.js"));
+
+var _identity = _interopRequireDefault(require("./identity.js"));
+
+var _range = _interopRequireDefault(require("./range.js"));
+
+var _ticks = require("./ticks.js");
+
+var _sturges = _interopRequireDefault(require("./threshold/sturges.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _default() {
+  var value = _identity.default,
+      domain = _extent.default,
+      threshold = _sturges.default;
+
+  function histogram(data) {
+    if (!Array.isArray(data)) data = Array.from(data);
+    var i,
+        n = data.length,
+        x,
+        values = new Array(n);
+
+    for (i = 0; i < n; ++i) {
+      values[i] = value(data[i], i, data);
+    }
+
+    var xz = domain(values),
+        x0 = xz[0],
+        x1 = xz[1],
+        tz = threshold(values, x0, x1); // Convert number of thresholds into uniform thresholds.
+
+    if (!Array.isArray(tz)) {
+      tz = (0, _ticks.tickStep)(x0, x1, tz);
+      tz = (0, _range.default)(Math.ceil(x0 / tz) * tz, x1, tz); // exclusive
+    } // Remove any thresholds outside the domain.
+
+
+    var m = tz.length;
+
+    while (tz[0] <= x0) tz.shift(), --m;
+
+    while (tz[m - 1] > x1) tz.pop(), --m;
+
+    var bins = new Array(m + 1),
+        bin; // Initialize bins.
+
+    for (i = 0; i <= m; ++i) {
+      bin = bins[i] = [];
+      bin.x0 = i > 0 ? tz[i - 1] : x0;
+      bin.x1 = i < m ? tz[i] : x1;
+    } // Assign data to bins by value, ignoring any outside the domain.
+
+
+    for (i = 0; i < n; ++i) {
+      x = values[i];
+
+      if (x0 <= x && x <= x1) {
+        bins[(0, _bisect.default)(tz, x, 0, m)].push(data[i]);
+      }
+    }
+
+    return bins;
+  }
+
+  histogram.value = function (_) {
+    return arguments.length ? (value = typeof _ === "function" ? _ : (0, _constant.default)(_), histogram) : value;
+  };
+
+  histogram.domain = function (_) {
+    return arguments.length ? (domain = typeof _ === "function" ? _ : (0, _constant.default)([_[0], _[1]]), histogram) : domain;
+  };
+
+  histogram.thresholds = function (_) {
+    return arguments.length ? (threshold = typeof _ === "function" ? _ : Array.isArray(_) ? (0, _constant.default)(_array.slice.call(_)) : (0, _constant.default)(_), histogram) : threshold;
+  };
+
+  return histogram;
+}
+},{"./array.js":"../node_modules/d3-array/src/array.js","./bisect.js":"../node_modules/d3-array/src/bisect.js","./constant.js":"../node_modules/d3-array/src/constant.js","./extent.js":"../node_modules/d3-array/src/extent.js","./identity.js":"../node_modules/d3-array/src/identity.js","./range.js":"../node_modules/d3-array/src/range.js","./ticks.js":"../node_modules/d3-array/src/ticks.js","./threshold/sturges.js":"../node_modules/d3-array/src/threshold/sturges.js"}],"../node_modules/d3-array/src/max.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = max;
+
+function max(values, valueof) {
+  let max;
+
+  if (valueof === undefined) {
+    for (const value of values) {
+      if (value != null && (max < value || max === undefined && value >= value)) {
+        max = value;
+      }
+    }
+  } else {
+    let index = -1;
+
+    for (let value of values) {
+      if ((value = valueof(value, ++index, values)) != null && (max < value || max === undefined && value >= value)) {
+        max = value;
+      }
+    }
+  }
+
+  return max;
+}
+},{}],"../node_modules/d3-array/src/min.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = min;
+
+function min(values, valueof) {
+  let min;
+
+  if (valueof === undefined) {
+    for (const value of values) {
+      if (value != null && (min > value || min === undefined && value >= value)) {
+        min = value;
+      }
+    }
+  } else {
+    let index = -1;
+
+    for (let value of values) {
+      if ((value = valueof(value, ++index, values)) != null && (min > value || min === undefined && value >= value)) {
+        min = value;
+      }
+    }
+  }
+
+  return min;
+}
+},{}],"../node_modules/d3-array/src/quickselect.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = quickselect;
+
+var _ascending = _interopRequireDefault(require("./ascending.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+// Based on https://github.com/mourner/quickselect
+// ISC license, Copyright 2018 Vladimir Agafonkin.
+function quickselect(array, k, left = 0, right = array.length - 1, compare = _ascending.default) {
+  while (right > left) {
+    if (right - left > 600) {
+      const n = right - left + 1;
+      const m = k - left + 1;
+      const z = Math.log(n);
+      const s = 0.5 * Math.exp(2 * z / 3);
+      const sd = 0.5 * Math.sqrt(z * s * (n - s) / n) * (m - n / 2 < 0 ? -1 : 1);
+      const newLeft = Math.max(left, Math.floor(k - m * s / n + sd));
+      const newRight = Math.min(right, Math.floor(k + (n - m) * s / n + sd));
+      quickselect(array, k, newLeft, newRight, compare);
+    }
+
+    const t = array[k];
+    let i = left;
+    let j = right;
+    swap(array, left, k);
+    if (compare(array[right], t) > 0) swap(array, left, right);
+
+    while (i < j) {
+      swap(array, i, j), ++i, --j;
+
+      while (compare(array[i], t) < 0) ++i;
+
+      while (compare(array[j], t) > 0) --j;
+    }
+
+    if (compare(array[left], t) === 0) swap(array, left, j);else ++j, swap(array, j, right);
+    if (j <= k) left = j + 1;
+    if (k <= j) right = j - 1;
+  }
+
+  return array;
+}
+
+function swap(array, i, j) {
+  const t = array[i];
+  array[i] = array[j];
+  array[j] = t;
+}
+},{"./ascending.js":"../node_modules/d3-array/src/ascending.js"}],"../node_modules/d3-array/src/number.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+exports.numbers = numbers;
+
+function _default(x) {
+  return x === null ? NaN : +x;
+}
+
+function* numbers(values, valueof) {
+  if (valueof === undefined) {
+    for (let value of values) {
+      if (value != null && (value = +value) >= value) {
+        yield value;
+      }
+    }
+  } else {
+    let index = -1;
+
+    for (let value of values) {
+      if ((value = valueof(value, ++index, values)) != null && (value = +value) >= value) {
+        yield value;
+      }
+    }
+  }
+}
+},{}],"../node_modules/d3-array/src/quantile.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = quantile;
+exports.quantileSorted = quantileSorted;
+
+var _max = _interopRequireDefault(require("./max.js"));
+
+var _min = _interopRequireDefault(require("./min.js"));
+
+var _quickselect = _interopRequireDefault(require("./quickselect.js"));
+
+var _number = _interopRequireWildcard(require("./number.js"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function quantile(values, p, valueof) {
+  values = Float64Array.from((0, _number.numbers)(values, valueof));
+  if (!(n = values.length)) return;
+  if ((p = +p) <= 0 || n < 2) return (0, _min.default)(values);
+  if (p >= 1) return (0, _max.default)(values);
+  var n,
+      i = (n - 1) * p,
+      i0 = Math.floor(i),
+      value0 = (0, _max.default)((0, _quickselect.default)(values, i0).subarray(0, i0 + 1)),
+      value1 = (0, _min.default)(values.subarray(i0 + 1));
+  return value0 + (value1 - value0) * (i - i0);
+}
+
+function quantileSorted(values, p, valueof = _number.default) {
+  if (!(n = values.length)) return;
+  if ((p = +p) <= 0 || n < 2) return +valueof(values[0], 0, values);
+  if (p >= 1) return +valueof(values[n - 1], n - 1, values);
+  var n,
+      i = (n - 1) * p,
+      i0 = Math.floor(i),
+      value0 = +valueof(values[i0], i0, values),
+      value1 = +valueof(values[i0 + 1], i0 + 1, values);
+  return value0 + (value1 - value0) * (i - i0);
+}
+},{"./max.js":"../node_modules/d3-array/src/max.js","./min.js":"../node_modules/d3-array/src/min.js","./quickselect.js":"../node_modules/d3-array/src/quickselect.js","./number.js":"../node_modules/d3-array/src/number.js"}],"../node_modules/d3-array/src/threshold/freedmanDiaconis.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+var _count = _interopRequireDefault(require("../count.js"));
+
+var _quantile = _interopRequireDefault(require("../quantile.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _default(values, min, max) {
+  return Math.ceil((max - min) / (2 * ((0, _quantile.default)(values, 0.75) - (0, _quantile.default)(values, 0.25)) * Math.pow((0, _count.default)(values), -1 / 3)));
+}
+},{"../count.js":"../node_modules/d3-array/src/count.js","../quantile.js":"../node_modules/d3-array/src/quantile.js"}],"../node_modules/d3-array/src/threshold/scott.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+var _count = _interopRequireDefault(require("../count.js"));
+
+var _deviation = _interopRequireDefault(require("../deviation.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _default(values, min, max) {
+  return Math.ceil((max - min) / (3.5 * (0, _deviation.default)(values) * Math.pow((0, _count.default)(values), -1 / 3)));
+}
+},{"../count.js":"../node_modules/d3-array/src/count.js","../deviation.js":"../node_modules/d3-array/src/deviation.js"}],"../node_modules/d3-array/src/maxIndex.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = maxIndex;
+
+function maxIndex(values, valueof) {
+  let max;
+  let maxIndex = -1;
+  let index = -1;
+
+  if (valueof === undefined) {
+    for (const value of values) {
+      ++index;
+
+      if (value != null && (max < value || max === undefined && value >= value)) {
+        max = value, maxIndex = index;
+      }
+    }
+  } else {
+    for (let value of values) {
+      if ((value = valueof(value, ++index, values)) != null && (max < value || max === undefined && value >= value)) {
+        max = value, maxIndex = index;
+      }
+    }
+  }
+
+  return maxIndex;
+}
+},{}],"../node_modules/d3-array/src/mean.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = mean;
+
+function mean(values, valueof) {
+  let count = 0;
+  let sum = 0;
+
+  if (valueof === undefined) {
+    for (let value of values) {
+      if (value != null && (value = +value) >= value) {
+        ++count, sum += value;
+      }
+    }
+  } else {
+    let index = -1;
+
+    for (let value of values) {
+      if ((value = valueof(value, ++index, values)) != null && (value = +value) >= value) {
+        ++count, sum += value;
+      }
+    }
+  }
+
+  if (count) return sum / count;
+}
+},{}],"../node_modules/d3-array/src/median.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+var _quantile = _interopRequireDefault(require("./quantile.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _default(values, valueof) {
+  return (0, _quantile.default)(values, 0.5, valueof);
+}
+},{"./quantile.js":"../node_modules/d3-array/src/quantile.js"}],"../node_modules/d3-array/src/merge.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = merge;
+
+function* flatten(arrays) {
+  for (const array of arrays) {
+    yield* array;
+  }
+}
+
+function merge(arrays) {
+  return Array.from(flatten(arrays));
+}
+},{}],"../node_modules/d3-array/src/minIndex.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = minIndex;
+
+function minIndex(values, valueof) {
+  let min;
+  let minIndex = -1;
+  let index = -1;
+
+  if (valueof === undefined) {
+    for (const value of values) {
+      ++index;
+
+      if (value != null && (min > value || min === undefined && value >= value)) {
+        min = value, minIndex = index;
+      }
+    }
+  } else {
+    for (let value of values) {
+      if ((value = valueof(value, ++index, values)) != null && (min > value || min === undefined && value >= value)) {
+        min = value, minIndex = index;
+      }
+    }
+  }
+
+  return minIndex;
+}
+},{}],"../node_modules/d3-array/src/pairs.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = pairs;
+exports.pair = pair;
+
+function pairs(values, pairof = pair) {
+  const pairs = [];
+  let previous;
+  let first = false;
+
+  for (const value of values) {
+    if (first) pairs.push(pairof(previous, value));
+    previous = value;
+    first = true;
+  }
+
+  return pairs;
+}
+
+function pair(a, b) {
+  return [a, b];
+}
+},{}],"../node_modules/d3-array/src/permute.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+function _default(source, keys) {
+  return Array.from(keys, key => source[key]);
+}
+},{}],"../node_modules/d3-array/src/least.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = least;
+
+var _ascending = _interopRequireDefault(require("./ascending.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function least(values, compare = _ascending.default) {
+  let min;
+  let defined = false;
+
+  if (compare.length === 1) {
+    let minValue;
+
+    for (const element of values) {
+      const value = compare(element);
+
+      if (defined ? (0, _ascending.default)(value, minValue) < 0 : (0, _ascending.default)(value, value) === 0) {
+        min = element;
+        minValue = value;
+        defined = true;
+      }
+    }
+  } else {
+    for (const value of values) {
+      if (defined ? compare(value, min) < 0 : compare(value, value) === 0) {
+        min = value;
+        defined = true;
+      }
+    }
+  }
+
+  return min;
+}
+},{"./ascending.js":"../node_modules/d3-array/src/ascending.js"}],"../node_modules/d3-array/src/leastIndex.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = leastIndex;
+
+var _ascending = _interopRequireDefault(require("./ascending.js"));
+
+var _minIndex = _interopRequireDefault(require("./minIndex.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function leastIndex(values, compare = _ascending.default) {
+  if (compare.length === 1) return (0, _minIndex.default)(values, compare);
+  let minValue;
+  let min = -1;
+  let index = -1;
+
+  for (const value of values) {
+    ++index;
+
+    if (min < 0 ? compare(value, value) === 0 : compare(value, minValue) < 0) {
+      minValue = value;
+      min = index;
+    }
+  }
+
+  return min;
+}
+},{"./ascending.js":"../node_modules/d3-array/src/ascending.js","./minIndex.js":"../node_modules/d3-array/src/minIndex.js"}],"../node_modules/d3-array/src/greatest.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = greatest;
+
+var _ascending = _interopRequireDefault(require("./ascending.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function greatest(values, compare = _ascending.default) {
+  let max;
+  let defined = false;
+
+  if (compare.length === 1) {
+    let maxValue;
+
+    for (const element of values) {
+      const value = compare(element);
+
+      if (defined ? (0, _ascending.default)(value, maxValue) > 0 : (0, _ascending.default)(value, value) === 0) {
+        max = element;
+        maxValue = value;
+        defined = true;
+      }
+    }
+  } else {
+    for (const value of values) {
+      if (defined ? compare(value, max) > 0 : compare(value, value) === 0) {
+        max = value;
+        defined = true;
+      }
+    }
+  }
+
+  return max;
+}
+},{"./ascending.js":"../node_modules/d3-array/src/ascending.js"}],"../node_modules/d3-array/src/greatestIndex.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = greatestIndex;
+
+var _ascending = _interopRequireDefault(require("./ascending.js"));
+
+var _maxIndex = _interopRequireDefault(require("./maxIndex.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function greatestIndex(values, compare = _ascending.default) {
+  if (compare.length === 1) return (0, _maxIndex.default)(values, compare);
+  let maxValue;
+  let max = -1;
+  let index = -1;
+
+  for (const value of values) {
+    ++index;
+
+    if (max < 0 ? compare(value, value) === 0 : compare(value, maxValue) > 0) {
+      maxValue = value;
+      max = index;
+    }
+  }
+
+  return max;
+}
+},{"./ascending.js":"../node_modules/d3-array/src/ascending.js","./maxIndex.js":"../node_modules/d3-array/src/maxIndex.js"}],"../node_modules/d3-array/src/scan.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = scan;
+
+var _leastIndex = _interopRequireDefault(require("./leastIndex.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function scan(values, compare) {
+  const index = (0, _leastIndex.default)(values, compare);
+  return index < 0 ? undefined : index;
+}
+},{"./leastIndex.js":"../node_modules/d3-array/src/leastIndex.js"}],"../node_modules/d3-array/src/shuffle.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = shuffle;
+
+function shuffle(array, i0 = 0, i1 = array.length) {
+  var m = i1 - (i0 = +i0),
+      t,
+      i;
+
+  while (m) {
+    i = Math.random() * m-- | 0;
+    t = array[m + i0];
+    array[m + i0] = array[i + i0];
+    array[i + i0] = t;
+  }
+
+  return array;
+}
+},{}],"../node_modules/d3-array/src/sum.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = sum;
+
+function sum(values, valueof) {
+  let sum = 0;
+
+  if (valueof === undefined) {
+    for (let value of values) {
+      if (value = +value) {
+        sum += value;
+      }
+    }
+  } else {
+    let index = -1;
+
+    for (let value of values) {
+      if (value = +valueof(value, ++index, values)) {
+        sum += value;
+      }
+    }
+  }
+
+  return sum;
+}
+},{}],"../node_modules/d3-array/src/transpose.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+var _min = _interopRequireDefault(require("./min.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _default(matrix) {
+  if (!(n = matrix.length)) return [];
+
+  for (var i = -1, m = (0, _min.default)(matrix, length), transpose = new Array(m); ++i < m;) {
+    for (var j = -1, n, row = transpose[i] = new Array(n); ++j < n;) {
+      row[j] = matrix[j][i];
+    }
+  }
+
+  return transpose;
+}
+
+function length(d) {
+  return d.length;
+}
+},{"./min.js":"../node_modules/d3-array/src/min.js"}],"../node_modules/d3-array/src/zip.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+var _transpose = _interopRequireDefault(require("./transpose.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _default() {
+  return (0, _transpose.default)(arguments);
+}
+},{"./transpose.js":"../node_modules/d3-array/src/transpose.js"}],"../node_modules/d3-array/src/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "bisect", {
+  enumerable: true,
+  get: function () {
+    return _bisect.default;
+  }
+});
+Object.defineProperty(exports, "bisectRight", {
+  enumerable: true,
+  get: function () {
+    return _bisect.bisectRight;
+  }
+});
+Object.defineProperty(exports, "bisectLeft", {
+  enumerable: true,
+  get: function () {
+    return _bisect.bisectLeft;
+  }
+});
+Object.defineProperty(exports, "ascending", {
+  enumerable: true,
+  get: function () {
+    return _ascending.default;
+  }
+});
+Object.defineProperty(exports, "bisector", {
+  enumerable: true,
+  get: function () {
+    return _bisector.default;
+  }
+});
+Object.defineProperty(exports, "count", {
+  enumerable: true,
+  get: function () {
+    return _count.default;
+  }
+});
+Object.defineProperty(exports, "cross", {
+  enumerable: true,
+  get: function () {
+    return _cross.default;
+  }
+});
+Object.defineProperty(exports, "cumsum", {
+  enumerable: true,
+  get: function () {
+    return _cumsum.default;
+  }
+});
+Object.defineProperty(exports, "descending", {
+  enumerable: true,
+  get: function () {
+    return _descending.default;
+  }
+});
+Object.defineProperty(exports, "deviation", {
+  enumerable: true,
+  get: function () {
+    return _deviation.default;
+  }
+});
+Object.defineProperty(exports, "extent", {
+  enumerable: true,
+  get: function () {
+    return _extent.default;
+  }
+});
+Object.defineProperty(exports, "group", {
+  enumerable: true,
+  get: function () {
+    return _group.default;
+  }
+});
+Object.defineProperty(exports, "groups", {
+  enumerable: true,
+  get: function () {
+    return _group.groups;
+  }
+});
+Object.defineProperty(exports, "rollup", {
+  enumerable: true,
+  get: function () {
+    return _group.rollup;
+  }
+});
+Object.defineProperty(exports, "rollups", {
+  enumerable: true,
+  get: function () {
+    return _group.rollups;
+  }
+});
+Object.defineProperty(exports, "bin", {
+  enumerable: true,
+  get: function () {
+    return _bin.default;
+  }
+});
+Object.defineProperty(exports, "histogram", {
+  enumerable: true,
+  get: function () {
+    return _bin.default;
+  }
+});
+Object.defineProperty(exports, "thresholdFreedmanDiaconis", {
+  enumerable: true,
+  get: function () {
+    return _freedmanDiaconis.default;
+  }
+});
+Object.defineProperty(exports, "thresholdScott", {
+  enumerable: true,
+  get: function () {
+    return _scott.default;
+  }
+});
+Object.defineProperty(exports, "thresholdSturges", {
+  enumerable: true,
+  get: function () {
+    return _sturges.default;
+  }
+});
+Object.defineProperty(exports, "max", {
+  enumerable: true,
+  get: function () {
+    return _max.default;
+  }
+});
+Object.defineProperty(exports, "maxIndex", {
+  enumerable: true,
+  get: function () {
+    return _maxIndex.default;
+  }
+});
+Object.defineProperty(exports, "mean", {
+  enumerable: true,
+  get: function () {
+    return _mean.default;
+  }
+});
+Object.defineProperty(exports, "median", {
+  enumerable: true,
+  get: function () {
+    return _median.default;
+  }
+});
+Object.defineProperty(exports, "merge", {
+  enumerable: true,
+  get: function () {
+    return _merge.default;
+  }
+});
+Object.defineProperty(exports, "min", {
+  enumerable: true,
+  get: function () {
+    return _min.default;
+  }
+});
+Object.defineProperty(exports, "minIndex", {
+  enumerable: true,
+  get: function () {
+    return _minIndex.default;
+  }
+});
+Object.defineProperty(exports, "pairs", {
+  enumerable: true,
+  get: function () {
+    return _pairs.default;
+  }
+});
+Object.defineProperty(exports, "permute", {
+  enumerable: true,
+  get: function () {
+    return _permute.default;
+  }
+});
+Object.defineProperty(exports, "quantile", {
+  enumerable: true,
+  get: function () {
+    return _quantile.default;
+  }
+});
+Object.defineProperty(exports, "quantileSorted", {
+  enumerable: true,
+  get: function () {
+    return _quantile.quantileSorted;
+  }
+});
+Object.defineProperty(exports, "quickselect", {
+  enumerable: true,
+  get: function () {
+    return _quickselect.default;
+  }
+});
+Object.defineProperty(exports, "range", {
+  enumerable: true,
+  get: function () {
+    return _range.default;
+  }
+});
+Object.defineProperty(exports, "least", {
+  enumerable: true,
+  get: function () {
+    return _least.default;
+  }
+});
+Object.defineProperty(exports, "leastIndex", {
+  enumerable: true,
+  get: function () {
+    return _leastIndex.default;
+  }
+});
+Object.defineProperty(exports, "greatest", {
+  enumerable: true,
+  get: function () {
+    return _greatest.default;
+  }
+});
+Object.defineProperty(exports, "greatestIndex", {
+  enumerable: true,
+  get: function () {
+    return _greatestIndex.default;
+  }
+});
+Object.defineProperty(exports, "scan", {
+  enumerable: true,
+  get: function () {
+    return _scan.default;
+  }
+});
+Object.defineProperty(exports, "shuffle", {
+  enumerable: true,
+  get: function () {
+    return _shuffle.default;
+  }
+});
+Object.defineProperty(exports, "sum", {
+  enumerable: true,
+  get: function () {
+    return _sum.default;
+  }
+});
+Object.defineProperty(exports, "ticks", {
+  enumerable: true,
+  get: function () {
+    return _ticks.default;
+  }
+});
+Object.defineProperty(exports, "tickIncrement", {
+  enumerable: true,
+  get: function () {
+    return _ticks.tickIncrement;
+  }
+});
+Object.defineProperty(exports, "tickStep", {
+  enumerable: true,
+  get: function () {
+    return _ticks.tickStep;
+  }
+});
+Object.defineProperty(exports, "transpose", {
+  enumerable: true,
+  get: function () {
+    return _transpose.default;
+  }
+});
+Object.defineProperty(exports, "variance", {
+  enumerable: true,
+  get: function () {
+    return _variance.default;
+  }
+});
+Object.defineProperty(exports, "zip", {
+  enumerable: true,
+  get: function () {
+    return _zip.default;
+  }
+});
+
+var _bisect = _interopRequireWildcard(require("./bisect.js"));
+
+var _ascending = _interopRequireDefault(require("./ascending.js"));
+
+var _bisector = _interopRequireDefault(require("./bisector.js"));
+
+var _count = _interopRequireDefault(require("./count.js"));
+
+var _cross = _interopRequireDefault(require("./cross.js"));
+
+var _cumsum = _interopRequireDefault(require("./cumsum.js"));
+
+var _descending = _interopRequireDefault(require("./descending.js"));
+
+var _deviation = _interopRequireDefault(require("./deviation.js"));
+
+var _extent = _interopRequireDefault(require("./extent.js"));
+
+var _group = _interopRequireWildcard(require("./group.js"));
+
+var _bin = _interopRequireDefault(require("./bin.js"));
+
+var _freedmanDiaconis = _interopRequireDefault(require("./threshold/freedmanDiaconis.js"));
+
+var _scott = _interopRequireDefault(require("./threshold/scott.js"));
+
+var _sturges = _interopRequireDefault(require("./threshold/sturges.js"));
+
+var _max = _interopRequireDefault(require("./max.js"));
+
+var _maxIndex = _interopRequireDefault(require("./maxIndex.js"));
+
+var _mean = _interopRequireDefault(require("./mean.js"));
+
+var _median = _interopRequireDefault(require("./median.js"));
+
+var _merge = _interopRequireDefault(require("./merge.js"));
+
+var _min = _interopRequireDefault(require("./min.js"));
+
+var _minIndex = _interopRequireDefault(require("./minIndex.js"));
+
+var _pairs = _interopRequireDefault(require("./pairs.js"));
+
+var _permute = _interopRequireDefault(require("./permute.js"));
+
+var _quantile = _interopRequireWildcard(require("./quantile.js"));
+
+var _quickselect = _interopRequireDefault(require("./quickselect.js"));
+
+var _range = _interopRequireDefault(require("./range.js"));
+
+var _least = _interopRequireDefault(require("./least.js"));
+
+var _leastIndex = _interopRequireDefault(require("./leastIndex.js"));
+
+var _greatest = _interopRequireDefault(require("./greatest.js"));
+
+var _greatestIndex = _interopRequireDefault(require("./greatestIndex.js"));
+
+var _scan = _interopRequireDefault(require("./scan.js"));
+
+var _shuffle = _interopRequireDefault(require("./shuffle.js"));
+
+var _sum = _interopRequireDefault(require("./sum.js"));
+
+var _ticks = _interopRequireWildcard(require("./ticks.js"));
+
+var _transpose = _interopRequireDefault(require("./transpose.js"));
+
+var _variance = _interopRequireDefault(require("./variance.js"));
+
+var _zip = _interopRequireDefault(require("./zip.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+},{"./bisect.js":"../node_modules/d3-array/src/bisect.js","./ascending.js":"../node_modules/d3-array/src/ascending.js","./bisector.js":"../node_modules/d3-array/src/bisector.js","./count.js":"../node_modules/d3-array/src/count.js","./cross.js":"../node_modules/d3-array/src/cross.js","./cumsum.js":"../node_modules/d3-array/src/cumsum.js","./descending.js":"../node_modules/d3-array/src/descending.js","./deviation.js":"../node_modules/d3-array/src/deviation.js","./extent.js":"../node_modules/d3-array/src/extent.js","./group.js":"../node_modules/d3-array/src/group.js","./bin.js":"../node_modules/d3-array/src/bin.js","./threshold/freedmanDiaconis.js":"../node_modules/d3-array/src/threshold/freedmanDiaconis.js","./threshold/scott.js":"../node_modules/d3-array/src/threshold/scott.js","./threshold/sturges.js":"../node_modules/d3-array/src/threshold/sturges.js","./max.js":"../node_modules/d3-array/src/max.js","./maxIndex.js":"../node_modules/d3-array/src/maxIndex.js","./mean.js":"../node_modules/d3-array/src/mean.js","./median.js":"../node_modules/d3-array/src/median.js","./merge.js":"../node_modules/d3-array/src/merge.js","./min.js":"../node_modules/d3-array/src/min.js","./minIndex.js":"../node_modules/d3-array/src/minIndex.js","./pairs.js":"../node_modules/d3-array/src/pairs.js","./permute.js":"../node_modules/d3-array/src/permute.js","./quantile.js":"../node_modules/d3-array/src/quantile.js","./quickselect.js":"../node_modules/d3-array/src/quickselect.js","./range.js":"../node_modules/d3-array/src/range.js","./least.js":"../node_modules/d3-array/src/least.js","./leastIndex.js":"../node_modules/d3-array/src/leastIndex.js","./greatest.js":"../node_modules/d3-array/src/greatest.js","./greatestIndex.js":"../node_modules/d3-array/src/greatestIndex.js","./scan.js":"../node_modules/d3-array/src/scan.js","./shuffle.js":"../node_modules/d3-array/src/shuffle.js","./sum.js":"../node_modules/d3-array/src/sum.js","./ticks.js":"../node_modules/d3-array/src/ticks.js","./transpose.js":"../node_modules/d3-array/src/transpose.js","./variance.js":"../node_modules/d3-array/src/variance.js","./zip.js":"../node_modules/d3-array/src/zip.js"}],"../node_modules/d3-scale/src/init.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.initRange = initRange;
+exports.initInterpolator = initInterpolator;
+
+function initRange(domain, range) {
+  switch (arguments.length) {
+    case 0:
+      break;
+
+    case 1:
+      this.range(domain);
+      break;
+
+    default:
+      this.range(range).domain(domain);
+      break;
+  }
+
+  return this;
+}
+
+function initInterpolator(domain, interpolator) {
+  switch (arguments.length) {
+    case 0:
+      break;
+
+    case 1:
+      {
+        if (typeof domain === "function") this.interpolator(domain);else this.range(domain);
+        break;
+      }
+
+    default:
+      {
+        this.domain(domain);
+        if (typeof interpolator === "function") this.interpolator(interpolator);else this.range(interpolator);
+        break;
+      }
+  }
+
+  return this;
+}
+},{}],"../node_modules/d3-scale/src/ordinal.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = ordinal;
+exports.implicit = void 0;
+
+var _init = require("./init.js");
+
+const implicit = Symbol("implicit");
+exports.implicit = implicit;
+
+function ordinal() {
+  var index = new Map(),
+      domain = [],
+      range = [],
+      unknown = implicit;
+
+  function scale(d) {
+    var key = d + "",
+        i = index.get(key);
+
+    if (!i) {
+      if (unknown !== implicit) return unknown;
+      index.set(key, i = domain.push(d));
+    }
+
+    return range[(i - 1) % range.length];
+  }
+
+  scale.domain = function (_) {
+    if (!arguments.length) return domain.slice();
+    domain = [], index = new Map();
+
+    for (const value of _) {
+      const key = value + "";
+      if (index.has(key)) continue;
+      index.set(key, domain.push(value));
+    }
+
+    return scale;
+  };
+
+  scale.range = function (_) {
+    return arguments.length ? (range = Array.from(_), scale) : range.slice();
+  };
+
+  scale.unknown = function (_) {
+    return arguments.length ? (unknown = _, scale) : unknown;
+  };
+
+  scale.copy = function () {
+    return ordinal(domain, range).unknown(unknown);
+  };
+
+  _init.initRange.apply(scale, arguments);
+
+  return scale;
+}
+},{"./init.js":"../node_modules/d3-scale/src/init.js"}],"../node_modules/d3-scale/src/band.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = band;
+exports.point = point;
+
+var _d3Array = require("d3-array");
+
+var _init = require("./init.js");
+
+var _ordinal = _interopRequireDefault(require("./ordinal.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function band() {
+  var scale = (0, _ordinal.default)().unknown(undefined),
+      domain = scale.domain,
+      ordinalRange = scale.range,
+      r0 = 0,
+      r1 = 1,
+      step,
+      bandwidth,
+      round = false,
+      paddingInner = 0,
+      paddingOuter = 0,
+      align = 0.5;
+  delete scale.unknown;
+
+  function rescale() {
+    var n = domain().length,
+        reverse = r1 < r0,
+        start = reverse ? r1 : r0,
+        stop = reverse ? r0 : r1;
+    step = (stop - start) / Math.max(1, n - paddingInner + paddingOuter * 2);
+    if (round) step = Math.floor(step);
+    start += (stop - start - step * (n - paddingInner)) * align;
+    bandwidth = step * (1 - paddingInner);
+    if (round) start = Math.round(start), bandwidth = Math.round(bandwidth);
+    var values = (0, _d3Array.range)(n).map(function (i) {
+      return start + step * i;
+    });
+    return ordinalRange(reverse ? values.reverse() : values);
+  }
+
+  scale.domain = function (_) {
+    return arguments.length ? (domain(_), rescale()) : domain();
+  };
+
+  scale.range = function (_) {
+    return arguments.length ? ([r0, r1] = _, r0 = +r0, r1 = +r1, rescale()) : [r0, r1];
+  };
+
+  scale.rangeRound = function (_) {
+    return [r0, r1] = _, r0 = +r0, r1 = +r1, round = true, rescale();
+  };
+
+  scale.bandwidth = function () {
+    return bandwidth;
+  };
+
+  scale.step = function () {
+    return step;
+  };
+
+  scale.round = function (_) {
+    return arguments.length ? (round = !!_, rescale()) : round;
+  };
+
+  scale.padding = function (_) {
+    return arguments.length ? (paddingInner = Math.min(1, paddingOuter = +_), rescale()) : paddingInner;
+  };
+
+  scale.paddingInner = function (_) {
+    return arguments.length ? (paddingInner = Math.min(1, _), rescale()) : paddingInner;
+  };
+
+  scale.paddingOuter = function (_) {
+    return arguments.length ? (paddingOuter = +_, rescale()) : paddingOuter;
+  };
+
+  scale.align = function (_) {
+    return arguments.length ? (align = Math.max(0, Math.min(1, _)), rescale()) : align;
+  };
+
+  scale.copy = function () {
+    return band(domain(), [r0, r1]).round(round).paddingInner(paddingInner).paddingOuter(paddingOuter).align(align);
+  };
+
+  return _init.initRange.apply(rescale(), arguments);
+}
+
+function pointish(scale) {
+  var copy = scale.copy;
+  scale.padding = scale.paddingOuter;
+  delete scale.paddingInner;
+  delete scale.paddingOuter;
+
+  scale.copy = function () {
+    return pointish(copy());
+  };
+
+  return scale;
+}
+
+function point() {
+  return pointish(band.apply(null, arguments).paddingInner(1));
+}
+},{"d3-array":"../node_modules/d3-array/src/index.js","./init.js":"../node_modules/d3-scale/src/init.js","./ordinal.js":"../node_modules/d3-scale/src/ordinal.js"}],"../node_modules/d3-scale/src/constant.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+function _default(x) {
+  return function () {
+    return x;
+  };
+}
+},{}],"../node_modules/d3-scale/src/number.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+function _default(x) {
+  return +x;
+}
+},{}],"../node_modules/d3-scale/src/continuous.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.identity = identity;
+exports.copy = copy;
+exports.transformer = transformer;
+exports.default = continuous;
+
+var _d3Array = require("d3-array");
+
+var _d3Interpolate = require("d3-interpolate");
+
+var _constant = _interopRequireDefault(require("./constant.js"));
+
+var _number = _interopRequireDefault(require("./number.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var unit = [0, 1];
+
+function identity(x) {
+  return x;
+}
+
+function normalize(a, b) {
+  return (b -= a = +a) ? function (x) {
+    return (x - a) / b;
+  } : (0, _constant.default)(isNaN(b) ? NaN : 0.5);
+}
+
+function clamper(a, b) {
+  var t;
+  if (a > b) t = a, a = b, b = t;
+  return function (x) {
+    return Math.max(a, Math.min(b, x));
+  };
+} // normalize(a, b)(x) takes a domain value x in [a,b] and returns the corresponding parameter t in [0,1].
+// interpolate(a, b)(t) takes a parameter t in [0,1] and returns the corresponding range value x in [a,b].
+
+
+function bimap(domain, range, interpolate) {
+  var d0 = domain[0],
+      d1 = domain[1],
+      r0 = range[0],
+      r1 = range[1];
+  if (d1 < d0) d0 = normalize(d1, d0), r0 = interpolate(r1, r0);else d0 = normalize(d0, d1), r0 = interpolate(r0, r1);
+  return function (x) {
+    return r0(d0(x));
+  };
+}
+
+function polymap(domain, range, interpolate) {
+  var j = Math.min(domain.length, range.length) - 1,
+      d = new Array(j),
+      r = new Array(j),
+      i = -1; // Reverse descending domains.
+
+  if (domain[j] < domain[0]) {
+    domain = domain.slice().reverse();
+    range = range.slice().reverse();
+  }
+
+  while (++i < j) {
+    d[i] = normalize(domain[i], domain[i + 1]);
+    r[i] = interpolate(range[i], range[i + 1]);
+  }
+
+  return function (x) {
+    var i = (0, _d3Array.bisect)(domain, x, 1, j) - 1;
+    return r[i](d[i](x));
+  };
+}
+
+function copy(source, target) {
+  return target.domain(source.domain()).range(source.range()).interpolate(source.interpolate()).clamp(source.clamp()).unknown(source.unknown());
+}
+
+function transformer() {
+  var domain = unit,
+      range = unit,
+      interpolate = _d3Interpolate.interpolate,
+      transform,
+      untransform,
+      unknown,
+      clamp = identity,
+      piecewise,
+      output,
+      input;
+
+  function rescale() {
+    var n = Math.min(domain.length, range.length);
+    if (clamp !== identity) clamp = clamper(domain[0], domain[n - 1]);
+    piecewise = n > 2 ? polymap : bimap;
+    output = input = null;
+    return scale;
+  }
+
+  function scale(x) {
+    return isNaN(x = +x) ? unknown : (output || (output = piecewise(domain.map(transform), range, interpolate)))(transform(clamp(x)));
+  }
+
+  scale.invert = function (y) {
+    return clamp(untransform((input || (input = piecewise(range, domain.map(transform), _d3Interpolate.interpolateNumber)))(y)));
+  };
+
+  scale.domain = function (_) {
+    return arguments.length ? (domain = Array.from(_, _number.default), rescale()) : domain.slice();
+  };
+
+  scale.range = function (_) {
+    return arguments.length ? (range = Array.from(_), rescale()) : range.slice();
+  };
+
+  scale.rangeRound = function (_) {
+    return range = Array.from(_), interpolate = _d3Interpolate.interpolateRound, rescale();
+  };
+
+  scale.clamp = function (_) {
+    return arguments.length ? (clamp = _ ? true : identity, rescale()) : clamp !== identity;
+  };
+
+  scale.interpolate = function (_) {
+    return arguments.length ? (interpolate = _, rescale()) : interpolate;
+  };
+
+  scale.unknown = function (_) {
+    return arguments.length ? (unknown = _, scale) : unknown;
+  };
+
+  return function (t, u) {
+    transform = t, untransform = u;
+    return rescale();
+  };
+}
+
+function continuous() {
+  return transformer()(identity, identity);
+}
+},{"d3-array":"../node_modules/d3-array/src/index.js","d3-interpolate":"../node_modules/d3-interpolate/src/index.js","./constant.js":"../node_modules/d3-scale/src/constant.js","./number.js":"../node_modules/d3-scale/src/number.js"}],"../node_modules/d3-format/src/formatDecimal.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+// Computes the decimal coefficient and exponent of the specified number x with
+// significant digits p, where x is positive and p is in [1, 21] or undefined.
+// For example, formatDecimal(1.23) returns ["123", 0].
+function _default(x, p) {
+  if ((i = (x = p ? x.toExponential(p - 1) : x.toExponential()).indexOf("e")) < 0) return null; // NaN, ±Infinity
+
+  var i,
+      coefficient = x.slice(0, i); // The string returned by toExponential either has the form \d\.\d+e[-+]\d+
+  // (e.g., 1.2e+3) or the form \de[-+]\d+ (e.g., 1e+3).
+
+  return [coefficient.length > 1 ? coefficient[0] + coefficient.slice(2) : coefficient, +x.slice(i + 1)];
+}
+},{}],"../node_modules/d3-format/src/exponent.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+var _formatDecimal = _interopRequireDefault(require("./formatDecimal.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _default(x) {
+  return x = (0, _formatDecimal.default)(Math.abs(x)), x ? x[1] : NaN;
+}
+},{"./formatDecimal.js":"../node_modules/d3-format/src/formatDecimal.js"}],"../node_modules/d3-format/src/formatGroup.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+function _default(grouping, thousands) {
+  return function (value, width) {
+    var i = value.length,
+        t = [],
+        j = 0,
+        g = grouping[0],
+        length = 0;
+
+    while (i > 0 && g > 0) {
+      if (length + g + 1 > width) g = Math.max(1, width - length);
+      t.push(value.substring(i -= g, i + g));
+      if ((length += g + 1) > width) break;
+      g = grouping[j = (j + 1) % grouping.length];
+    }
+
+    return t.reverse().join(thousands);
+  };
+}
+},{}],"../node_modules/d3-format/src/formatNumerals.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+function _default(numerals) {
+  return function (value) {
+    return value.replace(/[0-9]/g, function (i) {
+      return numerals[+i];
+    });
+  };
+}
+},{}],"../node_modules/d3-format/src/formatSpecifier.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = formatSpecifier;
+exports.FormatSpecifier = FormatSpecifier;
+// [[fill]align][sign][symbol][0][width][,][.precision][~][type]
+var re = /^(?:(.)?([<>=^]))?([+\-( ])?([$#])?(0)?(\d+)?(,)?(\.\d+)?(~)?([a-z%])?$/i;
+
+function formatSpecifier(specifier) {
+  if (!(match = re.exec(specifier))) throw new Error("invalid format: " + specifier);
+  var match;
+  return new FormatSpecifier({
+    fill: match[1],
+    align: match[2],
+    sign: match[3],
+    symbol: match[4],
+    zero: match[5],
+    width: match[6],
+    comma: match[7],
+    precision: match[8] && match[8].slice(1),
+    trim: match[9],
+    type: match[10]
+  });
+}
+
+formatSpecifier.prototype = FormatSpecifier.prototype; // instanceof
+
+function FormatSpecifier(specifier) {
+  this.fill = specifier.fill === undefined ? " " : specifier.fill + "";
+  this.align = specifier.align === undefined ? ">" : specifier.align + "";
+  this.sign = specifier.sign === undefined ? "-" : specifier.sign + "";
+  this.symbol = specifier.symbol === undefined ? "" : specifier.symbol + "";
+  this.zero = !!specifier.zero;
+  this.width = specifier.width === undefined ? undefined : +specifier.width;
+  this.comma = !!specifier.comma;
+  this.precision = specifier.precision === undefined ? undefined : +specifier.precision;
+  this.trim = !!specifier.trim;
+  this.type = specifier.type === undefined ? "" : specifier.type + "";
+}
+
+FormatSpecifier.prototype.toString = function () {
+  return this.fill + this.align + this.sign + this.symbol + (this.zero ? "0" : "") + (this.width === undefined ? "" : Math.max(1, this.width | 0)) + (this.comma ? "," : "") + (this.precision === undefined ? "" : "." + Math.max(0, this.precision | 0)) + (this.trim ? "~" : "") + this.type;
+};
+},{}],"../node_modules/d3-format/src/formatTrim.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+// Trims insignificant zeros, e.g., replaces 1.2000k with 1.2k.
+function _default(s) {
+  out: for (var n = s.length, i = 1, i0 = -1, i1; i < n; ++i) {
+    switch (s[i]) {
+      case ".":
+        i0 = i1 = i;
+        break;
+
+      case "0":
+        if (i0 === 0) i0 = i;
+        i1 = i;
+        break;
+
+      default:
+        if (i0 > 0) {
+          if (!+s[i]) break out;
+          i0 = 0;
+        }
+
+        break;
+    }
+  }
+
+  return i0 > 0 ? s.slice(0, i0) + s.slice(i1 + 1) : s;
+}
+},{}],"../node_modules/d3-format/src/formatPrefixAuto.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+exports.prefixExponent = void 0;
+
+var _formatDecimal = _interopRequireDefault(require("./formatDecimal.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var prefixExponent;
+exports.prefixExponent = prefixExponent;
+
+function _default(x, p) {
+  var d = (0, _formatDecimal.default)(x, p);
+  if (!d) return x + "";
+  var coefficient = d[0],
+      exponent = d[1],
+      i = exponent - (exports.prefixExponent = prefixExponent = Math.max(-8, Math.min(8, Math.floor(exponent / 3))) * 3) + 1,
+      n = coefficient.length;
+  return i === n ? coefficient : i > n ? coefficient + new Array(i - n + 1).join("0") : i > 0 ? coefficient.slice(0, i) + "." + coefficient.slice(i) : "0." + new Array(1 - i).join("0") + (0, _formatDecimal.default)(x, Math.max(0, p + i - 1))[0]; // less than 1y!
+}
+},{"./formatDecimal.js":"../node_modules/d3-format/src/formatDecimal.js"}],"../node_modules/d3-format/src/formatRounded.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+var _formatDecimal = _interopRequireDefault(require("./formatDecimal.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _default(x, p) {
+  var d = (0, _formatDecimal.default)(x, p);
+  if (!d) return x + "";
+  var coefficient = d[0],
+      exponent = d[1];
+  return exponent < 0 ? "0." + new Array(-exponent).join("0") + coefficient : coefficient.length > exponent + 1 ? coefficient.slice(0, exponent + 1) + "." + coefficient.slice(exponent + 1) : coefficient + new Array(exponent - coefficient.length + 2).join("0");
+}
+},{"./formatDecimal.js":"../node_modules/d3-format/src/formatDecimal.js"}],"../node_modules/d3-format/src/formatTypes.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _formatPrefixAuto = _interopRequireDefault(require("./formatPrefixAuto.js"));
+
+var _formatRounded = _interopRequireDefault(require("./formatRounded.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var _default = {
+  "%": function (x, p) {
+    return (x * 100).toFixed(p);
+  },
+  "b": function (x) {
+    return Math.round(x).toString(2);
+  },
+  "c": function (x) {
+    return x + "";
+  },
+  "d": function (x) {
+    return Math.round(x).toString(10);
+  },
+  "e": function (x, p) {
+    return x.toExponential(p);
+  },
+  "f": function (x, p) {
+    return x.toFixed(p);
+  },
+  "g": function (x, p) {
+    return x.toPrecision(p);
+  },
+  "o": function (x) {
+    return Math.round(x).toString(8);
+  },
+  "p": function (x, p) {
+    return (0, _formatRounded.default)(x * 100, p);
+  },
+  "r": _formatRounded.default,
+  "s": _formatPrefixAuto.default,
+  "X": function (x) {
+    return Math.round(x).toString(16).toUpperCase();
+  },
+  "x": function (x) {
+    return Math.round(x).toString(16);
+  }
+};
+exports.default = _default;
+},{"./formatPrefixAuto.js":"../node_modules/d3-format/src/formatPrefixAuto.js","./formatRounded.js":"../node_modules/d3-format/src/formatRounded.js"}],"../node_modules/d3-format/src/identity.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+function _default(x) {
+  return x;
+}
+},{}],"../node_modules/d3-format/src/locale.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+var _exponent = _interopRequireDefault(require("./exponent.js"));
+
+var _formatGroup = _interopRequireDefault(require("./formatGroup.js"));
+
+var _formatNumerals = _interopRequireDefault(require("./formatNumerals.js"));
+
+var _formatSpecifier = _interopRequireDefault(require("./formatSpecifier.js"));
+
+var _formatTrim = _interopRequireDefault(require("./formatTrim.js"));
+
+var _formatTypes = _interopRequireDefault(require("./formatTypes.js"));
+
+var _formatPrefixAuto = require("./formatPrefixAuto.js");
+
+var _identity = _interopRequireDefault(require("./identity.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var map = Array.prototype.map,
+    prefixes = ["y", "z", "a", "f", "p", "n", "µ", "m", "", "k", "M", "G", "T", "P", "E", "Z", "Y"];
+
+function _default(locale) {
+  var group = locale.grouping === undefined || locale.thousands === undefined ? _identity.default : (0, _formatGroup.default)(map.call(locale.grouping, Number), locale.thousands + ""),
+      currencyPrefix = locale.currency === undefined ? "" : locale.currency[0] + "",
+      currencySuffix = locale.currency === undefined ? "" : locale.currency[1] + "",
+      decimal = locale.decimal === undefined ? "." : locale.decimal + "",
+      numerals = locale.numerals === undefined ? _identity.default : (0, _formatNumerals.default)(map.call(locale.numerals, String)),
+      percent = locale.percent === undefined ? "%" : locale.percent + "",
+      minus = locale.minus === undefined ? "-" : locale.minus + "",
+      nan = locale.nan === undefined ? "NaN" : locale.nan + "";
+
+  function newFormat(specifier) {
+    specifier = (0, _formatSpecifier.default)(specifier);
+    var fill = specifier.fill,
+        align = specifier.align,
+        sign = specifier.sign,
+        symbol = specifier.symbol,
+        zero = specifier.zero,
+        width = specifier.width,
+        comma = specifier.comma,
+        precision = specifier.precision,
+        trim = specifier.trim,
+        type = specifier.type; // The "n" type is an alias for ",g".
+
+    if (type === "n") comma = true, type = "g"; // The "" type, and any invalid type, is an alias for ".12~g".
+    else if (!_formatTypes.default[type]) precision === undefined && (precision = 12), trim = true, type = "g"; // If zero fill is specified, padding goes after sign and before digits.
+
+    if (zero || fill === "0" && align === "=") zero = true, fill = "0", align = "="; // Compute the prefix and suffix.
+    // For SI-prefix, the suffix is lazily computed.
+
+    var prefix = symbol === "$" ? currencyPrefix : symbol === "#" && /[boxX]/.test(type) ? "0" + type.toLowerCase() : "",
+        suffix = symbol === "$" ? currencySuffix : /[%p]/.test(type) ? percent : ""; // What format function should we use?
+    // Is this an integer type?
+    // Can this type generate exponential notation?
+
+    var formatType = _formatTypes.default[type],
+        maybeSuffix = /[defgprs%]/.test(type); // Set the default precision if not specified,
+    // or clamp the specified precision to the supported range.
+    // For significant precision, it must be in [1, 21].
+    // For fixed precision, it must be in [0, 20].
+
+    precision = precision === undefined ? 6 : /[gprs]/.test(type) ? Math.max(1, Math.min(21, precision)) : Math.max(0, Math.min(20, precision));
+
+    function format(value) {
+      var valuePrefix = prefix,
+          valueSuffix = suffix,
+          i,
+          n,
+          c;
+
+      if (type === "c") {
+        valueSuffix = formatType(value) + valueSuffix;
+        value = "";
+      } else {
+        value = +value; // Perform the initial formatting.
+
+        var valueNegative = value < 0;
+        value = isNaN(value) ? nan : formatType(Math.abs(value), precision); // Trim insignificant zeros.
+
+        if (trim) value = (0, _formatTrim.default)(value); // If a negative value rounds to zero during formatting, treat as positive.
+
+        if (valueNegative && +value === 0) valueNegative = false; // Compute the prefix and suffix.
+
+        valuePrefix = (valueNegative ? sign === "(" ? sign : minus : sign === "-" || sign === "(" ? "" : sign) + valuePrefix;
+        valueSuffix = (type === "s" ? prefixes[8 + _formatPrefixAuto.prefixExponent / 3] : "") + valueSuffix + (valueNegative && sign === "(" ? ")" : ""); // Break the formatted value into the integer “value” part that can be
+        // grouped, and fractional or exponential “suffix” part that is not.
+
+        if (maybeSuffix) {
+          i = -1, n = value.length;
+
+          while (++i < n) {
+            if (c = value.charCodeAt(i), 48 > c || c > 57) {
+              valueSuffix = (c === 46 ? decimal + value.slice(i + 1) : value.slice(i)) + valueSuffix;
+              value = value.slice(0, i);
+              break;
+            }
+          }
+        }
+      } // If the fill character is not "0", grouping is applied before padding.
+
+
+      if (comma && !zero) value = group(value, Infinity); // Compute the padding.
+
+      var length = valuePrefix.length + value.length + valueSuffix.length,
+          padding = length < width ? new Array(width - length + 1).join(fill) : ""; // If the fill character is "0", grouping is applied after padding.
+
+      if (comma && zero) value = group(padding + value, padding.length ? width - valueSuffix.length : Infinity), padding = ""; // Reconstruct the final output based on the desired alignment.
+
+      switch (align) {
+        case "<":
+          value = valuePrefix + value + valueSuffix + padding;
+          break;
+
+        case "=":
+          value = valuePrefix + padding + value + valueSuffix;
+          break;
+
+        case "^":
+          value = padding.slice(0, length = padding.length >> 1) + valuePrefix + value + valueSuffix + padding.slice(length);
+          break;
+
+        default:
+          value = padding + valuePrefix + value + valueSuffix;
+          break;
+      }
+
+      return numerals(value);
+    }
+
+    format.toString = function () {
+      return specifier + "";
+    };
+
+    return format;
+  }
+
+  function formatPrefix(specifier, value) {
+    var f = newFormat((specifier = (0, _formatSpecifier.default)(specifier), specifier.type = "f", specifier)),
+        e = Math.max(-8, Math.min(8, Math.floor((0, _exponent.default)(value) / 3))) * 3,
+        k = Math.pow(10, -e),
+        prefix = prefixes[8 + e / 3];
+    return function (value) {
+      return f(k * value) + prefix;
+    };
+  }
+
+  return {
+    format: newFormat,
+    formatPrefix: formatPrefix
+  };
+}
+},{"./exponent.js":"../node_modules/d3-format/src/exponent.js","./formatGroup.js":"../node_modules/d3-format/src/formatGroup.js","./formatNumerals.js":"../node_modules/d3-format/src/formatNumerals.js","./formatSpecifier.js":"../node_modules/d3-format/src/formatSpecifier.js","./formatTrim.js":"../node_modules/d3-format/src/formatTrim.js","./formatTypes.js":"../node_modules/d3-format/src/formatTypes.js","./formatPrefixAuto.js":"../node_modules/d3-format/src/formatPrefixAuto.js","./identity.js":"../node_modules/d3-format/src/identity.js"}],"../node_modules/d3-format/src/defaultLocale.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = defaultLocale;
+exports.formatPrefix = exports.format = void 0;
+
+var _locale = _interopRequireDefault(require("./locale.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var locale;
+var format;
+exports.format = format;
+var formatPrefix;
+exports.formatPrefix = formatPrefix;
+defaultLocale({
+  decimal: ".",
+  thousands: ",",
+  grouping: [3],
+  currency: ["$", ""],
+  minus: "-"
+});
+
+function defaultLocale(definition) {
+  locale = (0, _locale.default)(definition);
+  exports.format = format = locale.format;
+  exports.formatPrefix = formatPrefix = locale.formatPrefix;
+  return locale;
+}
+},{"./locale.js":"../node_modules/d3-format/src/locale.js"}],"../node_modules/d3-format/src/precisionFixed.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+var _exponent = _interopRequireDefault(require("./exponent.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _default(step) {
+  return Math.max(0, -(0, _exponent.default)(Math.abs(step)));
+}
+},{"./exponent.js":"../node_modules/d3-format/src/exponent.js"}],"../node_modules/d3-format/src/precisionPrefix.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+var _exponent = _interopRequireDefault(require("./exponent.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _default(step, value) {
+  return Math.max(0, Math.max(-8, Math.min(8, Math.floor((0, _exponent.default)(value) / 3))) * 3 - (0, _exponent.default)(Math.abs(step)));
+}
+},{"./exponent.js":"../node_modules/d3-format/src/exponent.js"}],"../node_modules/d3-format/src/precisionRound.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+var _exponent = _interopRequireDefault(require("./exponent.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _default(step, max) {
+  step = Math.abs(step), max = Math.abs(max) - step;
+  return Math.max(0, (0, _exponent.default)(max) - (0, _exponent.default)(step)) + 1;
+}
+},{"./exponent.js":"../node_modules/d3-format/src/exponent.js"}],"../node_modules/d3-format/src/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "formatDefaultLocale", {
+  enumerable: true,
+  get: function () {
+    return _defaultLocale.default;
+  }
+});
+Object.defineProperty(exports, "format", {
+  enumerable: true,
+  get: function () {
+    return _defaultLocale.format;
+  }
+});
+Object.defineProperty(exports, "formatPrefix", {
+  enumerable: true,
+  get: function () {
+    return _defaultLocale.formatPrefix;
+  }
+});
+Object.defineProperty(exports, "formatLocale", {
+  enumerable: true,
+  get: function () {
+    return _locale.default;
+  }
+});
+Object.defineProperty(exports, "formatSpecifier", {
+  enumerable: true,
+  get: function () {
+    return _formatSpecifier.default;
+  }
+});
+Object.defineProperty(exports, "FormatSpecifier", {
+  enumerable: true,
+  get: function () {
+    return _formatSpecifier.FormatSpecifier;
+  }
+});
+Object.defineProperty(exports, "precisionFixed", {
+  enumerable: true,
+  get: function () {
+    return _precisionFixed.default;
+  }
+});
+Object.defineProperty(exports, "precisionPrefix", {
+  enumerable: true,
+  get: function () {
+    return _precisionPrefix.default;
+  }
+});
+Object.defineProperty(exports, "precisionRound", {
+  enumerable: true,
+  get: function () {
+    return _precisionRound.default;
+  }
+});
+
+var _defaultLocale = _interopRequireWildcard(require("./defaultLocale.js"));
+
+var _locale = _interopRequireDefault(require("./locale.js"));
+
+var _formatSpecifier = _interopRequireWildcard(require("./formatSpecifier.js"));
+
+var _precisionFixed = _interopRequireDefault(require("./precisionFixed.js"));
+
+var _precisionPrefix = _interopRequireDefault(require("./precisionPrefix.js"));
+
+var _precisionRound = _interopRequireDefault(require("./precisionRound.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+},{"./defaultLocale.js":"../node_modules/d3-format/src/defaultLocale.js","./locale.js":"../node_modules/d3-format/src/locale.js","./formatSpecifier.js":"../node_modules/d3-format/src/formatSpecifier.js","./precisionFixed.js":"../node_modules/d3-format/src/precisionFixed.js","./precisionPrefix.js":"../node_modules/d3-format/src/precisionPrefix.js","./precisionRound.js":"../node_modules/d3-format/src/precisionRound.js"}],"../node_modules/d3-scale/src/tickFormat.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+var _d3Array = require("d3-array");
+
+var _d3Format = require("d3-format");
+
+function _default(start, stop, count, specifier) {
+  var step = (0, _d3Array.tickStep)(start, stop, count),
+      precision;
+  specifier = (0, _d3Format.formatSpecifier)(specifier == null ? ",f" : specifier);
+
+  switch (specifier.type) {
+    case "s":
+      {
+        var value = Math.max(Math.abs(start), Math.abs(stop));
+        if (specifier.precision == null && !isNaN(precision = (0, _d3Format.precisionPrefix)(step, value))) specifier.precision = precision;
+        return (0, _d3Format.formatPrefix)(specifier, value);
+      }
+
+    case "":
+    case "e":
+    case "g":
+    case "p":
+    case "r":
+      {
+        if (specifier.precision == null && !isNaN(precision = (0, _d3Format.precisionRound)(step, Math.max(Math.abs(start), Math.abs(stop))))) specifier.precision = precision - (specifier.type === "e");
+        break;
+      }
+
+    case "f":
+    case "%":
+      {
+        if (specifier.precision == null && !isNaN(precision = (0, _d3Format.precisionFixed)(step))) specifier.precision = precision - (specifier.type === "%") * 2;
+        break;
+      }
+  }
+
+  return (0, _d3Format.format)(specifier);
+}
+},{"d3-array":"../node_modules/d3-array/src/index.js","d3-format":"../node_modules/d3-format/src/index.js"}],"../node_modules/d3-scale/src/linear.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.linearish = linearish;
+exports.default = linear;
+
+var _d3Array = require("d3-array");
+
+var _continuous = _interopRequireWildcard(require("./continuous.js"));
+
+var _init = require("./init.js");
+
+var _tickFormat = _interopRequireDefault(require("./tickFormat.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function linearish(scale) {
+  var domain = scale.domain;
+
+  scale.ticks = function (count) {
+    var d = domain();
+    return (0, _d3Array.ticks)(d[0], d[d.length - 1], count == null ? 10 : count);
+  };
+
+  scale.tickFormat = function (count, specifier) {
+    var d = domain();
+    return (0, _tickFormat.default)(d[0], d[d.length - 1], count == null ? 10 : count, specifier);
+  };
+
+  scale.nice = function (count) {
+    if (count == null) count = 10;
+    var d = domain(),
+        i0 = 0,
+        i1 = d.length - 1,
+        start = d[i0],
+        stop = d[i1],
+        step;
+
+    if (stop < start) {
+      step = start, start = stop, stop = step;
+      step = i0, i0 = i1, i1 = step;
+    }
+
+    step = (0, _d3Array.tickIncrement)(start, stop, count);
+
+    if (step > 0) {
+      start = Math.floor(start / step) * step;
+      stop = Math.ceil(stop / step) * step;
+      step = (0, _d3Array.tickIncrement)(start, stop, count);
+    } else if (step < 0) {
+      start = Math.ceil(start * step) / step;
+      stop = Math.floor(stop * step) / step;
+      step = (0, _d3Array.tickIncrement)(start, stop, count);
+    }
+
+    if (step > 0) {
+      d[i0] = Math.floor(start / step) * step;
+      d[i1] = Math.ceil(stop / step) * step;
+      domain(d);
+    } else if (step < 0) {
+      d[i0] = Math.ceil(start * step) / step;
+      d[i1] = Math.floor(stop * step) / step;
+      domain(d);
+    }
+
+    return scale;
+  };
+
+  return scale;
+}
+
+function linear() {
+  var scale = (0, _continuous.default)();
+
+  scale.copy = function () {
+    return (0, _continuous.copy)(scale, linear());
+  };
+
+  _init.initRange.apply(scale, arguments);
+
+  return linearish(scale);
+}
+},{"d3-array":"../node_modules/d3-array/src/index.js","./continuous.js":"../node_modules/d3-scale/src/continuous.js","./init.js":"../node_modules/d3-scale/src/init.js","./tickFormat.js":"../node_modules/d3-scale/src/tickFormat.js"}],"../node_modules/d3-scale/src/identity.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = identity;
+
+var _linear = require("./linear.js");
+
+var _number = _interopRequireDefault(require("./number.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function identity(domain) {
+  var unknown;
+
+  function scale(x) {
+    return isNaN(x = +x) ? unknown : x;
+  }
+
+  scale.invert = scale;
+
+  scale.domain = scale.range = function (_) {
+    return arguments.length ? (domain = Array.from(_, _number.default), scale) : domain.slice();
+  };
+
+  scale.unknown = function (_) {
+    return arguments.length ? (unknown = _, scale) : unknown;
+  };
+
+  scale.copy = function () {
+    return identity(domain).unknown(unknown);
+  };
+
+  domain = arguments.length ? Array.from(domain, _number.default) : [0, 1];
+  return (0, _linear.linearish)(scale);
+}
+},{"./linear.js":"../node_modules/d3-scale/src/linear.js","./number.js":"../node_modules/d3-scale/src/number.js"}],"../node_modules/d3-scale/src/nice.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+function _default(domain, interval) {
+  domain = domain.slice();
+  var i0 = 0,
+      i1 = domain.length - 1,
+      x0 = domain[i0],
+      x1 = domain[i1],
+      t;
+
+  if (x1 < x0) {
+    t = i0, i0 = i1, i1 = t;
+    t = x0, x0 = x1, x1 = t;
+  }
+
+  domain[i0] = interval.floor(x0);
+  domain[i1] = interval.ceil(x1);
+  return domain;
+}
+},{}],"../node_modules/d3-scale/src/log.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.loggish = loggish;
+exports.default = log;
+
+var _d3Array = require("d3-array");
+
+var _d3Format = require("d3-format");
+
+var _nice = _interopRequireDefault(require("./nice.js"));
+
+var _continuous = require("./continuous.js");
+
+var _init = require("./init.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function transformLog(x) {
+  return Math.log(x);
+}
+
+function transformExp(x) {
+  return Math.exp(x);
+}
+
+function transformLogn(x) {
+  return -Math.log(-x);
+}
+
+function transformExpn(x) {
+  return -Math.exp(-x);
+}
+
+function pow10(x) {
+  return isFinite(x) ? +("1e" + x) : x < 0 ? 0 : x;
+}
+
+function powp(base) {
+  return base === 10 ? pow10 : base === Math.E ? Math.exp : function (x) {
+    return Math.pow(base, x);
+  };
+}
+
+function logp(base) {
+  return base === Math.E ? Math.log : base === 10 && Math.log10 || base === 2 && Math.log2 || (base = Math.log(base), function (x) {
+    return Math.log(x) / base;
+  });
+}
+
+function reflect(f) {
+  return function (x) {
+    return -f(-x);
+  };
+}
+
+function loggish(transform) {
+  var scale = transform(transformLog, transformExp),
+      domain = scale.domain,
+      base = 10,
+      logs,
+      pows;
+
+  function rescale() {
+    logs = logp(base), pows = powp(base);
+
+    if (domain()[0] < 0) {
+      logs = reflect(logs), pows = reflect(pows);
+      transform(transformLogn, transformExpn);
+    } else {
+      transform(transformLog, transformExp);
+    }
+
+    return scale;
+  }
+
+  scale.base = function (_) {
+    return arguments.length ? (base = +_, rescale()) : base;
+  };
+
+  scale.domain = function (_) {
+    return arguments.length ? (domain(_), rescale()) : domain();
+  };
+
+  scale.ticks = function (count) {
+    var d = domain(),
+        u = d[0],
+        v = d[d.length - 1],
+        r;
+    if (r = v < u) i = u, u = v, v = i;
+    var i = logs(u),
+        j = logs(v),
+        p,
+        k,
+        t,
+        n = count == null ? 10 : +count,
+        z = [];
+
+    if (!(base % 1) && j - i < n) {
+      i = Math.floor(i), j = Math.ceil(j);
+      if (u > 0) for (; i <= j; ++i) {
+        for (k = 1, p = pows(i); k < base; ++k) {
+          t = p * k;
+          if (t < u) continue;
+          if (t > v) break;
+          z.push(t);
+        }
+      } else for (; i <= j; ++i) {
+        for (k = base - 1, p = pows(i); k >= 1; --k) {
+          t = p * k;
+          if (t < u) continue;
+          if (t > v) break;
+          z.push(t);
+        }
+      }
+      if (!z.length) z = (0, _d3Array.ticks)(u, v, n);
+    } else {
+      z = (0, _d3Array.ticks)(i, j, Math.min(j - i, n)).map(pows);
+    }
+
+    return r ? z.reverse() : z;
+  };
+
+  scale.tickFormat = function (count, specifier) {
+    if (specifier == null) specifier = base === 10 ? ".0e" : ",";
+    if (typeof specifier !== "function") specifier = (0, _d3Format.format)(specifier);
+    if (count === Infinity) return specifier;
+    if (count == null) count = 10;
+    var k = Math.max(1, base * count / scale.ticks().length); // TODO fast estimate?
+
+    return function (d) {
+      var i = d / pows(Math.round(logs(d)));
+      if (i * base < base - 0.5) i *= base;
+      return i <= k ? specifier(d) : "";
+    };
+  };
+
+  scale.nice = function () {
+    return domain((0, _nice.default)(domain(), {
+      floor: function (x) {
+        return pows(Math.floor(logs(x)));
+      },
+      ceil: function (x) {
+        return pows(Math.ceil(logs(x)));
+      }
+    }));
+  };
+
+  return scale;
+}
+
+function log() {
+  var scale = loggish((0, _continuous.transformer)()).domain([1, 10]);
+
+  scale.copy = function () {
+    return (0, _continuous.copy)(scale, log()).base(scale.base());
+  };
+
+  _init.initRange.apply(scale, arguments);
+
+  return scale;
+}
+},{"d3-array":"../node_modules/d3-array/src/index.js","d3-format":"../node_modules/d3-format/src/index.js","./nice.js":"../node_modules/d3-scale/src/nice.js","./continuous.js":"../node_modules/d3-scale/src/continuous.js","./init.js":"../node_modules/d3-scale/src/init.js"}],"../node_modules/d3-scale/src/symlog.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.symlogish = symlogish;
+exports.default = symlog;
+
+var _linear = require("./linear.js");
+
+var _continuous = require("./continuous.js");
+
+var _init = require("./init.js");
+
+function transformSymlog(c) {
+  return function (x) {
+    return Math.sign(x) * Math.log1p(Math.abs(x / c));
+  };
+}
+
+function transformSymexp(c) {
+  return function (x) {
+    return Math.sign(x) * Math.expm1(Math.abs(x)) * c;
+  };
+}
+
+function symlogish(transform) {
+  var c = 1,
+      scale = transform(transformSymlog(c), transformSymexp(c));
+
+  scale.constant = function (_) {
+    return arguments.length ? transform(transformSymlog(c = +_), transformSymexp(c)) : c;
+  };
+
+  return (0, _linear.linearish)(scale);
+}
+
+function symlog() {
+  var scale = symlogish((0, _continuous.transformer)());
+
+  scale.copy = function () {
+    return (0, _continuous.copy)(scale, symlog()).constant(scale.constant());
+  };
+
+  return _init.initRange.apply(scale, arguments);
+}
+},{"./linear.js":"../node_modules/d3-scale/src/linear.js","./continuous.js":"../node_modules/d3-scale/src/continuous.js","./init.js":"../node_modules/d3-scale/src/init.js"}],"../node_modules/d3-scale/src/pow.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.powish = powish;
+exports.default = pow;
+exports.sqrt = sqrt;
+
+var _linear = require("./linear.js");
+
+var _continuous = require("./continuous.js");
+
+var _init = require("./init.js");
+
+function transformPow(exponent) {
+  return function (x) {
+    return x < 0 ? -Math.pow(-x, exponent) : Math.pow(x, exponent);
+  };
+}
+
+function transformSqrt(x) {
+  return x < 0 ? -Math.sqrt(-x) : Math.sqrt(x);
+}
+
+function transformSquare(x) {
+  return x < 0 ? -x * x : x * x;
+}
+
+function powish(transform) {
+  var scale = transform(_continuous.identity, _continuous.identity),
+      exponent = 1;
+
+  function rescale() {
+    return exponent === 1 ? transform(_continuous.identity, _continuous.identity) : exponent === 0.5 ? transform(transformSqrt, transformSquare) : transform(transformPow(exponent), transformPow(1 / exponent));
+  }
+
+  scale.exponent = function (_) {
+    return arguments.length ? (exponent = +_, rescale()) : exponent;
+  };
+
+  return (0, _linear.linearish)(scale);
+}
+
+function pow() {
+  var scale = powish((0, _continuous.transformer)());
+
+  scale.copy = function () {
+    return (0, _continuous.copy)(scale, pow()).exponent(scale.exponent());
+  };
+
+  _init.initRange.apply(scale, arguments);
+
+  return scale;
+}
+
+function sqrt() {
+  return pow.apply(null, arguments).exponent(0.5);
+}
+},{"./linear.js":"../node_modules/d3-scale/src/linear.js","./continuous.js":"../node_modules/d3-scale/src/continuous.js","./init.js":"../node_modules/d3-scale/src/init.js"}],"../node_modules/d3-scale/src/radial.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = radial;
+
+var _continuous = _interopRequireDefault(require("./continuous.js"));
+
+var _init = require("./init.js");
+
+var _linear = require("./linear.js");
+
+var _number = _interopRequireDefault(require("./number.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function square(x) {
+  return Math.sign(x) * x * x;
+}
+
+function unsquare(x) {
+  return Math.sign(x) * Math.sqrt(Math.abs(x));
+}
+
+function radial() {
+  var squared = (0, _continuous.default)(),
+      range = [0, 1],
+      round = false,
+      unknown;
+
+  function scale(x) {
+    var y = unsquare(squared(x));
+    return isNaN(y) ? unknown : round ? Math.round(y) : y;
+  }
+
+  scale.invert = function (y) {
+    return squared.invert(square(y));
+  };
+
+  scale.domain = function (_) {
+    return arguments.length ? (squared.domain(_), scale) : squared.domain();
+  };
+
+  scale.range = function (_) {
+    return arguments.length ? (squared.range((range = Array.from(_, _number.default)).map(square)), scale) : range.slice();
+  };
+
+  scale.rangeRound = function (_) {
+    return scale.range(_).round(true);
+  };
+
+  scale.round = function (_) {
+    return arguments.length ? (round = !!_, scale) : round;
+  };
+
+  scale.clamp = function (_) {
+    return arguments.length ? (squared.clamp(_), scale) : squared.clamp();
+  };
+
+  scale.unknown = function (_) {
+    return arguments.length ? (unknown = _, scale) : unknown;
+  };
+
+  scale.copy = function () {
+    return radial(squared.domain(), range).round(round).clamp(squared.clamp()).unknown(unknown);
+  };
+
+  _init.initRange.apply(scale, arguments);
+
+  return (0, _linear.linearish)(scale);
+}
+},{"./continuous.js":"../node_modules/d3-scale/src/continuous.js","./init.js":"../node_modules/d3-scale/src/init.js","./linear.js":"../node_modules/d3-scale/src/linear.js","./number.js":"../node_modules/d3-scale/src/number.js"}],"../node_modules/d3-scale/src/quantile.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = quantile;
+
+var _d3Array = require("d3-array");
+
+var _init = require("./init.js");
+
+function quantile() {
+  var domain = [],
+      range = [],
+      thresholds = [],
+      unknown;
+
+  function rescale() {
+    var i = 0,
+        n = Math.max(1, range.length);
+    thresholds = new Array(n - 1);
+
+    while (++i < n) thresholds[i - 1] = (0, _d3Array.quantile)(domain, i / n);
+
+    return scale;
+  }
+
+  function scale(x) {
+    return isNaN(x = +x) ? unknown : range[(0, _d3Array.bisect)(thresholds, x)];
+  }
+
+  scale.invertExtent = function (y) {
+    var i = range.indexOf(y);
+    return i < 0 ? [NaN, NaN] : [i > 0 ? thresholds[i - 1] : domain[0], i < thresholds.length ? thresholds[i] : domain[domain.length - 1]];
+  };
+
+  scale.domain = function (_) {
+    if (!arguments.length) return domain.slice();
+    domain = [];
+
+    for (let d of _) if (d != null && !isNaN(d = +d)) domain.push(d);
+
+    domain.sort(_d3Array.ascending);
+    return rescale();
+  };
+
+  scale.range = function (_) {
+    return arguments.length ? (range = Array.from(_), rescale()) : range.slice();
+  };
+
+  scale.unknown = function (_) {
+    return arguments.length ? (unknown = _, scale) : unknown;
+  };
+
+  scale.quantiles = function () {
+    return thresholds.slice();
+  };
+
+  scale.copy = function () {
+    return quantile().domain(domain).range(range).unknown(unknown);
+  };
+
+  return _init.initRange.apply(scale, arguments);
+}
+},{"d3-array":"../node_modules/d3-array/src/index.js","./init.js":"../node_modules/d3-scale/src/init.js"}],"../node_modules/d3-scale/src/quantize.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = quantize;
+
+var _d3Array = require("d3-array");
+
+var _linear = require("./linear.js");
+
+var _init = require("./init.js");
+
+function quantize() {
+  var x0 = 0,
+      x1 = 1,
+      n = 1,
+      domain = [0.5],
+      range = [0, 1],
+      unknown;
+
+  function scale(x) {
+    return x <= x ? range[(0, _d3Array.bisect)(domain, x, 0, n)] : unknown;
+  }
+
+  function rescale() {
+    var i = -1;
+    domain = new Array(n);
+
+    while (++i < n) domain[i] = ((i + 1) * x1 - (i - n) * x0) / (n + 1);
+
+    return scale;
+  }
+
+  scale.domain = function (_) {
+    return arguments.length ? ([x0, x1] = _, x0 = +x0, x1 = +x1, rescale()) : [x0, x1];
+  };
+
+  scale.range = function (_) {
+    return arguments.length ? (n = (range = Array.from(_)).length - 1, rescale()) : range.slice();
+  };
+
+  scale.invertExtent = function (y) {
+    var i = range.indexOf(y);
+    return i < 0 ? [NaN, NaN] : i < 1 ? [x0, domain[0]] : i >= n ? [domain[n - 1], x1] : [domain[i - 1], domain[i]];
+  };
+
+  scale.unknown = function (_) {
+    return arguments.length ? (unknown = _, scale) : scale;
+  };
+
+  scale.thresholds = function () {
+    return domain.slice();
+  };
+
+  scale.copy = function () {
+    return quantize().domain([x0, x1]).range(range).unknown(unknown);
+  };
+
+  return _init.initRange.apply((0, _linear.linearish)(scale), arguments);
+}
+},{"d3-array":"../node_modules/d3-array/src/index.js","./linear.js":"../node_modules/d3-scale/src/linear.js","./init.js":"../node_modules/d3-scale/src/init.js"}],"../node_modules/d3-scale/src/threshold.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = threshold;
+
+var _d3Array = require("d3-array");
+
+var _init = require("./init.js");
+
+function threshold() {
+  var domain = [0.5],
+      range = [0, 1],
+      unknown,
+      n = 1;
+
+  function scale(x) {
+    return x <= x ? range[(0, _d3Array.bisect)(domain, x, 0, n)] : unknown;
+  }
+
+  scale.domain = function (_) {
+    return arguments.length ? (domain = Array.from(_), n = Math.min(domain.length, range.length - 1), scale) : domain.slice();
+  };
+
+  scale.range = function (_) {
+    return arguments.length ? (range = Array.from(_), n = Math.min(domain.length, range.length - 1), scale) : range.slice();
+  };
+
+  scale.invertExtent = function (y) {
+    var i = range.indexOf(y);
+    return [domain[i - 1], domain[i]];
+  };
+
+  scale.unknown = function (_) {
+    return arguments.length ? (unknown = _, scale) : unknown;
+  };
+
+  scale.copy = function () {
+    return threshold().domain(domain).range(range).unknown(unknown);
+  };
+
+  return _init.initRange.apply(scale, arguments);
+}
+},{"d3-array":"../node_modules/d3-array/src/index.js","./init.js":"../node_modules/d3-scale/src/init.js"}],"../node_modules/d3-time/src/interval.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = newInterval;
+var t0 = new Date(),
+    t1 = new Date();
+
+function newInterval(floori, offseti, count, field) {
+  function interval(date) {
+    return floori(date = arguments.length === 0 ? new Date() : new Date(+date)), date;
+  }
+
+  interval.floor = function (date) {
+    return floori(date = new Date(+date)), date;
+  };
+
+  interval.ceil = function (date) {
+    return floori(date = new Date(date - 1)), offseti(date, 1), floori(date), date;
+  };
+
+  interval.round = function (date) {
+    var d0 = interval(date),
+        d1 = interval.ceil(date);
+    return date - d0 < d1 - date ? d0 : d1;
+  };
+
+  interval.offset = function (date, step) {
+    return offseti(date = new Date(+date), step == null ? 1 : Math.floor(step)), date;
+  };
+
+  interval.range = function (start, stop, step) {
+    var range = [],
+        previous;
+    start = interval.ceil(start);
+    step = step == null ? 1 : Math.floor(step);
+    if (!(start < stop) || !(step > 0)) return range; // also handles Invalid Date
+
+    do range.push(previous = new Date(+start)), offseti(start, step), floori(start); while (previous < start && start < stop);
+
+    return range;
+  };
+
+  interval.filter = function (test) {
+    return newInterval(function (date) {
+      if (date >= date) while (floori(date), !test(date)) date.setTime(date - 1);
+    }, function (date, step) {
+      if (date >= date) {
+        if (step < 0) while (++step <= 0) {
+          while (offseti(date, -1), !test(date)) {} // eslint-disable-line no-empty
+
+        } else while (--step >= 0) {
+          while (offseti(date, +1), !test(date)) {} // eslint-disable-line no-empty
+
+        }
+      }
+    });
+  };
+
+  if (count) {
+    interval.count = function (start, end) {
+      t0.setTime(+start), t1.setTime(+end);
+      floori(t0), floori(t1);
+      return Math.floor(count(t0, t1));
+    };
+
+    interval.every = function (step) {
+      step = Math.floor(step);
+      return !isFinite(step) || !(step > 0) ? null : !(step > 1) ? interval : interval.filter(field ? function (d) {
+        return field(d) % step === 0;
+      } : function (d) {
+        return interval.count(0, d) % step === 0;
+      });
+    };
+  }
+
+  return interval;
+}
+},{}],"../node_modules/d3-time/src/millisecond.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.milliseconds = exports.default = void 0;
+
+var _interval = _interopRequireDefault(require("./interval.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var millisecond = (0, _interval.default)(function () {// noop
+}, function (date, step) {
+  date.setTime(+date + step);
+}, function (start, end) {
+  return end - start;
+}); // An optimized implementation for this simple case.
+
+millisecond.every = function (k) {
+  k = Math.floor(k);
+  if (!isFinite(k) || !(k > 0)) return null;
+  if (!(k > 1)) return millisecond;
+  return (0, _interval.default)(function (date) {
+    date.setTime(Math.floor(date / k) * k);
+  }, function (date, step) {
+    date.setTime(+date + step * k);
+  }, function (start, end) {
+    return (end - start) / k;
+  });
+};
+
+var _default = millisecond;
+exports.default = _default;
+var milliseconds = millisecond.range;
+exports.milliseconds = milliseconds;
+},{"./interval.js":"../node_modules/d3-time/src/interval.js"}],"../node_modules/d3-time/src/duration.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.durationWeek = exports.durationDay = exports.durationHour = exports.durationMinute = exports.durationSecond = void 0;
+var durationSecond = 1e3;
+exports.durationSecond = durationSecond;
+var durationMinute = 6e4;
+exports.durationMinute = durationMinute;
+var durationHour = 36e5;
+exports.durationHour = durationHour;
+var durationDay = 864e5;
+exports.durationDay = durationDay;
+var durationWeek = 6048e5;
+exports.durationWeek = durationWeek;
+},{}],"../node_modules/d3-time/src/second.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.seconds = exports.default = void 0;
+
+var _interval = _interopRequireDefault(require("./interval.js"));
+
+var _duration = require("./duration.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var second = (0, _interval.default)(function (date) {
+  date.setTime(date - date.getMilliseconds());
+}, function (date, step) {
+  date.setTime(+date + step * _duration.durationSecond);
+}, function (start, end) {
+  return (end - start) / _duration.durationSecond;
+}, function (date) {
+  return date.getUTCSeconds();
+});
+var _default = second;
+exports.default = _default;
+var seconds = second.range;
+exports.seconds = seconds;
+},{"./interval.js":"../node_modules/d3-time/src/interval.js","./duration.js":"../node_modules/d3-time/src/duration.js"}],"../node_modules/d3-time/src/minute.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.minutes = exports.default = void 0;
+
+var _interval = _interopRequireDefault(require("./interval.js"));
+
+var _duration = require("./duration.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var minute = (0, _interval.default)(function (date) {
+  date.setTime(date - date.getMilliseconds() - date.getSeconds() * _duration.durationSecond);
+}, function (date, step) {
+  date.setTime(+date + step * _duration.durationMinute);
+}, function (start, end) {
+  return (end - start) / _duration.durationMinute;
+}, function (date) {
+  return date.getMinutes();
+});
+var _default = minute;
+exports.default = _default;
+var minutes = minute.range;
+exports.minutes = minutes;
+},{"./interval.js":"../node_modules/d3-time/src/interval.js","./duration.js":"../node_modules/d3-time/src/duration.js"}],"../node_modules/d3-time/src/hour.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.hours = exports.default = void 0;
+
+var _interval = _interopRequireDefault(require("./interval.js"));
+
+var _duration = require("./duration.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var hour = (0, _interval.default)(function (date) {
+  date.setTime(date - date.getMilliseconds() - date.getSeconds() * _duration.durationSecond - date.getMinutes() * _duration.durationMinute);
+}, function (date, step) {
+  date.setTime(+date + step * _duration.durationHour);
+}, function (start, end) {
+  return (end - start) / _duration.durationHour;
+}, function (date) {
+  return date.getHours();
+});
+var _default = hour;
+exports.default = _default;
+var hours = hour.range;
+exports.hours = hours;
+},{"./interval.js":"../node_modules/d3-time/src/interval.js","./duration.js":"../node_modules/d3-time/src/duration.js"}],"../node_modules/d3-time/src/day.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.days = exports.default = void 0;
+
+var _interval = _interopRequireDefault(require("./interval.js"));
+
+var _duration = require("./duration.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var day = (0, _interval.default)(function (date) {
+  date.setHours(0, 0, 0, 0);
+}, function (date, step) {
+  date.setDate(date.getDate() + step);
+}, function (start, end) {
+  return (end - start - (end.getTimezoneOffset() - start.getTimezoneOffset()) * _duration.durationMinute) / _duration.durationDay;
+}, function (date) {
+  return date.getDate() - 1;
+});
+var _default = day;
+exports.default = _default;
+var days = day.range;
+exports.days = days;
+},{"./interval.js":"../node_modules/d3-time/src/interval.js","./duration.js":"../node_modules/d3-time/src/duration.js"}],"../node_modules/d3-time/src/week.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.saturdays = exports.fridays = exports.thursdays = exports.wednesdays = exports.tuesdays = exports.mondays = exports.sundays = exports.saturday = exports.friday = exports.thursday = exports.wednesday = exports.tuesday = exports.monday = exports.sunday = void 0;
+
+var _interval = _interopRequireDefault(require("./interval.js"));
+
+var _duration = require("./duration.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function weekday(i) {
+  return (0, _interval.default)(function (date) {
+    date.setDate(date.getDate() - (date.getDay() + 7 - i) % 7);
+    date.setHours(0, 0, 0, 0);
+  }, function (date, step) {
+    date.setDate(date.getDate() + step * 7);
+  }, function (start, end) {
+    return (end - start - (end.getTimezoneOffset() - start.getTimezoneOffset()) * _duration.durationMinute) / _duration.durationWeek;
+  });
+}
+
+var sunday = weekday(0);
+exports.sunday = sunday;
+var monday = weekday(1);
+exports.monday = monday;
+var tuesday = weekday(2);
+exports.tuesday = tuesday;
+var wednesday = weekday(3);
+exports.wednesday = wednesday;
+var thursday = weekday(4);
+exports.thursday = thursday;
+var friday = weekday(5);
+exports.friday = friday;
+var saturday = weekday(6);
+exports.saturday = saturday;
+var sundays = sunday.range;
+exports.sundays = sundays;
+var mondays = monday.range;
+exports.mondays = mondays;
+var tuesdays = tuesday.range;
+exports.tuesdays = tuesdays;
+var wednesdays = wednesday.range;
+exports.wednesdays = wednesdays;
+var thursdays = thursday.range;
+exports.thursdays = thursdays;
+var fridays = friday.range;
+exports.fridays = fridays;
+var saturdays = saturday.range;
+exports.saturdays = saturdays;
+},{"./interval.js":"../node_modules/d3-time/src/interval.js","./duration.js":"../node_modules/d3-time/src/duration.js"}],"../node_modules/d3-time/src/month.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.months = exports.default = void 0;
+
+var _interval = _interopRequireDefault(require("./interval.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var month = (0, _interval.default)(function (date) {
+  date.setDate(1);
+  date.setHours(0, 0, 0, 0);
+}, function (date, step) {
+  date.setMonth(date.getMonth() + step);
+}, function (start, end) {
+  return end.getMonth() - start.getMonth() + (end.getFullYear() - start.getFullYear()) * 12;
+}, function (date) {
+  return date.getMonth();
+});
+var _default = month;
+exports.default = _default;
+var months = month.range;
+exports.months = months;
+},{"./interval.js":"../node_modules/d3-time/src/interval.js"}],"../node_modules/d3-time/src/year.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.years = exports.default = void 0;
+
+var _interval = _interopRequireDefault(require("./interval.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var year = (0, _interval.default)(function (date) {
+  date.setMonth(0, 1);
+  date.setHours(0, 0, 0, 0);
+}, function (date, step) {
+  date.setFullYear(date.getFullYear() + step);
+}, function (start, end) {
+  return end.getFullYear() - start.getFullYear();
+}, function (date) {
+  return date.getFullYear();
+}); // An optimized implementation for this simple case.
+
+year.every = function (k) {
+  return !isFinite(k = Math.floor(k)) || !(k > 0) ? null : (0, _interval.default)(function (date) {
+    date.setFullYear(Math.floor(date.getFullYear() / k) * k);
+    date.setMonth(0, 1);
+    date.setHours(0, 0, 0, 0);
+  }, function (date, step) {
+    date.setFullYear(date.getFullYear() + step * k);
+  });
+};
+
+var _default = year;
+exports.default = _default;
+var years = year.range;
+exports.years = years;
+},{"./interval.js":"../node_modules/d3-time/src/interval.js"}],"../node_modules/d3-time/src/utcMinute.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.utcMinutes = exports.default = void 0;
+
+var _interval = _interopRequireDefault(require("./interval.js"));
+
+var _duration = require("./duration.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var utcMinute = (0, _interval.default)(function (date) {
+  date.setUTCSeconds(0, 0);
+}, function (date, step) {
+  date.setTime(+date + step * _duration.durationMinute);
+}, function (start, end) {
+  return (end - start) / _duration.durationMinute;
+}, function (date) {
+  return date.getUTCMinutes();
+});
+var _default = utcMinute;
+exports.default = _default;
+var utcMinutes = utcMinute.range;
+exports.utcMinutes = utcMinutes;
+},{"./interval.js":"../node_modules/d3-time/src/interval.js","./duration.js":"../node_modules/d3-time/src/duration.js"}],"../node_modules/d3-time/src/utcHour.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.utcHours = exports.default = void 0;
+
+var _interval = _interopRequireDefault(require("./interval.js"));
+
+var _duration = require("./duration.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var utcHour = (0, _interval.default)(function (date) {
+  date.setUTCMinutes(0, 0, 0);
+}, function (date, step) {
+  date.setTime(+date + step * _duration.durationHour);
+}, function (start, end) {
+  return (end - start) / _duration.durationHour;
+}, function (date) {
+  return date.getUTCHours();
+});
+var _default = utcHour;
+exports.default = _default;
+var utcHours = utcHour.range;
+exports.utcHours = utcHours;
+},{"./interval.js":"../node_modules/d3-time/src/interval.js","./duration.js":"../node_modules/d3-time/src/duration.js"}],"../node_modules/d3-time/src/utcDay.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.utcDays = exports.default = void 0;
+
+var _interval = _interopRequireDefault(require("./interval.js"));
+
+var _duration = require("./duration.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var utcDay = (0, _interval.default)(function (date) {
+  date.setUTCHours(0, 0, 0, 0);
+}, function (date, step) {
+  date.setUTCDate(date.getUTCDate() + step);
+}, function (start, end) {
+  return (end - start) / _duration.durationDay;
+}, function (date) {
+  return date.getUTCDate() - 1;
+});
+var _default = utcDay;
+exports.default = _default;
+var utcDays = utcDay.range;
+exports.utcDays = utcDays;
+},{"./interval.js":"../node_modules/d3-time/src/interval.js","./duration.js":"../node_modules/d3-time/src/duration.js"}],"../node_modules/d3-time/src/utcWeek.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.utcSaturdays = exports.utcFridays = exports.utcThursdays = exports.utcWednesdays = exports.utcTuesdays = exports.utcMondays = exports.utcSundays = exports.utcSaturday = exports.utcFriday = exports.utcThursday = exports.utcWednesday = exports.utcTuesday = exports.utcMonday = exports.utcSunday = void 0;
+
+var _interval = _interopRequireDefault(require("./interval.js"));
+
+var _duration = require("./duration.js");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function utcWeekday(i) {
+  return (0, _interval.default)(function (date) {
+    date.setUTCDate(date.getUTCDate() - (date.getUTCDay() + 7 - i) % 7);
+    date.setUTCHours(0, 0, 0, 0);
+  }, function (date, step) {
+    date.setUTCDate(date.getUTCDate() + step * 7);
+  }, function (start, end) {
+    return (end - start) / _duration.durationWeek;
+  });
+}
+
+var utcSunday = utcWeekday(0);
+exports.utcSunday = utcSunday;
+var utcMonday = utcWeekday(1);
+exports.utcMonday = utcMonday;
+var utcTuesday = utcWeekday(2);
+exports.utcTuesday = utcTuesday;
+var utcWednesday = utcWeekday(3);
+exports.utcWednesday = utcWednesday;
+var utcThursday = utcWeekday(4);
+exports.utcThursday = utcThursday;
+var utcFriday = utcWeekday(5);
+exports.utcFriday = utcFriday;
+var utcSaturday = utcWeekday(6);
+exports.utcSaturday = utcSaturday;
+var utcSundays = utcSunday.range;
+exports.utcSundays = utcSundays;
+var utcMondays = utcMonday.range;
+exports.utcMondays = utcMondays;
+var utcTuesdays = utcTuesday.range;
+exports.utcTuesdays = utcTuesdays;
+var utcWednesdays = utcWednesday.range;
+exports.utcWednesdays = utcWednesdays;
+var utcThursdays = utcThursday.range;
+exports.utcThursdays = utcThursdays;
+var utcFridays = utcFriday.range;
+exports.utcFridays = utcFridays;
+var utcSaturdays = utcSaturday.range;
+exports.utcSaturdays = utcSaturdays;
+},{"./interval.js":"../node_modules/d3-time/src/interval.js","./duration.js":"../node_modules/d3-time/src/duration.js"}],"../node_modules/d3-time/src/utcMonth.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.utcMonths = exports.default = void 0;
+
+var _interval = _interopRequireDefault(require("./interval.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var utcMonth = (0, _interval.default)(function (date) {
+  date.setUTCDate(1);
+  date.setUTCHours(0, 0, 0, 0);
+}, function (date, step) {
+  date.setUTCMonth(date.getUTCMonth() + step);
+}, function (start, end) {
+  return end.getUTCMonth() - start.getUTCMonth() + (end.getUTCFullYear() - start.getUTCFullYear()) * 12;
+}, function (date) {
+  return date.getUTCMonth();
+});
+var _default = utcMonth;
+exports.default = _default;
+var utcMonths = utcMonth.range;
+exports.utcMonths = utcMonths;
+},{"./interval.js":"../node_modules/d3-time/src/interval.js"}],"../node_modules/d3-time/src/utcYear.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.utcYears = exports.default = void 0;
+
+var _interval = _interopRequireDefault(require("./interval.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var utcYear = (0, _interval.default)(function (date) {
+  date.setUTCMonth(0, 1);
+  date.setUTCHours(0, 0, 0, 0);
+}, function (date, step) {
+  date.setUTCFullYear(date.getUTCFullYear() + step);
+}, function (start, end) {
+  return end.getUTCFullYear() - start.getUTCFullYear();
+}, function (date) {
+  return date.getUTCFullYear();
+}); // An optimized implementation for this simple case.
+
+utcYear.every = function (k) {
+  return !isFinite(k = Math.floor(k)) || !(k > 0) ? null : (0, _interval.default)(function (date) {
+    date.setUTCFullYear(Math.floor(date.getUTCFullYear() / k) * k);
+    date.setUTCMonth(0, 1);
+    date.setUTCHours(0, 0, 0, 0);
+  }, function (date, step) {
+    date.setUTCFullYear(date.getUTCFullYear() + step * k);
+  });
+};
+
+var _default = utcYear;
+exports.default = _default;
+var utcYears = utcYear.range;
+exports.utcYears = utcYears;
+},{"./interval.js":"../node_modules/d3-time/src/interval.js"}],"../node_modules/d3-time/src/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "timeInterval", {
+  enumerable: true,
+  get: function () {
+    return _interval.default;
+  }
+});
+Object.defineProperty(exports, "timeMillisecond", {
+  enumerable: true,
+  get: function () {
+    return _millisecond.default;
+  }
+});
+Object.defineProperty(exports, "timeMilliseconds", {
+  enumerable: true,
+  get: function () {
+    return _millisecond.milliseconds;
+  }
+});
+Object.defineProperty(exports, "utcMillisecond", {
+  enumerable: true,
+  get: function () {
+    return _millisecond.default;
+  }
+});
+Object.defineProperty(exports, "utcMilliseconds", {
+  enumerable: true,
+  get: function () {
+    return _millisecond.milliseconds;
+  }
+});
+Object.defineProperty(exports, "timeSecond", {
+  enumerable: true,
+  get: function () {
+    return _second.default;
+  }
+});
+Object.defineProperty(exports, "timeSeconds", {
+  enumerable: true,
+  get: function () {
+    return _second.seconds;
+  }
+});
+Object.defineProperty(exports, "utcSecond", {
+  enumerable: true,
+  get: function () {
+    return _second.default;
+  }
+});
+Object.defineProperty(exports, "utcSeconds", {
+  enumerable: true,
+  get: function () {
+    return _second.seconds;
+  }
+});
+Object.defineProperty(exports, "timeMinute", {
+  enumerable: true,
+  get: function () {
+    return _minute.default;
+  }
+});
+Object.defineProperty(exports, "timeMinutes", {
+  enumerable: true,
+  get: function () {
+    return _minute.minutes;
+  }
+});
+Object.defineProperty(exports, "timeHour", {
+  enumerable: true,
+  get: function () {
+    return _hour.default;
+  }
+});
+Object.defineProperty(exports, "timeHours", {
+  enumerable: true,
+  get: function () {
+    return _hour.hours;
+  }
+});
+Object.defineProperty(exports, "timeDay", {
+  enumerable: true,
+  get: function () {
+    return _day.default;
+  }
+});
+Object.defineProperty(exports, "timeDays", {
+  enumerable: true,
+  get: function () {
+    return _day.days;
+  }
+});
+Object.defineProperty(exports, "timeWeek", {
+  enumerable: true,
+  get: function () {
+    return _week.sunday;
+  }
+});
+Object.defineProperty(exports, "timeWeeks", {
+  enumerable: true,
+  get: function () {
+    return _week.sundays;
+  }
+});
+Object.defineProperty(exports, "timeSunday", {
+  enumerable: true,
+  get: function () {
+    return _week.sunday;
+  }
+});
+Object.defineProperty(exports, "timeSundays", {
+  enumerable: true,
+  get: function () {
+    return _week.sundays;
+  }
+});
+Object.defineProperty(exports, "timeMonday", {
+  enumerable: true,
+  get: function () {
+    return _week.monday;
+  }
+});
+Object.defineProperty(exports, "timeMondays", {
+  enumerable: true,
+  get: function () {
+    return _week.mondays;
+  }
+});
+Object.defineProperty(exports, "timeTuesday", {
+  enumerable: true,
+  get: function () {
+    return _week.tuesday;
+  }
+});
+Object.defineProperty(exports, "timeTuesdays", {
+  enumerable: true,
+  get: function () {
+    return _week.tuesdays;
+  }
+});
+Object.defineProperty(exports, "timeWednesday", {
+  enumerable: true,
+  get: function () {
+    return _week.wednesday;
+  }
+});
+Object.defineProperty(exports, "timeWednesdays", {
+  enumerable: true,
+  get: function () {
+    return _week.wednesdays;
+  }
+});
+Object.defineProperty(exports, "timeThursday", {
+  enumerable: true,
+  get: function () {
+    return _week.thursday;
+  }
+});
+Object.defineProperty(exports, "timeThursdays", {
+  enumerable: true,
+  get: function () {
+    return _week.thursdays;
+  }
+});
+Object.defineProperty(exports, "timeFriday", {
+  enumerable: true,
+  get: function () {
+    return _week.friday;
+  }
+});
+Object.defineProperty(exports, "timeFridays", {
+  enumerable: true,
+  get: function () {
+    return _week.fridays;
+  }
+});
+Object.defineProperty(exports, "timeSaturday", {
+  enumerable: true,
+  get: function () {
+    return _week.saturday;
+  }
+});
+Object.defineProperty(exports, "timeSaturdays", {
+  enumerable: true,
+  get: function () {
+    return _week.saturdays;
+  }
+});
+Object.defineProperty(exports, "timeMonth", {
+  enumerable: true,
+  get: function () {
+    return _month.default;
+  }
+});
+Object.defineProperty(exports, "timeMonths", {
+  enumerable: true,
+  get: function () {
+    return _month.months;
+  }
+});
+Object.defineProperty(exports, "timeYear", {
+  enumerable: true,
+  get: function () {
+    return _year.default;
+  }
+});
+Object.defineProperty(exports, "timeYears", {
+  enumerable: true,
+  get: function () {
+    return _year.years;
+  }
+});
+Object.defineProperty(exports, "utcMinute", {
+  enumerable: true,
+  get: function () {
+    return _utcMinute.default;
+  }
+});
+Object.defineProperty(exports, "utcMinutes", {
+  enumerable: true,
+  get: function () {
+    return _utcMinute.utcMinutes;
+  }
+});
+Object.defineProperty(exports, "utcHour", {
+  enumerable: true,
+  get: function () {
+    return _utcHour.default;
+  }
+});
+Object.defineProperty(exports, "utcHours", {
+  enumerable: true,
+  get: function () {
+    return _utcHour.utcHours;
+  }
+});
+Object.defineProperty(exports, "utcDay", {
+  enumerable: true,
+  get: function () {
+    return _utcDay.default;
+  }
+});
+Object.defineProperty(exports, "utcDays", {
+  enumerable: true,
+  get: function () {
+    return _utcDay.utcDays;
+  }
+});
+Object.defineProperty(exports, "utcWeek", {
+  enumerable: true,
+  get: function () {
+    return _utcWeek.utcSunday;
+  }
+});
+Object.defineProperty(exports, "utcWeeks", {
+  enumerable: true,
+  get: function () {
+    return _utcWeek.utcSundays;
+  }
+});
+Object.defineProperty(exports, "utcSunday", {
+  enumerable: true,
+  get: function () {
+    return _utcWeek.utcSunday;
+  }
+});
+Object.defineProperty(exports, "utcSundays", {
+  enumerable: true,
+  get: function () {
+    return _utcWeek.utcSundays;
+  }
+});
+Object.defineProperty(exports, "utcMonday", {
+  enumerable: true,
+  get: function () {
+    return _utcWeek.utcMonday;
+  }
+});
+Object.defineProperty(exports, "utcMondays", {
+  enumerable: true,
+  get: function () {
+    return _utcWeek.utcMondays;
+  }
+});
+Object.defineProperty(exports, "utcTuesday", {
+  enumerable: true,
+  get: function () {
+    return _utcWeek.utcTuesday;
+  }
+});
+Object.defineProperty(exports, "utcTuesdays", {
+  enumerable: true,
+  get: function () {
+    return _utcWeek.utcTuesdays;
+  }
+});
+Object.defineProperty(exports, "utcWednesday", {
+  enumerable: true,
+  get: function () {
+    return _utcWeek.utcWednesday;
+  }
+});
+Object.defineProperty(exports, "utcWednesdays", {
+  enumerable: true,
+  get: function () {
+    return _utcWeek.utcWednesdays;
+  }
+});
+Object.defineProperty(exports, "utcThursday", {
+  enumerable: true,
+  get: function () {
+    return _utcWeek.utcThursday;
+  }
+});
+Object.defineProperty(exports, "utcThursdays", {
+  enumerable: true,
+  get: function () {
+    return _utcWeek.utcThursdays;
+  }
+});
+Object.defineProperty(exports, "utcFriday", {
+  enumerable: true,
+  get: function () {
+    return _utcWeek.utcFriday;
+  }
+});
+Object.defineProperty(exports, "utcFridays", {
+  enumerable: true,
+  get: function () {
+    return _utcWeek.utcFridays;
+  }
+});
+Object.defineProperty(exports, "utcSaturday", {
+  enumerable: true,
+  get: function () {
+    return _utcWeek.utcSaturday;
+  }
+});
+Object.defineProperty(exports, "utcSaturdays", {
+  enumerable: true,
+  get: function () {
+    return _utcWeek.utcSaturdays;
+  }
+});
+Object.defineProperty(exports, "utcMonth", {
+  enumerable: true,
+  get: function () {
+    return _utcMonth.default;
+  }
+});
+Object.defineProperty(exports, "utcMonths", {
+  enumerable: true,
+  get: function () {
+    return _utcMonth.utcMonths;
+  }
+});
+Object.defineProperty(exports, "utcYear", {
+  enumerable: true,
+  get: function () {
+    return _utcYear.default;
+  }
+});
+Object.defineProperty(exports, "utcYears", {
+  enumerable: true,
+  get: function () {
+    return _utcYear.utcYears;
+  }
+});
+
+var _interval = _interopRequireDefault(require("./interval.js"));
+
+var _millisecond = _interopRequireWildcard(require("./millisecond.js"));
+
+var _second = _interopRequireWildcard(require("./second.js"));
+
+var _minute = _interopRequireWildcard(require("./minute.js"));
+
+var _hour = _interopRequireWildcard(require("./hour.js"));
+
+var _day = _interopRequireWildcard(require("./day.js"));
+
+var _week = require("./week.js");
+
+var _month = _interopRequireWildcard(require("./month.js"));
+
+var _year = _interopRequireWildcard(require("./year.js"));
+
+var _utcMinute = _interopRequireWildcard(require("./utcMinute.js"));
+
+var _utcHour = _interopRequireWildcard(require("./utcHour.js"));
+
+var _utcDay = _interopRequireWildcard(require("./utcDay.js"));
+
+var _utcWeek = require("./utcWeek.js");
+
+var _utcMonth = _interopRequireWildcard(require("./utcMonth.js"));
+
+var _utcYear = _interopRequireWildcard(require("./utcYear.js"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./interval.js":"../node_modules/d3-time/src/interval.js","./millisecond.js":"../node_modules/d3-time/src/millisecond.js","./second.js":"../node_modules/d3-time/src/second.js","./minute.js":"../node_modules/d3-time/src/minute.js","./hour.js":"../node_modules/d3-time/src/hour.js","./day.js":"../node_modules/d3-time/src/day.js","./week.js":"../node_modules/d3-time/src/week.js","./month.js":"../node_modules/d3-time/src/month.js","./year.js":"../node_modules/d3-time/src/year.js","./utcMinute.js":"../node_modules/d3-time/src/utcMinute.js","./utcHour.js":"../node_modules/d3-time/src/utcHour.js","./utcDay.js":"../node_modules/d3-time/src/utcDay.js","./utcWeek.js":"../node_modules/d3-time/src/utcWeek.js","./utcMonth.js":"../node_modules/d3-time/src/utcMonth.js","./utcYear.js":"../node_modules/d3-time/src/utcYear.js"}],"../node_modules/d3-time-format/src/locale.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = formatLocale;
+
+var _d3Time = require("d3-time");
+
+function localDate(d) {
+  if (0 <= d.y && d.y < 100) {
+    var date = new Date(-1, d.m, d.d, d.H, d.M, d.S, d.L);
+    date.setFullYear(d.y);
+    return date;
+  }
+
+  return new Date(d.y, d.m, d.d, d.H, d.M, d.S, d.L);
+}
+
+function utcDate(d) {
+  if (0 <= d.y && d.y < 100) {
+    var date = new Date(Date.UTC(-1, d.m, d.d, d.H, d.M, d.S, d.L));
+    date.setUTCFullYear(d.y);
+    return date;
+  }
+
+  return new Date(Date.UTC(d.y, d.m, d.d, d.H, d.M, d.S, d.L));
+}
+
+function newDate(y, m, d) {
+  return {
+    y: y,
+    m: m,
+    d: d,
+    H: 0,
+    M: 0,
+    S: 0,
+    L: 0
+  };
+}
+
+function formatLocale(locale) {
+  var locale_dateTime = locale.dateTime,
+      locale_date = locale.date,
+      locale_time = locale.time,
+      locale_periods = locale.periods,
+      locale_weekdays = locale.days,
+      locale_shortWeekdays = locale.shortDays,
+      locale_months = locale.months,
+      locale_shortMonths = locale.shortMonths;
+  var periodRe = formatRe(locale_periods),
+      periodLookup = formatLookup(locale_periods),
+      weekdayRe = formatRe(locale_weekdays),
+      weekdayLookup = formatLookup(locale_weekdays),
+      shortWeekdayRe = formatRe(locale_shortWeekdays),
+      shortWeekdayLookup = formatLookup(locale_shortWeekdays),
+      monthRe = formatRe(locale_months),
+      monthLookup = formatLookup(locale_months),
+      shortMonthRe = formatRe(locale_shortMonths),
+      shortMonthLookup = formatLookup(locale_shortMonths);
+  var formats = {
+    "a": formatShortWeekday,
+    "A": formatWeekday,
+    "b": formatShortMonth,
+    "B": formatMonth,
+    "c": null,
+    "d": formatDayOfMonth,
+    "e": formatDayOfMonth,
+    "f": formatMicroseconds,
+    "H": formatHour24,
+    "I": formatHour12,
+    "j": formatDayOfYear,
+    "L": formatMilliseconds,
+    "m": formatMonthNumber,
+    "M": formatMinutes,
+    "p": formatPeriod,
+    "q": formatQuarter,
+    "Q": formatUnixTimestamp,
+    "s": formatUnixTimestampSeconds,
+    "S": formatSeconds,
+    "u": formatWeekdayNumberMonday,
+    "U": formatWeekNumberSunday,
+    "V": formatWeekNumberISO,
+    "w": formatWeekdayNumberSunday,
+    "W": formatWeekNumberMonday,
+    "x": null,
+    "X": null,
+    "y": formatYear,
+    "Y": formatFullYear,
+    "Z": formatZone,
+    "%": formatLiteralPercent
+  };
+  var utcFormats = {
+    "a": formatUTCShortWeekday,
+    "A": formatUTCWeekday,
+    "b": formatUTCShortMonth,
+    "B": formatUTCMonth,
+    "c": null,
+    "d": formatUTCDayOfMonth,
+    "e": formatUTCDayOfMonth,
+    "f": formatUTCMicroseconds,
+    "H": formatUTCHour24,
+    "I": formatUTCHour12,
+    "j": formatUTCDayOfYear,
+    "L": formatUTCMilliseconds,
+    "m": formatUTCMonthNumber,
+    "M": formatUTCMinutes,
+    "p": formatUTCPeriod,
+    "q": formatUTCQuarter,
+    "Q": formatUnixTimestamp,
+    "s": formatUnixTimestampSeconds,
+    "S": formatUTCSeconds,
+    "u": formatUTCWeekdayNumberMonday,
+    "U": formatUTCWeekNumberSunday,
+    "V": formatUTCWeekNumberISO,
+    "w": formatUTCWeekdayNumberSunday,
+    "W": formatUTCWeekNumberMonday,
+    "x": null,
+    "X": null,
+    "y": formatUTCYear,
+    "Y": formatUTCFullYear,
+    "Z": formatUTCZone,
+    "%": formatLiteralPercent
+  };
+  var parses = {
+    "a": parseShortWeekday,
+    "A": parseWeekday,
+    "b": parseShortMonth,
+    "B": parseMonth,
+    "c": parseLocaleDateTime,
+    "d": parseDayOfMonth,
+    "e": parseDayOfMonth,
+    "f": parseMicroseconds,
+    "H": parseHour24,
+    "I": parseHour24,
+    "j": parseDayOfYear,
+    "L": parseMilliseconds,
+    "m": parseMonthNumber,
+    "M": parseMinutes,
+    "p": parsePeriod,
+    "q": parseQuarter,
+    "Q": parseUnixTimestamp,
+    "s": parseUnixTimestampSeconds,
+    "S": parseSeconds,
+    "u": parseWeekdayNumberMonday,
+    "U": parseWeekNumberSunday,
+    "V": parseWeekNumberISO,
+    "w": parseWeekdayNumberSunday,
+    "W": parseWeekNumberMonday,
+    "x": parseLocaleDate,
+    "X": parseLocaleTime,
+    "y": parseYear,
+    "Y": parseFullYear,
+    "Z": parseZone,
+    "%": parseLiteralPercent
+  }; // These recursive directive definitions must be deferred.
+
+  formats.x = newFormat(locale_date, formats);
+  formats.X = newFormat(locale_time, formats);
+  formats.c = newFormat(locale_dateTime, formats);
+  utcFormats.x = newFormat(locale_date, utcFormats);
+  utcFormats.X = newFormat(locale_time, utcFormats);
+  utcFormats.c = newFormat(locale_dateTime, utcFormats);
+
+  function newFormat(specifier, formats) {
+    return function (date) {
+      var string = [],
+          i = -1,
+          j = 0,
+          n = specifier.length,
+          c,
+          pad,
+          format;
+      if (!(date instanceof Date)) date = new Date(+date);
+
+      while (++i < n) {
+        if (specifier.charCodeAt(i) === 37) {
+          string.push(specifier.slice(j, i));
+          if ((pad = pads[c = specifier.charAt(++i)]) != null) c = specifier.charAt(++i);else pad = c === "e" ? " " : "0";
+          if (format = formats[c]) c = format(date, pad);
+          string.push(c);
+          j = i + 1;
+        }
+      }
+
+      string.push(specifier.slice(j, i));
+      return string.join("");
+    };
+  }
+
+  function newParse(specifier, Z) {
+    return function (string) {
+      var d = newDate(1900, undefined, 1),
+          i = parseSpecifier(d, specifier, string += "", 0),
+          week,
+          day;
+      if (i != string.length) return null; // If a UNIX timestamp is specified, return it.
+
+      if ("Q" in d) return new Date(d.Q);
+      if ("s" in d) return new Date(d.s * 1000 + ("L" in d ? d.L : 0)); // If this is utcParse, never use the local timezone.
+
+      if (Z && !("Z" in d)) d.Z = 0; // The am-pm flag is 0 for AM, and 1 for PM.
+
+      if ("p" in d) d.H = d.H % 12 + d.p * 12; // If the month was not specified, inherit from the quarter.
+
+      if (d.m === undefined) d.m = "q" in d ? d.q : 0; // Convert day-of-week and week-of-year to day-of-year.
+
+      if ("V" in d) {
+        if (d.V < 1 || d.V > 53) return null;
+        if (!("w" in d)) d.w = 1;
+
+        if ("Z" in d) {
+          week = utcDate(newDate(d.y, 0, 1)), day = week.getUTCDay();
+          week = day > 4 || day === 0 ? _d3Time.utcMonday.ceil(week) : (0, _d3Time.utcMonday)(week);
+          week = _d3Time.utcDay.offset(week, (d.V - 1) * 7);
+          d.y = week.getUTCFullYear();
+          d.m = week.getUTCMonth();
+          d.d = week.getUTCDate() + (d.w + 6) % 7;
+        } else {
+          week = localDate(newDate(d.y, 0, 1)), day = week.getDay();
+          week = day > 4 || day === 0 ? _d3Time.timeMonday.ceil(week) : (0, _d3Time.timeMonday)(week);
+          week = _d3Time.timeDay.offset(week, (d.V - 1) * 7);
+          d.y = week.getFullYear();
+          d.m = week.getMonth();
+          d.d = week.getDate() + (d.w + 6) % 7;
+        }
+      } else if ("W" in d || "U" in d) {
+        if (!("w" in d)) d.w = "u" in d ? d.u % 7 : "W" in d ? 1 : 0;
+        day = "Z" in d ? utcDate(newDate(d.y, 0, 1)).getUTCDay() : localDate(newDate(d.y, 0, 1)).getDay();
+        d.m = 0;
+        d.d = "W" in d ? (d.w + 6) % 7 + d.W * 7 - (day + 5) % 7 : d.w + d.U * 7 - (day + 6) % 7;
+      } // If a time zone is specified, all fields are interpreted as UTC and then
+      // offset according to the specified time zone.
+
+
+      if ("Z" in d) {
+        d.H += d.Z / 100 | 0;
+        d.M += d.Z % 100;
+        return utcDate(d);
+      } // Otherwise, all fields are in local time.
+
+
+      return localDate(d);
+    };
+  }
+
+  function parseSpecifier(d, specifier, string, j) {
+    var i = 0,
+        n = specifier.length,
+        m = string.length,
+        c,
+        parse;
+
+    while (i < n) {
+      if (j >= m) return -1;
+      c = specifier.charCodeAt(i++);
+
+      if (c === 37) {
+        c = specifier.charAt(i++);
+        parse = parses[c in pads ? specifier.charAt(i++) : c];
+        if (!parse || (j = parse(d, string, j)) < 0) return -1;
+      } else if (c != string.charCodeAt(j++)) {
+        return -1;
+      }
+    }
+
+    return j;
+  }
+
+  function parsePeriod(d, string, i) {
+    var n = periodRe.exec(string.slice(i));
+    return n ? (d.p = periodLookup[n[0].toLowerCase()], i + n[0].length) : -1;
+  }
+
+  function parseShortWeekday(d, string, i) {
+    var n = shortWeekdayRe.exec(string.slice(i));
+    return n ? (d.w = shortWeekdayLookup[n[0].toLowerCase()], i + n[0].length) : -1;
+  }
+
+  function parseWeekday(d, string, i) {
+    var n = weekdayRe.exec(string.slice(i));
+    return n ? (d.w = weekdayLookup[n[0].toLowerCase()], i + n[0].length) : -1;
+  }
+
+  function parseShortMonth(d, string, i) {
+    var n = shortMonthRe.exec(string.slice(i));
+    return n ? (d.m = shortMonthLookup[n[0].toLowerCase()], i + n[0].length) : -1;
+  }
+
+  function parseMonth(d, string, i) {
+    var n = monthRe.exec(string.slice(i));
+    return n ? (d.m = monthLookup[n[0].toLowerCase()], i + n[0].length) : -1;
+  }
+
+  function parseLocaleDateTime(d, string, i) {
+    return parseSpecifier(d, locale_dateTime, string, i);
+  }
+
+  function parseLocaleDate(d, string, i) {
+    return parseSpecifier(d, locale_date, string, i);
+  }
+
+  function parseLocaleTime(d, string, i) {
+    return parseSpecifier(d, locale_time, string, i);
+  }
+
+  function formatShortWeekday(d) {
+    return locale_shortWeekdays[d.getDay()];
+  }
+
+  function formatWeekday(d) {
+    return locale_weekdays[d.getDay()];
+  }
+
+  function formatShortMonth(d) {
+    return locale_shortMonths[d.getMonth()];
+  }
+
+  function formatMonth(d) {
+    return locale_months[d.getMonth()];
+  }
+
+  function formatPeriod(d) {
+    return locale_periods[+(d.getHours() >= 12)];
+  }
+
+  function formatQuarter(d) {
+    return 1 + ~~(d.getMonth() / 3);
+  }
+
+  function formatUTCShortWeekday(d) {
+    return locale_shortWeekdays[d.getUTCDay()];
+  }
+
+  function formatUTCWeekday(d) {
+    return locale_weekdays[d.getUTCDay()];
+  }
+
+  function formatUTCShortMonth(d) {
+    return locale_shortMonths[d.getUTCMonth()];
+  }
+
+  function formatUTCMonth(d) {
+    return locale_months[d.getUTCMonth()];
+  }
+
+  function formatUTCPeriod(d) {
+    return locale_periods[+(d.getUTCHours() >= 12)];
+  }
+
+  function formatUTCQuarter(d) {
+    return 1 + ~~(d.getUTCMonth() / 3);
+  }
+
+  return {
+    format: function (specifier) {
+      var f = newFormat(specifier += "", formats);
+
+      f.toString = function () {
+        return specifier;
+      };
+
+      return f;
+    },
+    parse: function (specifier) {
+      var p = newParse(specifier += "", false);
+
+      p.toString = function () {
+        return specifier;
+      };
+
+      return p;
+    },
+    utcFormat: function (specifier) {
+      var f = newFormat(specifier += "", utcFormats);
+
+      f.toString = function () {
+        return specifier;
+      };
+
+      return f;
+    },
+    utcParse: function (specifier) {
+      var p = newParse(specifier += "", true);
+
+      p.toString = function () {
+        return specifier;
+      };
+
+      return p;
+    }
+  };
+}
+
+var pads = {
+  "-": "",
+  "_": " ",
+  "0": "0"
+},
+    numberRe = /^\s*\d+/,
+    // note: ignores next directive
+percentRe = /^%/,
+    requoteRe = /[\\^$*+?|[\]().{}]/g;
+
+function pad(value, fill, width) {
+  var sign = value < 0 ? "-" : "",
+      string = (sign ? -value : value) + "",
+      length = string.length;
+  return sign + (length < width ? new Array(width - length + 1).join(fill) + string : string);
+}
+
+function requote(s) {
+  return s.replace(requoteRe, "\\$&");
+}
+
+function formatRe(names) {
+  return new RegExp("^(?:" + names.map(requote).join("|") + ")", "i");
+}
+
+function formatLookup(names) {
+  var map = {},
+      i = -1,
+      n = names.length;
+
+  while (++i < n) map[names[i].toLowerCase()] = i;
+
+  return map;
+}
+
+function parseWeekdayNumberSunday(d, string, i) {
+  var n = numberRe.exec(string.slice(i, i + 1));
+  return n ? (d.w = +n[0], i + n[0].length) : -1;
+}
+
+function parseWeekdayNumberMonday(d, string, i) {
+  var n = numberRe.exec(string.slice(i, i + 1));
+  return n ? (d.u = +n[0], i + n[0].length) : -1;
+}
+
+function parseWeekNumberSunday(d, string, i) {
+  var n = numberRe.exec(string.slice(i, i + 2));
+  return n ? (d.U = +n[0], i + n[0].length) : -1;
+}
+
+function parseWeekNumberISO(d, string, i) {
+  var n = numberRe.exec(string.slice(i, i + 2));
+  return n ? (d.V = +n[0], i + n[0].length) : -1;
+}
+
+function parseWeekNumberMonday(d, string, i) {
+  var n = numberRe.exec(string.slice(i, i + 2));
+  return n ? (d.W = +n[0], i + n[0].length) : -1;
+}
+
+function parseFullYear(d, string, i) {
+  var n = numberRe.exec(string.slice(i, i + 4));
+  return n ? (d.y = +n[0], i + n[0].length) : -1;
+}
+
+function parseYear(d, string, i) {
+  var n = numberRe.exec(string.slice(i, i + 2));
+  return n ? (d.y = +n[0] + (+n[0] > 68 ? 1900 : 2000), i + n[0].length) : -1;
+}
+
+function parseZone(d, string, i) {
+  var n = /^(Z)|([+-]\d\d)(?::?(\d\d))?/.exec(string.slice(i, i + 6));
+  return n ? (d.Z = n[1] ? 0 : -(n[2] + (n[3] || "00")), i + n[0].length) : -1;
+}
+
+function parseQuarter(d, string, i) {
+  var n = numberRe.exec(string.slice(i, i + 1));
+  return n ? (d.q = n[0] * 3 - 3, i + n[0].length) : -1;
+}
+
+function parseMonthNumber(d, string, i) {
+  var n = numberRe.exec(string.slice(i, i + 2));
+  return n ? (d.m = n[0] - 1, i + n[0].length) : -1;
+}
+
+function parseDayOfMonth(d, string, i) {
+  var n = numberRe.exec(string.slice(i, i + 2));
+  return n ? (d.d = +n[0], i + n[0].length) : -1;
+}
+
+function parseDayOfYear(d, string, i) {
+  var n = numberRe.exec(string.slice(i, i + 3));
+  return n ? (d.m = 0, d.d = +n[0], i + n[0].length) : -1;
+}
+
+function parseHour24(d, string, i) {
+  var n = numberRe.exec(string.slice(i, i + 2));
+  return n ? (d.H = +n[0], i + n[0].length) : -1;
+}
+
+function parseMinutes(d, string, i) {
+  var n = numberRe.exec(string.slice(i, i + 2));
+  return n ? (d.M = +n[0], i + n[0].length) : -1;
+}
+
+function parseSeconds(d, string, i) {
+  var n = numberRe.exec(string.slice(i, i + 2));
+  return n ? (d.S = +n[0], i + n[0].length) : -1;
+}
+
+function parseMilliseconds(d, string, i) {
+  var n = numberRe.exec(string.slice(i, i + 3));
+  return n ? (d.L = +n[0], i + n[0].length) : -1;
+}
+
+function parseMicroseconds(d, string, i) {
+  var n = numberRe.exec(string.slice(i, i + 6));
+  return n ? (d.L = Math.floor(n[0] / 1000), i + n[0].length) : -1;
+}
+
+function parseLiteralPercent(d, string, i) {
+  var n = percentRe.exec(string.slice(i, i + 1));
+  return n ? i + n[0].length : -1;
+}
+
+function parseUnixTimestamp(d, string, i) {
+  var n = numberRe.exec(string.slice(i));
+  return n ? (d.Q = +n[0], i + n[0].length) : -1;
+}
+
+function parseUnixTimestampSeconds(d, string, i) {
+  var n = numberRe.exec(string.slice(i));
+  return n ? (d.s = +n[0], i + n[0].length) : -1;
+}
+
+function formatDayOfMonth(d, p) {
+  return pad(d.getDate(), p, 2);
+}
+
+function formatHour24(d, p) {
+  return pad(d.getHours(), p, 2);
+}
+
+function formatHour12(d, p) {
+  return pad(d.getHours() % 12 || 12, p, 2);
+}
+
+function formatDayOfYear(d, p) {
+  return pad(1 + _d3Time.timeDay.count((0, _d3Time.timeYear)(d), d), p, 3);
+}
+
+function formatMilliseconds(d, p) {
+  return pad(d.getMilliseconds(), p, 3);
+}
+
+function formatMicroseconds(d, p) {
+  return formatMilliseconds(d, p) + "000";
+}
+
+function formatMonthNumber(d, p) {
+  return pad(d.getMonth() + 1, p, 2);
+}
+
+function formatMinutes(d, p) {
+  return pad(d.getMinutes(), p, 2);
+}
+
+function formatSeconds(d, p) {
+  return pad(d.getSeconds(), p, 2);
+}
+
+function formatWeekdayNumberMonday(d) {
+  var day = d.getDay();
+  return day === 0 ? 7 : day;
+}
+
+function formatWeekNumberSunday(d, p) {
+  return pad(_d3Time.timeSunday.count((0, _d3Time.timeYear)(d) - 1, d), p, 2);
+}
+
+function formatWeekNumberISO(d, p) {
+  var day = d.getDay();
+  d = day >= 4 || day === 0 ? (0, _d3Time.timeThursday)(d) : _d3Time.timeThursday.ceil(d);
+  return pad(_d3Time.timeThursday.count((0, _d3Time.timeYear)(d), d) + ((0, _d3Time.timeYear)(d).getDay() === 4), p, 2);
+}
+
+function formatWeekdayNumberSunday(d) {
+  return d.getDay();
+}
+
+function formatWeekNumberMonday(d, p) {
+  return pad(_d3Time.timeMonday.count((0, _d3Time.timeYear)(d) - 1, d), p, 2);
+}
+
+function formatYear(d, p) {
+  return pad(d.getFullYear() % 100, p, 2);
+}
+
+function formatFullYear(d, p) {
+  return pad(d.getFullYear() % 10000, p, 4);
+}
+
+function formatZone(d) {
+  var z = d.getTimezoneOffset();
+  return (z > 0 ? "-" : (z *= -1, "+")) + pad(z / 60 | 0, "0", 2) + pad(z % 60, "0", 2);
+}
+
+function formatUTCDayOfMonth(d, p) {
+  return pad(d.getUTCDate(), p, 2);
+}
+
+function formatUTCHour24(d, p) {
+  return pad(d.getUTCHours(), p, 2);
+}
+
+function formatUTCHour12(d, p) {
+  return pad(d.getUTCHours() % 12 || 12, p, 2);
+}
+
+function formatUTCDayOfYear(d, p) {
+  return pad(1 + _d3Time.utcDay.count((0, _d3Time.utcYear)(d), d), p, 3);
+}
+
+function formatUTCMilliseconds(d, p) {
+  return pad(d.getUTCMilliseconds(), p, 3);
+}
+
+function formatUTCMicroseconds(d, p) {
+  return formatUTCMilliseconds(d, p) + "000";
+}
+
+function formatUTCMonthNumber(d, p) {
+  return pad(d.getUTCMonth() + 1, p, 2);
+}
+
+function formatUTCMinutes(d, p) {
+  return pad(d.getUTCMinutes(), p, 2);
+}
+
+function formatUTCSeconds(d, p) {
+  return pad(d.getUTCSeconds(), p, 2);
+}
+
+function formatUTCWeekdayNumberMonday(d) {
+  var dow = d.getUTCDay();
+  return dow === 0 ? 7 : dow;
+}
+
+function formatUTCWeekNumberSunday(d, p) {
+  return pad(_d3Time.utcSunday.count((0, _d3Time.utcYear)(d) - 1, d), p, 2);
+}
+
+function formatUTCWeekNumberISO(d, p) {
+  var day = d.getUTCDay();
+  d = day >= 4 || day === 0 ? (0, _d3Time.utcThursday)(d) : _d3Time.utcThursday.ceil(d);
+  return pad(_d3Time.utcThursday.count((0, _d3Time.utcYear)(d), d) + ((0, _d3Time.utcYear)(d).getUTCDay() === 4), p, 2);
+}
+
+function formatUTCWeekdayNumberSunday(d) {
+  return d.getUTCDay();
+}
+
+function formatUTCWeekNumberMonday(d, p) {
+  return pad(_d3Time.utcMonday.count((0, _d3Time.utcYear)(d) - 1, d), p, 2);
+}
+
+function formatUTCYear(d, p) {
+  return pad(d.getUTCFullYear() % 100, p, 2);
+}
+
+function formatUTCFullYear(d, p) {
+  return pad(d.getUTCFullYear() % 10000, p, 4);
+}
+
+function formatUTCZone() {
+  return "+0000";
+}
+
+function formatLiteralPercent() {
+  return "%";
+}
+
+function formatUnixTimestamp(d) {
+  return +d;
+}
+
+function formatUnixTimestampSeconds(d) {
+  return Math.floor(+d / 1000);
+}
+},{"d3-time":"../node_modules/d3-time/src/index.js"}],"../node_modules/d3-time-format/src/defaultLocale.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = defaultLocale;
+exports.utcParse = exports.utcFormat = exports.timeParse = exports.timeFormat = void 0;
+
+var _locale = _interopRequireDefault(require("./locale.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var locale;
+var timeFormat;
+exports.timeFormat = timeFormat;
+var timeParse;
+exports.timeParse = timeParse;
+var utcFormat;
+exports.utcFormat = utcFormat;
+var utcParse;
+exports.utcParse = utcParse;
+defaultLocale({
+  dateTime: "%x, %X",
+  date: "%-m/%-d/%Y",
+  time: "%-I:%M:%S %p",
+  periods: ["AM", "PM"],
+  days: ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+  shortDays: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+  months: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+  shortMonths: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+});
+
+function defaultLocale(definition) {
+  locale = (0, _locale.default)(definition);
+  exports.timeFormat = timeFormat = locale.format;
+  exports.timeParse = timeParse = locale.parse;
+  exports.utcFormat = utcFormat = locale.utcFormat;
+  exports.utcParse = utcParse = locale.utcParse;
+  return locale;
+}
+},{"./locale.js":"../node_modules/d3-time-format/src/locale.js"}],"../node_modules/d3-time-format/src/isoFormat.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.isoSpecifier = void 0;
+
+var _defaultLocale = require("./defaultLocale.js");
+
+var isoSpecifier = "%Y-%m-%dT%H:%M:%S.%LZ";
+exports.isoSpecifier = isoSpecifier;
+
+function formatIsoNative(date) {
+  return date.toISOString();
+}
+
+var formatIso = Date.prototype.toISOString ? formatIsoNative : (0, _defaultLocale.utcFormat)(isoSpecifier);
+var _default = formatIso;
+exports.default = _default;
+},{"./defaultLocale.js":"../node_modules/d3-time-format/src/defaultLocale.js"}],"../node_modules/d3-time-format/src/isoParse.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _isoFormat = require("./isoFormat.js");
+
+var _defaultLocale = require("./defaultLocale.js");
+
+function parseIsoNative(string) {
+  var date = new Date(string);
+  return isNaN(date) ? null : date;
+}
+
+var parseIso = +new Date("2000-01-01T00:00:00.000Z") ? parseIsoNative : (0, _defaultLocale.utcParse)(_isoFormat.isoSpecifier);
+var _default = parseIso;
+exports.default = _default;
+},{"./isoFormat.js":"../node_modules/d3-time-format/src/isoFormat.js","./defaultLocale.js":"../node_modules/d3-time-format/src/defaultLocale.js"}],"../node_modules/d3-time-format/src/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "timeFormatDefaultLocale", {
+  enumerable: true,
+  get: function () {
+    return _defaultLocale.default;
+  }
+});
+Object.defineProperty(exports, "timeFormat", {
+  enumerable: true,
+  get: function () {
+    return _defaultLocale.timeFormat;
+  }
+});
+Object.defineProperty(exports, "timeParse", {
+  enumerable: true,
+  get: function () {
+    return _defaultLocale.timeParse;
+  }
+});
+Object.defineProperty(exports, "utcFormat", {
+  enumerable: true,
+  get: function () {
+    return _defaultLocale.utcFormat;
+  }
+});
+Object.defineProperty(exports, "utcParse", {
+  enumerable: true,
+  get: function () {
+    return _defaultLocale.utcParse;
+  }
+});
+Object.defineProperty(exports, "timeFormatLocale", {
+  enumerable: true,
+  get: function () {
+    return _locale.default;
+  }
+});
+Object.defineProperty(exports, "isoFormat", {
+  enumerable: true,
+  get: function () {
+    return _isoFormat.default;
+  }
+});
+Object.defineProperty(exports, "isoParse", {
+  enumerable: true,
+  get: function () {
+    return _isoParse.default;
+  }
+});
+
+var _defaultLocale = _interopRequireWildcard(require("./defaultLocale.js"));
+
+var _locale = _interopRequireDefault(require("./locale.js"));
+
+var _isoFormat = _interopRequireDefault(require("./isoFormat.js"));
+
+var _isoParse = _interopRequireDefault(require("./isoParse.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+},{"./defaultLocale.js":"../node_modules/d3-time-format/src/defaultLocale.js","./locale.js":"../node_modules/d3-time-format/src/locale.js","./isoFormat.js":"../node_modules/d3-time-format/src/isoFormat.js","./isoParse.js":"../node_modules/d3-time-format/src/isoParse.js"}],"../node_modules/d3-scale/src/time.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.calendar = calendar;
+exports.default = _default;
+
+var _d3Array = require("d3-array");
+
+var _d3Time = require("d3-time");
+
+var _d3TimeFormat = require("d3-time-format");
+
+var _continuous = _interopRequireWildcard(require("./continuous.js"));
+
+var _init = require("./init.js");
+
+var _nice = _interopRequireDefault(require("./nice.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+var durationSecond = 1000,
+    durationMinute = durationSecond * 60,
+    durationHour = durationMinute * 60,
+    durationDay = durationHour * 24,
+    durationWeek = durationDay * 7,
+    durationMonth = durationDay * 30,
+    durationYear = durationDay * 365;
+
+function date(t) {
+  return new Date(t);
+}
+
+function number(t) {
+  return t instanceof Date ? +t : +new Date(+t);
+}
+
+function calendar(year, month, week, day, hour, minute, second, millisecond, format) {
+  var scale = (0, _continuous.default)(),
+      invert = scale.invert,
+      domain = scale.domain;
+  var formatMillisecond = format(".%L"),
+      formatSecond = format(":%S"),
+      formatMinute = format("%I:%M"),
+      formatHour = format("%I %p"),
+      formatDay = format("%a %d"),
+      formatWeek = format("%b %d"),
+      formatMonth = format("%B"),
+      formatYear = format("%Y");
+  var tickIntervals = [[second, 1, durationSecond], [second, 5, 5 * durationSecond], [second, 15, 15 * durationSecond], [second, 30, 30 * durationSecond], [minute, 1, durationMinute], [minute, 5, 5 * durationMinute], [minute, 15, 15 * durationMinute], [minute, 30, 30 * durationMinute], [hour, 1, durationHour], [hour, 3, 3 * durationHour], [hour, 6, 6 * durationHour], [hour, 12, 12 * durationHour], [day, 1, durationDay], [day, 2, 2 * durationDay], [week, 1, durationWeek], [month, 1, durationMonth], [month, 3, 3 * durationMonth], [year, 1, durationYear]];
+
+  function tickFormat(date) {
+    return (second(date) < date ? formatMillisecond : minute(date) < date ? formatSecond : hour(date) < date ? formatMinute : day(date) < date ? formatHour : month(date) < date ? week(date) < date ? formatDay : formatWeek : year(date) < date ? formatMonth : formatYear)(date);
+  }
+
+  function tickInterval(interval, start, stop) {
+    if (interval == null) interval = 10; // If a desired tick count is specified, pick a reasonable tick interval
+    // based on the extent of the domain and a rough estimate of tick size.
+    // Otherwise, assume interval is already a time interval and use it.
+
+    if (typeof interval === "number") {
+      var target = Math.abs(stop - start) / interval,
+          i = (0, _d3Array.bisector)(function (i) {
+        return i[2];
+      }).right(tickIntervals, target),
+          step;
+
+      if (i === tickIntervals.length) {
+        step = (0, _d3Array.tickStep)(start / durationYear, stop / durationYear, interval);
+        interval = year;
+      } else if (i) {
+        i = tickIntervals[target / tickIntervals[i - 1][2] < tickIntervals[i][2] / target ? i - 1 : i];
+        step = i[1];
+        interval = i[0];
+      } else {
+        step = Math.max((0, _d3Array.tickStep)(start, stop, interval), 1);
+        interval = millisecond;
+      }
+
+      return interval.every(step);
+    }
+
+    return interval;
+  }
+
+  scale.invert = function (y) {
+    return new Date(invert(y));
+  };
+
+  scale.domain = function (_) {
+    return arguments.length ? domain(Array.from(_, number)) : domain().map(date);
+  };
+
+  scale.ticks = function (interval) {
+    var d = domain(),
+        t0 = d[0],
+        t1 = d[d.length - 1],
+        r = t1 < t0,
+        t;
+    if (r) t = t0, t0 = t1, t1 = t;
+    t = tickInterval(interval, t0, t1);
+    t = t ? t.range(t0, t1 + 1) : []; // inclusive stop
+
+    return r ? t.reverse() : t;
+  };
+
+  scale.tickFormat = function (count, specifier) {
+    return specifier == null ? tickFormat : format(specifier);
+  };
+
+  scale.nice = function (interval) {
+    var d = domain();
+    return (interval = tickInterval(interval, d[0], d[d.length - 1])) ? domain((0, _nice.default)(d, interval)) : scale;
+  };
+
+  scale.copy = function () {
+    return (0, _continuous.copy)(scale, calendar(year, month, week, day, hour, minute, second, millisecond, format));
+  };
+
+  return scale;
+}
+
+function _default() {
+  return _init.initRange.apply(calendar(_d3Time.timeYear, _d3Time.timeMonth, _d3Time.timeWeek, _d3Time.timeDay, _d3Time.timeHour, _d3Time.timeMinute, _d3Time.timeSecond, _d3Time.timeMillisecond, _d3TimeFormat.timeFormat).domain([new Date(2000, 0, 1), new Date(2000, 0, 2)]), arguments);
+}
+},{"d3-array":"../node_modules/d3-array/src/index.js","d3-time":"../node_modules/d3-time/src/index.js","d3-time-format":"../node_modules/d3-time-format/src/index.js","./continuous.js":"../node_modules/d3-scale/src/continuous.js","./init.js":"../node_modules/d3-scale/src/init.js","./nice.js":"../node_modules/d3-scale/src/nice.js"}],"../node_modules/d3-scale/src/utcTime.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+var _time = require("./time.js");
+
+var _d3TimeFormat = require("d3-time-format");
+
+var _d3Time = require("d3-time");
+
+var _init = require("./init.js");
+
+function _default() {
+  return _init.initRange.apply((0, _time.calendar)(_d3Time.utcYear, _d3Time.utcMonth, _d3Time.utcWeek, _d3Time.utcDay, _d3Time.utcHour, _d3Time.utcMinute, _d3Time.utcSecond, _d3Time.utcMillisecond, _d3TimeFormat.utcFormat).domain([Date.UTC(2000, 0, 1), Date.UTC(2000, 0, 2)]), arguments);
+}
+},{"./time.js":"../node_modules/d3-scale/src/time.js","d3-time-format":"../node_modules/d3-time-format/src/index.js","d3-time":"../node_modules/d3-time/src/index.js","./init.js":"../node_modules/d3-scale/src/init.js"}],"../node_modules/d3-scale/src/sequential.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.copy = copy;
+exports.default = sequential;
+exports.sequentialLog = sequentialLog;
+exports.sequentialSymlog = sequentialSymlog;
+exports.sequentialPow = sequentialPow;
+exports.sequentialSqrt = sequentialSqrt;
+
+var _d3Interpolate = require("d3-interpolate");
+
+var _continuous = require("./continuous.js");
+
+var _init = require("./init.js");
+
+var _linear = require("./linear.js");
+
+var _log = require("./log.js");
+
+var _symlog = require("./symlog.js");
+
+var _pow = require("./pow.js");
+
+function transformer() {
+  var x0 = 0,
+      x1 = 1,
+      t0,
+      t1,
+      k10,
+      transform,
+      interpolator = _continuous.identity,
+      clamp = false,
+      unknown;
+
+  function scale(x) {
+    return isNaN(x = +x) ? unknown : interpolator(k10 === 0 ? 0.5 : (x = (transform(x) - t0) * k10, clamp ? Math.max(0, Math.min(1, x)) : x));
+  }
+
+  scale.domain = function (_) {
+    return arguments.length ? ([x0, x1] = _, t0 = transform(x0 = +x0), t1 = transform(x1 = +x1), k10 = t0 === t1 ? 0 : 1 / (t1 - t0), scale) : [x0, x1];
+  };
+
+  scale.clamp = function (_) {
+    return arguments.length ? (clamp = !!_, scale) : clamp;
+  };
+
+  scale.interpolator = function (_) {
+    return arguments.length ? (interpolator = _, scale) : interpolator;
+  };
+
+  function range(interpolate) {
+    return function (_) {
+      var r0, r1;
+      return arguments.length ? ([r0, r1] = _, interpolator = interpolate(r0, r1), scale) : [interpolator(0), interpolator(1)];
+    };
+  }
+
+  scale.range = range(_d3Interpolate.interpolate);
+  scale.rangeRound = range(_d3Interpolate.interpolateRound);
+
+  scale.unknown = function (_) {
+    return arguments.length ? (unknown = _, scale) : unknown;
+  };
+
+  return function (t) {
+    transform = t, t0 = t(x0), t1 = t(x1), k10 = t0 === t1 ? 0 : 1 / (t1 - t0);
+    return scale;
+  };
+}
+
+function copy(source, target) {
+  return target.domain(source.domain()).interpolator(source.interpolator()).clamp(source.clamp()).unknown(source.unknown());
+}
+
+function sequential() {
+  var scale = (0, _linear.linearish)(transformer()(_continuous.identity));
+
+  scale.copy = function () {
+    return copy(scale, sequential());
+  };
+
+  return _init.initInterpolator.apply(scale, arguments);
+}
+
+function sequentialLog() {
+  var scale = (0, _log.loggish)(transformer()).domain([1, 10]);
+
+  scale.copy = function () {
+    return copy(scale, sequentialLog()).base(scale.base());
+  };
+
+  return _init.initInterpolator.apply(scale, arguments);
+}
+
+function sequentialSymlog() {
+  var scale = (0, _symlog.symlogish)(transformer());
+
+  scale.copy = function () {
+    return copy(scale, sequentialSymlog()).constant(scale.constant());
+  };
+
+  return _init.initInterpolator.apply(scale, arguments);
+}
+
+function sequentialPow() {
+  var scale = (0, _pow.powish)(transformer());
+
+  scale.copy = function () {
+    return copy(scale, sequentialPow()).exponent(scale.exponent());
+  };
+
+  return _init.initInterpolator.apply(scale, arguments);
+}
+
+function sequentialSqrt() {
+  return sequentialPow.apply(null, arguments).exponent(0.5);
+}
+},{"d3-interpolate":"../node_modules/d3-interpolate/src/index.js","./continuous.js":"../node_modules/d3-scale/src/continuous.js","./init.js":"../node_modules/d3-scale/src/init.js","./linear.js":"../node_modules/d3-scale/src/linear.js","./log.js":"../node_modules/d3-scale/src/log.js","./symlog.js":"../node_modules/d3-scale/src/symlog.js","./pow.js":"../node_modules/d3-scale/src/pow.js"}],"../node_modules/d3-scale/src/sequentialQuantile.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = sequentialQuantile;
+
+var _d3Array = require("d3-array");
+
+var _continuous = require("./continuous.js");
+
+var _init = require("./init.js");
+
+function sequentialQuantile() {
+  var domain = [],
+      interpolator = _continuous.identity;
+
+  function scale(x) {
+    if (!isNaN(x = +x)) return interpolator(((0, _d3Array.bisect)(domain, x, 1) - 1) / (domain.length - 1));
+  }
+
+  scale.domain = function (_) {
+    if (!arguments.length) return domain.slice();
+    domain = [];
+
+    for (let d of _) if (d != null && !isNaN(d = +d)) domain.push(d);
+
+    domain.sort(_d3Array.ascending);
+    return scale;
+  };
+
+  scale.interpolator = function (_) {
+    return arguments.length ? (interpolator = _, scale) : interpolator;
+  };
+
+  scale.range = function () {
+    return domain.map((d, i) => interpolator(i / (domain.length - 1)));
+  };
+
+  scale.quantiles = function (n) {
+    return Array.from({
+      length: n + 1
+    }, (_, i) => (0, _d3Array.quantile)(domain, i / n));
+  };
+
+  scale.copy = function () {
+    return sequentialQuantile(interpolator).domain(domain);
+  };
+
+  return _init.initInterpolator.apply(scale, arguments);
+}
+},{"d3-array":"../node_modules/d3-array/src/index.js","./continuous.js":"../node_modules/d3-scale/src/continuous.js","./init.js":"../node_modules/d3-scale/src/init.js"}],"../node_modules/d3-scale/src/diverging.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = diverging;
+exports.divergingLog = divergingLog;
+exports.divergingSymlog = divergingSymlog;
+exports.divergingPow = divergingPow;
+exports.divergingSqrt = divergingSqrt;
+
+var _d3Interpolate = require("d3-interpolate");
+
+var _continuous = require("./continuous.js");
+
+var _init = require("./init.js");
+
+var _linear = require("./linear.js");
+
+var _log = require("./log.js");
+
+var _sequential = require("./sequential.js");
+
+var _symlog = require("./symlog.js");
+
+var _pow = require("./pow.js");
+
+function transformer() {
+  var x0 = 0,
+      x1 = 0.5,
+      x2 = 1,
+      s = 1,
+      t0,
+      t1,
+      t2,
+      k10,
+      k21,
+      interpolator = _continuous.identity,
+      transform,
+      clamp = false,
+      unknown;
+
+  function scale(x) {
+    return isNaN(x = +x) ? unknown : (x = 0.5 + ((x = +transform(x)) - t1) * (s * x < s * t1 ? k10 : k21), interpolator(clamp ? Math.max(0, Math.min(1, x)) : x));
+  }
+
+  scale.domain = function (_) {
+    return arguments.length ? ([x0, x1, x2] = _, t0 = transform(x0 = +x0), t1 = transform(x1 = +x1), t2 = transform(x2 = +x2), k10 = t0 === t1 ? 0 : 0.5 / (t1 - t0), k21 = t1 === t2 ? 0 : 0.5 / (t2 - t1), s = t1 < t0 ? -1 : 1, scale) : [x0, x1, x2];
+  };
+
+  scale.clamp = function (_) {
+    return arguments.length ? (clamp = !!_, scale) : clamp;
+  };
+
+  scale.interpolator = function (_) {
+    return arguments.length ? (interpolator = _, scale) : interpolator;
+  };
+
+  function range(interpolate) {
+    return function (_) {
+      var r0, r1, r2;
+      return arguments.length ? ([r0, r1, r2] = _, interpolator = (0, _d3Interpolate.piecewise)(interpolate, [r0, r1, r2]), scale) : [interpolator(0), interpolator(0.5), interpolator(1)];
+    };
+  }
+
+  scale.range = range(_d3Interpolate.interpolate);
+  scale.rangeRound = range(_d3Interpolate.interpolateRound);
+
+  scale.unknown = function (_) {
+    return arguments.length ? (unknown = _, scale) : unknown;
+  };
+
+  return function (t) {
+    transform = t, t0 = t(x0), t1 = t(x1), t2 = t(x2), k10 = t0 === t1 ? 0 : 0.5 / (t1 - t0), k21 = t1 === t2 ? 0 : 0.5 / (t2 - t1), s = t1 < t0 ? -1 : 1;
+    return scale;
+  };
+}
+
+function diverging() {
+  var scale = (0, _linear.linearish)(transformer()(_continuous.identity));
+
+  scale.copy = function () {
+    return (0, _sequential.copy)(scale, diverging());
+  };
+
+  return _init.initInterpolator.apply(scale, arguments);
+}
+
+function divergingLog() {
+  var scale = (0, _log.loggish)(transformer()).domain([0.1, 1, 10]);
+
+  scale.copy = function () {
+    return (0, _sequential.copy)(scale, divergingLog()).base(scale.base());
+  };
+
+  return _init.initInterpolator.apply(scale, arguments);
+}
+
+function divergingSymlog() {
+  var scale = (0, _symlog.symlogish)(transformer());
+
+  scale.copy = function () {
+    return (0, _sequential.copy)(scale, divergingSymlog()).constant(scale.constant());
+  };
+
+  return _init.initInterpolator.apply(scale, arguments);
+}
+
+function divergingPow() {
+  var scale = (0, _pow.powish)(transformer());
+
+  scale.copy = function () {
+    return (0, _sequential.copy)(scale, divergingPow()).exponent(scale.exponent());
+  };
+
+  return _init.initInterpolator.apply(scale, arguments);
+}
+
+function divergingSqrt() {
+  return divergingPow.apply(null, arguments).exponent(0.5);
+}
+},{"d3-interpolate":"../node_modules/d3-interpolate/src/index.js","./continuous.js":"../node_modules/d3-scale/src/continuous.js","./init.js":"../node_modules/d3-scale/src/init.js","./linear.js":"../node_modules/d3-scale/src/linear.js","./log.js":"../node_modules/d3-scale/src/log.js","./sequential.js":"../node_modules/d3-scale/src/sequential.js","./symlog.js":"../node_modules/d3-scale/src/symlog.js","./pow.js":"../node_modules/d3-scale/src/pow.js"}],"../node_modules/d3-scale/src/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "scaleBand", {
+  enumerable: true,
+  get: function () {
+    return _band.default;
+  }
+});
+Object.defineProperty(exports, "scalePoint", {
+  enumerable: true,
+  get: function () {
+    return _band.point;
+  }
+});
+Object.defineProperty(exports, "scaleIdentity", {
+  enumerable: true,
+  get: function () {
+    return _identity.default;
+  }
+});
+Object.defineProperty(exports, "scaleLinear", {
+  enumerable: true,
+  get: function () {
+    return _linear.default;
+  }
+});
+Object.defineProperty(exports, "scaleLog", {
+  enumerable: true,
+  get: function () {
+    return _log.default;
+  }
+});
+Object.defineProperty(exports, "scaleSymlog", {
+  enumerable: true,
+  get: function () {
+    return _symlog.default;
+  }
+});
+Object.defineProperty(exports, "scaleOrdinal", {
+  enumerable: true,
+  get: function () {
+    return _ordinal.default;
+  }
+});
+Object.defineProperty(exports, "scaleImplicit", {
+  enumerable: true,
+  get: function () {
+    return _ordinal.implicit;
+  }
+});
+Object.defineProperty(exports, "scalePow", {
+  enumerable: true,
+  get: function () {
+    return _pow.default;
+  }
+});
+Object.defineProperty(exports, "scaleSqrt", {
+  enumerable: true,
+  get: function () {
+    return _pow.sqrt;
+  }
+});
+Object.defineProperty(exports, "scaleRadial", {
+  enumerable: true,
+  get: function () {
+    return _radial.default;
+  }
+});
+Object.defineProperty(exports, "scaleQuantile", {
+  enumerable: true,
+  get: function () {
+    return _quantile.default;
+  }
+});
+Object.defineProperty(exports, "scaleQuantize", {
+  enumerable: true,
+  get: function () {
+    return _quantize.default;
+  }
+});
+Object.defineProperty(exports, "scaleThreshold", {
+  enumerable: true,
+  get: function () {
+    return _threshold.default;
+  }
+});
+Object.defineProperty(exports, "scaleTime", {
+  enumerable: true,
+  get: function () {
+    return _time.default;
+  }
+});
+Object.defineProperty(exports, "scaleUtc", {
+  enumerable: true,
+  get: function () {
+    return _utcTime.default;
+  }
+});
+Object.defineProperty(exports, "scaleSequential", {
+  enumerable: true,
+  get: function () {
+    return _sequential.default;
+  }
+});
+Object.defineProperty(exports, "scaleSequentialLog", {
+  enumerable: true,
+  get: function () {
+    return _sequential.sequentialLog;
+  }
+});
+Object.defineProperty(exports, "scaleSequentialPow", {
+  enumerable: true,
+  get: function () {
+    return _sequential.sequentialPow;
+  }
+});
+Object.defineProperty(exports, "scaleSequentialSqrt", {
+  enumerable: true,
+  get: function () {
+    return _sequential.sequentialSqrt;
+  }
+});
+Object.defineProperty(exports, "scaleSequentialSymlog", {
+  enumerable: true,
+  get: function () {
+    return _sequential.sequentialSymlog;
+  }
+});
+Object.defineProperty(exports, "scaleSequentialQuantile", {
+  enumerable: true,
+  get: function () {
+    return _sequentialQuantile.default;
+  }
+});
+Object.defineProperty(exports, "scaleDiverging", {
+  enumerable: true,
+  get: function () {
+    return _diverging.default;
+  }
+});
+Object.defineProperty(exports, "scaleDivergingLog", {
+  enumerable: true,
+  get: function () {
+    return _diverging.divergingLog;
+  }
+});
+Object.defineProperty(exports, "scaleDivergingPow", {
+  enumerable: true,
+  get: function () {
+    return _diverging.divergingPow;
+  }
+});
+Object.defineProperty(exports, "scaleDivergingSqrt", {
+  enumerable: true,
+  get: function () {
+    return _diverging.divergingSqrt;
+  }
+});
+Object.defineProperty(exports, "scaleDivergingSymlog", {
+  enumerable: true,
+  get: function () {
+    return _diverging.divergingSymlog;
+  }
+});
+Object.defineProperty(exports, "tickFormat", {
+  enumerable: true,
+  get: function () {
+    return _tickFormat.default;
+  }
+});
+
+var _band = _interopRequireWildcard(require("./band.js"));
+
+var _identity = _interopRequireDefault(require("./identity.js"));
+
+var _linear = _interopRequireDefault(require("./linear.js"));
+
+var _log = _interopRequireDefault(require("./log.js"));
+
+var _symlog = _interopRequireDefault(require("./symlog.js"));
+
+var _ordinal = _interopRequireWildcard(require("./ordinal.js"));
+
+var _pow = _interopRequireWildcard(require("./pow.js"));
+
+var _radial = _interopRequireDefault(require("./radial.js"));
+
+var _quantile = _interopRequireDefault(require("./quantile.js"));
+
+var _quantize = _interopRequireDefault(require("./quantize.js"));
+
+var _threshold = _interopRequireDefault(require("./threshold.js"));
+
+var _time = _interopRequireDefault(require("./time.js"));
+
+var _utcTime = _interopRequireDefault(require("./utcTime.js"));
+
+var _sequential = _interopRequireWildcard(require("./sequential.js"));
+
+var _sequentialQuantile = _interopRequireDefault(require("./sequentialQuantile.js"));
+
+var _diverging = _interopRequireWildcard(require("./diverging.js"));
+
+var _tickFormat = _interopRequireDefault(require("./tickFormat.js"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+},{"./band.js":"../node_modules/d3-scale/src/band.js","./identity.js":"../node_modules/d3-scale/src/identity.js","./linear.js":"../node_modules/d3-scale/src/linear.js","./log.js":"../node_modules/d3-scale/src/log.js","./symlog.js":"../node_modules/d3-scale/src/symlog.js","./ordinal.js":"../node_modules/d3-scale/src/ordinal.js","./pow.js":"../node_modules/d3-scale/src/pow.js","./radial.js":"../node_modules/d3-scale/src/radial.js","./quantile.js":"../node_modules/d3-scale/src/quantile.js","./quantize.js":"../node_modules/d3-scale/src/quantize.js","./threshold.js":"../node_modules/d3-scale/src/threshold.js","./time.js":"../node_modules/d3-scale/src/time.js","./utcTime.js":"../node_modules/d3-scale/src/utcTime.js","./sequential.js":"../node_modules/d3-scale/src/sequential.js","./sequentialQuantile.js":"../node_modules/d3-scale/src/sequentialQuantile.js","./diverging.js":"../node_modules/d3-scale/src/diverging.js","./tickFormat.js":"../node_modules/d3-scale/src/tickFormat.js"}],"../node_modules/mapbox-gl/dist/mapbox-gl.js":[function(require,module,exports) {
 var define;
 var global = arguments[3];
 /* Mapbox GL JS is licensed under the 3-Clause BSD License. Full text of license: https://github.com/mapbox/mapbox-gl-js/blob/v1.5.0/LICENSE.txt */
@@ -60947,44 +66607,6 @@ class Search extends _react.Component {
 
 var _default = Search;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js"}],"CafeCard.jsx":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-class CafeCard extends _react.Component {
-  constructor() {
-    super(...arguments);
-
-    _defineProperty(this, "handleClose", () => {
-      this.props.closeCard();
-    });
-  }
-
-  render() {
-    return _react.default.createElement("div", {
-      className: "cafeCard"
-    }, "Cafe Card", _react.default.createElement("a", {
-      onClick: this.handleClose,
-      className: 'closeBtn'
-    }, " Close "), _react.default.createElement("br", null), this.props.content.properties.title, this.props.content.properties.description);
-  }
-
-}
-
-var _default = CafeCard;
-exports.default = _default;
 },{"react":"../node_modules/react/index.js"}],"../node_modules/base64-js/index.js":[function(require,module,exports) {
 'use strict'
 
@@ -80156,8 +85778,6 @@ var _reactDom = _interopRequireDefault(require("react-dom"));
 
 var _Search = _interopRequireDefault(require("./Search.jsx"));
 
-var _CafeCard = _interopRequireDefault(require("./CafeCard.jsx"));
-
 var _lodash = _interopRequireDefault(require("lodash"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -80189,18 +85809,8 @@ class List extends _react.Component {
 
     _defineProperty(this, "handleClick", number => {
       this.props.activeItem(number);
-      this.setState({
-        clicked: true,
-        activeItem: number
-      });
-      this.searchHandler(number.properties.title);
-    });
-
-    _defineProperty(this, "handleClose", () => {
-      this.setState({
-        clicked: false
-      });
-      this.searchHandler("");
+      this.props.currentItem(number); //this.setState({clicked: true, activeItem: number});
+      //this.searchHandler(number.properties.title)
     });
   }
 
@@ -80208,7 +85818,7 @@ class List extends _react.Component {
     if (!_lodash.default.isEqual(this.props.visiblePoints, prevProps.visiblePoints)) {
       const linesOfList = this.getLinesOfList();
       this.updateLinesOfList(linesOfList);
-    }
+    } else 'nothing to update';
   }
 
   getLinesOfList() {
@@ -80236,16 +85846,18 @@ class List extends _react.Component {
     this.props.filteredItems(linesOfList);
   }
 
+  /*
+      handleClose = () => {
+          this.setState({clicked: false});
+          this.searchHandler("")
+      }*/
   render() {
     const {
       linesOfList
     } = this.state;
     return _reactDom.default.createPortal(_react.default.createElement("div", {
       className: 'sidebar'
-    }, this.state.clicked ? _react.default.createElement(_CafeCard.default, {
-      content: this.state.activeItem,
-      closeCard: () => this.handleClose()
-    }) : _react.default.createElement("div", null, _react.default.createElement(_Search.default, {
+    }, this.props.clicked ? '1' : _react.default.createElement("div", null, _react.default.createElement(_Search.default, {
       style: {
         display: this.state.clicked ? 'none' : null
       },
@@ -80256,18 +85868,61 @@ class List extends _react.Component {
       className: 'listItem',
       key: i,
       onClick: () => this.handleClick(number)
-    }, number.properties.title))))), document.getElementById('list'));
+    }, number.properties.title))))), document.getElementById('cafeList'));
   }
 
 }
 
 var _default = List;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./Search.jsx":"Search.jsx","./CafeCard.jsx":"CafeCard.jsx","lodash":"../node_modules/lodash/lodash.js"}],"data/data_test.csv":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./Search.jsx":"Search.jsx","lodash":"../node_modules/lodash/lodash.js"}],"data/data_test.csv":[function(require,module,exports) {
 module.exports = "/data_test.b42f3e45.csv";
 },{}],"data/mo.geojson":[function(require,module,exports) {
 module.exports = "/mo.43572431.geojson";
-},{}],"Map/index.jsx":[function(require,module,exports) {
+},{}],"CafeCard.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _reactDom = _interopRequireDefault(require("react-dom"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+class CafeCard extends _react.Component {
+  constructor() {
+    super(...arguments);
+
+    _defineProperty(this, "handleClose", () => {
+      this.props.closeCard();
+    });
+  }
+
+  render() {
+    const info = this.props.all.find(el => el['Id карточки'] === this.props.target.properties.rawId);
+    return _reactDom.default.createPortal(_react.default.createElement("div", {
+      className: "cafeCard"
+    }, "Cafe Card", _react.default.createElement("a", {
+      onClick: this.handleClose,
+      className: 'closeBtn'
+    }, " Close "), _react.default.createElement("br", null), this.props.target.properties.title, this.props.target.properties.description, _react.default.createElement("div", null, info['FlampRating'])), document.getElementById('cafeCard'));
+  }
+
+}
+
+var _default = CafeCard;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js"}],"Map/index.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -80281,6 +85936,8 @@ var _d3Fetch = require("d3-fetch");
 
 var _d3ScaleChromatic = require("d3-scale-chromatic");
 
+var _d3Scale = require("d3-scale");
+
 var _Map = _interopRequireDefault(require("./Map"));
 
 var _List = _interopRequireDefault(require("../List"));
@@ -80288,6 +85945,8 @@ var _List = _interopRequireDefault(require("../List"));
 var _data_test = _interopRequireDefault(require("../data/data_test.csv"));
 
 var _mo = _interopRequireDefault(require("../data/mo.geojson"));
+
+var _CafeCard = _interopRequireDefault(require("../CafeCard"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -80305,8 +85964,10 @@ class MapContainer extends _react.Component {
       points: null,
       conturs: null,
       activeItem: null,
+      currentItem: null,
       visiblePoints: null,
-      filteredItemsList: []
+      filteredItemsList: [],
+      rawData: []
     });
 
     _defineProperty(this, "visiblePointsHandler", value => {
@@ -80321,6 +85982,12 @@ class MapContainer extends _react.Component {
       });
     });
 
+    _defineProperty(this, "currentItemHandler", value => {
+      this.setState({
+        currentItem: value
+      });
+    });
+
     _defineProperty(this, "clearActiveItemHandler", () => {
       this.setState({
         activeItem: null
@@ -80328,10 +85995,15 @@ class MapContainer extends _react.Component {
     });
 
     _defineProperty(this, "filteredItemsHandler", list => {
-      //console.log(this.state.filteredItems, list)
       this.setState({
         filteredItems: list
       });
+    });
+
+    _defineProperty(this, "handleClose", () => {
+      this.setState({
+        currentItem: null
+      }); //this.searchHandler("")
     });
   }
 
@@ -80343,6 +86015,7 @@ class MapContainer extends _react.Component {
         const geoJSON = makeGeoJSON(data);
         addValues(geoMoscow);
         this.setState({
+          rawData: data,
           points: geoJSON,
           conturs: geoMoscow,
           visiblePoints: geoJSON.data.features,
@@ -80353,9 +86026,16 @@ class MapContainer extends _react.Component {
   }
 
   render() {
-    return _react.default.createElement("div", null, _react.default.createElement(_List.default, {
+    return _react.default.createElement("div", null, this.state.currentItem ? _react.default.createElement(_CafeCard.default, {
+      target: this.state.currentItem,
+      all: this.state.rawData,
+      closeCard: () => this.handleClose()
+    }) : null, _react.default.createElement(_List.default, {
       visiblePoints: this.state.visiblePoints,
-      activeItem: this.activeItemHandler,
+      activeItem: this.activeItemHandler // to fly on map, it will be null after flight
+      ,
+      currentItem: this.currentItemHandler // to open card
+      ,
       filteredItems: this.filteredItemsHandler,
       filteredItemsList: this.state.filteredItems
     }), _react.default.createElement(_Map.default, {
@@ -80373,6 +86053,7 @@ class MapContainer extends _react.Component {
 function makeGeoJSON(data) {
   const features = data.map((d, i) => {
     let rating = +d['FlampRating'].replace(',', '.') || 0;
+    let x = (0, _d3Scale.scaleSequential)([3, 5], _d3ScaleChromatic.interpolateMagma);
     return {
       type: 'Feature',
       geometry: {
@@ -80381,10 +86062,11 @@ function makeGeoJSON(data) {
       },
       properties: {
         id: i,
+        rawId: d['Id карточки'],
         title: d['Наименование организации'],
         description: d['Улица'] + ', ' + d['Номер дома'],
         rating: rating,
-        color: rating ? (0, _d3ScaleChromatic.interpolateMagma)(1 / rating) : 'gray'
+        color: rating ? x(rating) : 'gray'
       }
     };
   });
@@ -80406,7 +86088,7 @@ function addValues(data) {
 
 var _default = MapContainer;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","d3-fetch":"../node_modules/d3-fetch/src/index.js","d3-scale-chromatic":"../node_modules/d3-scale-chromatic/src/index.js","./Map":"Map/Map.jsx","../List":"List.jsx","../data/data_test.csv":"data/data_test.csv","../data/mo.geojson":"data/mo.geojson"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","d3-fetch":"../node_modules/d3-fetch/src/index.js","d3-scale-chromatic":"../node_modules/d3-scale-chromatic/src/index.js","d3-scale":"../node_modules/d3-scale/src/index.js","./Map":"Map/Map.jsx","../List":"List.jsx","../data/data_test.csv":"data/data_test.csv","../data/mo.geojson":"data/mo.geojson","../CafeCard":"CafeCard.jsx"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -80543,7 +86225,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41493" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41922" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

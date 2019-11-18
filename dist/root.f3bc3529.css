@@ -59,19 +59,22 @@ body {
   cursor: pointer;
 }
 
+#cafeCard {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: lavender;
+}
+#cafeCard .closeBtn {
+  float: right;
+  color: coral;
+}
+
 .sidebar {
   display: flex;
   flex-direction: column;
   align-items: stretch;
   flex-grow: 1;
-}
-.sidebar .cafeCard {
-  background: lavender;
-  flex-grow: 1;
-}
-.sidebar .cafeCard .closeBtn {
-  float: right;
-  color: coral;
 }
 .sidebar ul.scrollable {
   position: absolute;
