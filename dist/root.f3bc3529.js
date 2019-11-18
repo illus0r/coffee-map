@@ -80372,8 +80372,7 @@ class MapContainer extends _react.Component {
 
 function makeGeoJSON(data) {
   const features = data.map((d, i) => {
-    //console.log(d['FlampRating'].replace(',', '.'),  1 / +d['FlampRating'], interpolateMagma(1 / +d['FlampRating'].replace(',', '.') || 0))
-    let rating = d['FlampRating'].replace(',', '.');
+    let rating = +d['FlampRating'].replace(',', '.') || 0;
     return {
       type: 'Feature',
       geometry: {
@@ -80384,8 +80383,8 @@ function makeGeoJSON(data) {
         id: i,
         title: d['Наименование организации'],
         description: d['Улица'] + ', ' + d['Номер дома'],
-        rating: d['FlampRating'],
-        color: rating ? (0, _d3ScaleChromatic.interpolateMagma)(1 / +d['FlampRating'].replace(',', '.')) : 'gray'
+        rating: rating,
+        color: rating ? (0, _d3ScaleChromatic.interpolateMagma)(1 / rating) : 'gray'
       }
     };
   });
@@ -80393,7 +80392,7 @@ function makeGeoJSON(data) {
     "type": "geojson",
     "data": {
       "type": "FeatureCollection",
-      "features": features
+      "features": features.sort((a, b) => a.properties.rating - b.properties.rating)
     }
   };
   return geoJSON;
@@ -80544,7 +80543,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "40061" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41493" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

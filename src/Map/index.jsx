@@ -72,9 +72,7 @@ class MapContainer extends Component {
 
 function makeGeoJSON(data) {
     const features = data.map((d, i) => {
-        //console.log(d['FlampRating'].replace(',', '.'),  1 / +d['FlampRating'], interpolateMagma(1 / +d['FlampRating'].replace(',', '.') || 0))
-        let rating = d['FlampRating'].replace(',', '.')
-
+        let rating = +d['FlampRating'].replace(',', '.') || 0
         return {
             type: 'Feature',
             geometry: {
@@ -85,8 +83,8 @@ function makeGeoJSON(data) {
                 id: i,
                 title: d['Наименование организации'],
                 description: d['Улица'] + ', ' + d['Номер дома'],
-                rating: d['FlampRating'],
-                color: (rating) ? interpolateMagma(1 / +d['FlampRating'].replace(',', '.')) : 'gray',
+                rating: rating,
+                color: (rating) ? interpolateMagma(1 / rating) : 'gray',
             }
         }
         }
@@ -96,7 +94,7 @@ function makeGeoJSON(data) {
         "type": "geojson",
         "data": {
             "type": "FeatureCollection",
-            "features": features,
+            "features": features.sort((a,b)=>a.properties.rating-b.properties.rating),
         }
     };
 
