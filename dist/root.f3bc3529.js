@@ -66439,7 +66439,7 @@ class Map extends _react.Component {
                 'text-offset': [0, 0.6],
                 'text-anchor': 'top',
                 "text-size": {
-                  "stops": [[0, 0], [12, 0], [16, 20]]
+                  "stops": [[0, 0], [14, 0], [14.1, 16], [15, 20]]
                 },
                 'icon-allow-overlap': true,
                 'text-allow-overlap': false,
@@ -66460,8 +66460,9 @@ class Map extends _react.Component {
             const currentFeature = e.features[0];
             this.map.flyTo({
               center: currentFeature.geometry.coordinates,
-              zoom: 13
+              zoom: 15
             });
+            this.props.selectedPoint(currentFeature);
           });
         }
 
@@ -66491,7 +66492,7 @@ class Map extends _react.Component {
             }, new _mapboxGl.default.LngLatBounds(coordinates[0], coordinates[0]));
             this.map.flyTo({
               center: bounds.getCenter(),
-              zoom: 11
+              zoom: 13
             });
           });
         }
@@ -66521,7 +66522,7 @@ class Map extends _react.Component {
       this.map.flyTo({
         center: this.props.activeItem.geometry.coordinates,
         speed: 3,
-        zoom: 13
+        zoom: 15
       });
       this.props.clearActiveItem();
     }
@@ -85976,6 +85977,12 @@ class MapContainer extends _react.Component {
       });
     });
 
+    _defineProperty(this, "selectedPointHandler", value => {
+      this.setState({
+        currentItem: value
+      });
+    });
+
     _defineProperty(this, "activeItemHandler", value => {
       this.setState({
         activeItem: value
@@ -86043,6 +86050,7 @@ class MapContainer extends _react.Component {
       contursData: this.state.conturs,
       visiblePoints: this.visiblePointsHandler,
       activeItem: this.state.activeItem,
+      selectedPoint: this.selectedPointHandler,
       clearActiveItem: this.clearActiveItemHandler,
       filteredItemsList: this.state.filteredItems
     }));
@@ -86225,7 +86233,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "41922" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50069" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

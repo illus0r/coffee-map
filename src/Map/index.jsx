@@ -42,6 +42,10 @@ class MapContainer extends Component {
         this.setState({visiblePoints: value})
     };
 
+    selectedPointHandler = (value) => {
+        this.setState({currentItem: value})
+    };
+
     activeItemHandler = (value) => {
         this.setState({activeItem: value})
     };
@@ -82,6 +86,7 @@ class MapContainer extends Component {
                      contursData={this.state.conturs}
                      visiblePoints={this.visiblePointsHandler}
                      activeItem={this.state.activeItem}
+                     selectedPoint={this.selectedPointHandler}
                      clearActiveItem={this.clearActiveItemHandler}
                      filteredItemsList={this.state.filteredItems}/>
             </div>

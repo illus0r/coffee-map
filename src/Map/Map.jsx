@@ -67,8 +67,9 @@ class Map extends Component {
                             "text-size": {
                                 "stops": [
                                     [0, 0],
-                                    [12, 0],
-                                    [16, 20]
+                                    [14, 0],
+                                    [14.1, 16],
+                                    [15, 20]
                                 ]
                             },
                             'icon-allow-overlap': true,
@@ -91,8 +92,9 @@ class Map extends Component {
                     const currentFeature = e.features[0];
                     this.map.flyTo({
                         center: currentFeature.geometry.coordinates,
-                        zoom: 13
+                        zoom: 15
                     });
+                    this.props.selectedPoint(currentFeature)
                 });
             }
 
@@ -136,7 +138,7 @@ class Map extends Component {
                     }, new mapboxgl.LngLatBounds(coordinates[0], coordinates[0]));
                     this.map.flyTo({
                         center: bounds.getCenter(),
-                        zoom: 11
+                        zoom: 13
                     });
                 });
             }
@@ -165,7 +167,7 @@ class Map extends Component {
             this.map.flyTo({
                 center: this.props.activeItem.geometry.coordinates,
                 speed: 3,
-                zoom: 13
+                zoom: 15
             });
 
             this.props.clearActiveItem()
