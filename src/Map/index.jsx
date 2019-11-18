@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import * as d3 from 'd3-fetch';
+import {csv, json}  from 'd3-fetch';
+import {interpolateMagma} from 'd3-scale-chromatic';
 import Map from './Map';
 import List from '../List';
 import data from '../data/data_test.csv'
@@ -17,8 +18,8 @@ class MapContainer extends Component {
     componentDidMount() {
         ///  GET DATA HERE
         // async await вроде не нужен
-        d3.csv(data).then((data) => {
-            d3.json(moscow).then((geoMoscow) => {
+        csv(data).then((data) => {
+            json(moscow).then((geoMoscow) => {
                 const geoJSON = makeGeoJSON(data);
                 addValues(geoMoscow);
                 this.setState({
@@ -70,7 +71,11 @@ class MapContainer extends Component {
 }
 
 function makeGeoJSON(data) {
-    const features = data.map((d, i) => ({
+    const features = data.map((d, i) => {
+        //console.log(d['FlampRating'].replace(',', '.'),  1 / +d['FlampRating'], interpolateMagma(1 / +d['FlampRating'].replace(',', '.') || 0))
+        let rating = d['FlampRating'].replace(',', '.')
+
+        return {
             type: 'Feature',
             geometry: {
                 type: 'Point',
@@ -80,8 +85,11 @@ function makeGeoJSON(data) {
                 id: i,
                 title: d['Наименование организации'],
                 description: d['Улица'] + ', ' + d['Номер дома'],
+                rating: d['FlampRating'],
+                color: (rating) ? interpolateMagma(1 / +d['FlampRating'].replace(',', '.')) : 'gray',
             }
-        })
+        }
+        }
     );
 
     const geoJSON = {

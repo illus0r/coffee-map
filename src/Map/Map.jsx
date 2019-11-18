@@ -44,10 +44,10 @@ class Map extends Component {
                         source: geojsonPoints,
                         'paint': {
                             'circle-radius': {
-                                'base': 2,
-                                'stops': [[12, 2], [14, 4]]
+                                'base': 3,
+                                'stops': [[12, 3], [14, 6]]
                             },
-                            'circle-color':  '#223b53',
+                            'circle-color':  ['get','color'],
                             "circle-opacity": 1,
                             "circle-stroke-width": 0,
                             "circle-stroke-color": "#00bf7c",
