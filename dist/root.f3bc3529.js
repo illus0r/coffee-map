@@ -57682,7 +57682,7 @@ class Map extends _react.Component {
             const currentFeature = e.features[0];
             this.map.flyTo({
               center: currentFeature.geometry.coordinates,
-              zoom: 11
+              zoom: 13
             });
           });
         }
@@ -57828,6 +57828,44 @@ class Search extends _react.Component {
 }
 
 var _default = Search;
+exports.default = _default;
+},{"react":"../node_modules/react/index.js"}],"CafeCard.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+class CafeCard extends _react.Component {
+  constructor() {
+    super(...arguments);
+
+    _defineProperty(this, "handleClose", () => {
+      this.props.closeCard();
+    });
+  }
+
+  render() {
+    return _react.default.createElement("div", {
+      className: "cafeCard"
+    }, "Cafe Card", _react.default.createElement("a", {
+      onClick: this.handleClose,
+      className: 'closeBtn'
+    }, " Close "), _react.default.createElement("br", null), this.props.content.properties.title, this.props.content.properties.description);
+  }
+
+}
+
+var _default = CafeCard;
 exports.default = _default;
 },{"react":"../node_modules/react/index.js"}],"../node_modules/base64-js/index.js":[function(require,module,exports) {
 'use strict'
@@ -77000,6 +77038,8 @@ var _reactDom = _interopRequireDefault(require("react-dom"));
 
 var _Search = _interopRequireDefault(require("./Search.jsx"));
 
+var _CafeCard = _interopRequireDefault(require("./CafeCard.jsx"));
+
 var _lodash = _interopRequireDefault(require("lodash"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -77016,7 +77056,8 @@ class List extends _react.Component {
 
     _defineProperty(this, "state", {
       searchText: '',
-      linesOfList: []
+      linesOfList: [],
+      clicked: false
     });
 
     _defineProperty(this, "searchHandler", value => {
@@ -77026,6 +77067,22 @@ class List extends _react.Component {
         const linesOfList = this.getLinesOfList();
         this.updateLinesOfList(linesOfList);
       });
+    });
+
+    _defineProperty(this, "handleClick", number => {
+      this.props.activeItem(number);
+      this.setState({
+        clicked: true,
+        activeItem: number
+      });
+      this.searchHandler(number.properties.title);
+    });
+
+    _defineProperty(this, "handleClose", () => {
+      this.setState({
+        clicked: false
+      });
+      this.searchHandler("");
     });
   }
 
@@ -77065,19 +77122,27 @@ class List extends _react.Component {
     const {
       linesOfList
     } = this.state;
-    return _reactDom.default.createPortal(_react.default.createElement("div", null, _react.default.createElement(_Search.default, {
+    return _reactDom.default.createPortal(_react.default.createElement("div", {
+      className: 'sidebar'
+    }, this.state.clicked ? _react.default.createElement(_CafeCard.default, {
+      content: this.state.activeItem,
+      closeCard: () => this.handleClose()
+    }) : _react.default.createElement("div", null, _react.default.createElement(_Search.default, {
+      style: {
+        display: this.state.clicked ? 'none' : null
+      },
       searchText: this.searchHandler
     }), _react.default.createElement("ul", null, linesOfList.map((number, i) => _react.default.createElement("li", {
       key: i,
-      onClick: () => this.props.activeItem(number)
-    }, number.properties.title)))), document.getElementById('list'));
+      onClick: () => this.handleClick(number)
+    }, number.properties.title))))), document.getElementById('list'));
   }
 
 }
 
 var _default = List;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./Search.jsx":"Search.jsx","lodash":"../node_modules/lodash/lodash.js"}],"data/data_test.csv":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./Search.jsx":"Search.jsx","./CafeCard.jsx":"CafeCard.jsx","lodash":"../node_modules/lodash/lodash.js"}],"data/data_test.csv":[function(require,module,exports) {
 module.exports = "/data_test.b42f3e45.csv";
 },{}],"data/mo.geojson":[function(require,module,exports) {
 module.exports = "/mo.43572431.geojson";
@@ -77350,7 +77415,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "27296" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "28590" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -1,12 +1,14 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import Search from './Search.jsx'
+import CafeCard from './CafeCard.jsx'
 import lodash from 'lodash';
 
 class List extends Component {
     state = {
         searchText: '',
-        linesOfList: []
+        linesOfList: [],
+        clicked: false
     };
 
     searchHandler = (value) => {
@@ -48,22 +50,40 @@ class List extends Component {
         this.props.filteredItems(linesOfList)
     }
 
+    handleClick = (number) => {
+        this.props.activeItem(number)
+        this.setState({clicked: true, activeItem: number});
+        this.searchHandler(number.properties.title)
+    }
+
+    handleClose = () => {
+        this.setState({clicked: false});
+        this.searchHandler("")
+    }
+
     render() {
         const {linesOfList} = this.state;
 
         return ReactDOM.createPortal(
-            <div>
-                <Search searchText={this.searchHandler}/>
-                <ul>
+            <div className={'sidebar'}>
+                {this.state.clicked ?
+                    <CafeCard content={this.state.activeItem}
+                              closeCard={() => this.handleClose()}
+                    /> :
+                    <div><Search
+                        style={{display: this.state.clicked ? 'none' : null}}
+                        searchText={this.searchHandler}
+                    /><ul>
                     {linesOfList.map((number, i) =>
                         <li
                             key={i}
-                            onClick={() => this.props.activeItem(number)}
+                            onClick={() => this.handleClick(number) }
                         >
                             {number.properties.title}
                         </li>
                     )}
-                </ul>
+                    </ul></div>
+                }
             </div>,
             document.getElementById('list')
         );

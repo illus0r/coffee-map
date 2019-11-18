@@ -31,6 +31,8 @@ body {
   grid-area: left;
   padding: 0.5rem;
   font-size: 16px;
+  display: flex;
+  flex-direction: column;
 }
 
 .right-column {
@@ -54,6 +56,21 @@ body {
   height: 50px;
   border-radius: 50%;
   cursor: pointer;
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  flex-grow: 1;
+}
+.sidebar .cafeCard {
+  background: lavender;
+  flex-grow: 1;
+}
+.sidebar .cafeCard .closeBtn {
+  float: right;
+  color: coral;
 }
 
 /*# sourceMappingURL=/root.f3bc3529.css.map */

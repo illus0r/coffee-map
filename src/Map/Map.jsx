@@ -91,7 +91,7 @@ class Map extends Component {
                     const currentFeature = e.features[0];
                     this.map.flyTo({
                         center: currentFeature.geometry.coordinates,
-                        zoom: 11
+                        zoom: 13
                     });
                 });
             }
