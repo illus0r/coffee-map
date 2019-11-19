@@ -110,23 +110,9 @@ class Map extends Component {
                         'source': 'cafeRating',
                         'type': 'fill',
                         'maxzoom': this.zoomThreshold,
-                        //'filter': ['==', 'isState', true],
                         'paint': {
-                            'fill-color': [
-                                'interpolate',
-                                ['linear'],
-                                ['get', 'value'],
-                                0, '#F2F12D',
-                                10, '#EED322',
-                                20, '#E6B71E',
-                                30, '#DA9C20',
-                                40, '#CA8323',
-                                50, '#B86B25',
-                                75, '#A25626',
-                                85, '#8B4225',
-                                100, '#723122'
-                            ],
-                            'fill-opacity': 0.3,
+                            'fill-color': ['get','color'],
+                            'fill-opacity': 0,
                             'fill-outline-color': '#000'
                         }
                     }, 'waterway-label');
@@ -145,6 +131,7 @@ class Map extends Component {
             createCafePopUp(this.map);
 
             this.map.on('moveend', () => {
+                this.props.zoomValue(this.map.getZoom())
                 const features = this.map.queryRenderedFeatures({layers: ['locationsFake']});
                 if (features) {
                     //var uniqueFeatures = getUniqueFeatures(features, "iata_code");

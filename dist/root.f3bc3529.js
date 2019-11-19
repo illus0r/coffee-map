@@ -41120,7 +41120,357 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-},{"./band.js":"../node_modules/d3-scale/src/band.js","./identity.js":"../node_modules/d3-scale/src/identity.js","./linear.js":"../node_modules/d3-scale/src/linear.js","./log.js":"../node_modules/d3-scale/src/log.js","./symlog.js":"../node_modules/d3-scale/src/symlog.js","./ordinal.js":"../node_modules/d3-scale/src/ordinal.js","./pow.js":"../node_modules/d3-scale/src/pow.js","./radial.js":"../node_modules/d3-scale/src/radial.js","./quantile.js":"../node_modules/d3-scale/src/quantile.js","./quantize.js":"../node_modules/d3-scale/src/quantize.js","./threshold.js":"../node_modules/d3-scale/src/threshold.js","./time.js":"../node_modules/d3-scale/src/time.js","./utcTime.js":"../node_modules/d3-scale/src/utcTime.js","./sequential.js":"../node_modules/d3-scale/src/sequential.js","./sequentialQuantile.js":"../node_modules/d3-scale/src/sequentialQuantile.js","./diverging.js":"../node_modules/d3-scale/src/diverging.js","./tickFormat.js":"../node_modules/d3-scale/src/tickFormat.js"}],"../node_modules/mapbox-gl/dist/mapbox-gl.js":[function(require,module,exports) {
+},{"./band.js":"../node_modules/d3-scale/src/band.js","./identity.js":"../node_modules/d3-scale/src/identity.js","./linear.js":"../node_modules/d3-scale/src/linear.js","./log.js":"../node_modules/d3-scale/src/log.js","./symlog.js":"../node_modules/d3-scale/src/symlog.js","./ordinal.js":"../node_modules/d3-scale/src/ordinal.js","./pow.js":"../node_modules/d3-scale/src/pow.js","./radial.js":"../node_modules/d3-scale/src/radial.js","./quantile.js":"../node_modules/d3-scale/src/quantile.js","./quantize.js":"../node_modules/d3-scale/src/quantize.js","./threshold.js":"../node_modules/d3-scale/src/threshold.js","./time.js":"../node_modules/d3-scale/src/time.js","./utcTime.js":"../node_modules/d3-scale/src/utcTime.js","./sequential.js":"../node_modules/d3-scale/src/sequential.js","./sequentialQuantile.js":"../node_modules/d3-scale/src/sequentialQuantile.js","./diverging.js":"../node_modules/d3-scale/src/diverging.js","./tickFormat.js":"../node_modules/d3-scale/src/tickFormat.js"}],"../node_modules/d3-collection/src/map.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = exports.prefix = void 0;
+var prefix = "$";
+exports.prefix = prefix;
+
+function Map() {}
+
+Map.prototype = map.prototype = {
+  constructor: Map,
+  has: function (key) {
+    return prefix + key in this;
+  },
+  get: function (key) {
+    return this[prefix + key];
+  },
+  set: function (key, value) {
+    this[prefix + key] = value;
+    return this;
+  },
+  remove: function (key) {
+    var property = prefix + key;
+    return property in this && delete this[property];
+  },
+  clear: function () {
+    for (var property in this) if (property[0] === prefix) delete this[property];
+  },
+  keys: function () {
+    var keys = [];
+
+    for (var property in this) if (property[0] === prefix) keys.push(property.slice(1));
+
+    return keys;
+  },
+  values: function () {
+    var values = [];
+
+    for (var property in this) if (property[0] === prefix) values.push(this[property]);
+
+    return values;
+  },
+  entries: function () {
+    var entries = [];
+
+    for (var property in this) if (property[0] === prefix) entries.push({
+      key: property.slice(1),
+      value: this[property]
+    });
+
+    return entries;
+  },
+  size: function () {
+    var size = 0;
+
+    for (var property in this) if (property[0] === prefix) ++size;
+
+    return size;
+  },
+  empty: function () {
+    for (var property in this) if (property[0] === prefix) return false;
+
+    return true;
+  },
+  each: function (f) {
+    for (var property in this) if (property[0] === prefix) f(this[property], property.slice(1), this);
+  }
+};
+
+function map(object, f) {
+  var map = new Map(); // Copy constructor.
+
+  if (object instanceof Map) object.each(function (value, key) {
+    map.set(key, value);
+  }); // Index array by numeric index or specified key function.
+  else if (Array.isArray(object)) {
+      var i = -1,
+          n = object.length,
+          o;
+      if (f == null) while (++i < n) map.set(i, object[i]);else while (++i < n) map.set(f(o = object[i], i, object), o);
+    } // Convert object to map.
+    else if (object) for (var key in object) map.set(key, object[key]);
+  return map;
+}
+
+var _default = map;
+exports.default = _default;
+},{}],"../node_modules/d3-collection/src/nest.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+var _map = _interopRequireDefault(require("./map"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _default() {
+  var keys = [],
+      sortKeys = [],
+      sortValues,
+      rollup,
+      nest;
+
+  function apply(array, depth, createResult, setResult) {
+    if (depth >= keys.length) {
+      if (sortValues != null) array.sort(sortValues);
+      return rollup != null ? rollup(array) : array;
+    }
+
+    var i = -1,
+        n = array.length,
+        key = keys[depth++],
+        keyValue,
+        value,
+        valuesByKey = (0, _map.default)(),
+        values,
+        result = createResult();
+
+    while (++i < n) {
+      if (values = valuesByKey.get(keyValue = key(value = array[i]) + "")) {
+        values.push(value);
+      } else {
+        valuesByKey.set(keyValue, [value]);
+      }
+    }
+
+    valuesByKey.each(function (values, key) {
+      setResult(result, key, apply(values, depth, createResult, setResult));
+    });
+    return result;
+  }
+
+  function entries(map, depth) {
+    if (++depth > keys.length) return map;
+    var array,
+        sortKey = sortKeys[depth - 1];
+    if (rollup != null && depth >= keys.length) array = map.entries();else array = [], map.each(function (v, k) {
+      array.push({
+        key: k,
+        values: entries(v, depth)
+      });
+    });
+    return sortKey != null ? array.sort(function (a, b) {
+      return sortKey(a.key, b.key);
+    }) : array;
+  }
+
+  return nest = {
+    object: function (array) {
+      return apply(array, 0, createObject, setObject);
+    },
+    map: function (array) {
+      return apply(array, 0, createMap, setMap);
+    },
+    entries: function (array) {
+      return entries(apply(array, 0, createMap, setMap), 0);
+    },
+    key: function (d) {
+      keys.push(d);
+      return nest;
+    },
+    sortKeys: function (order) {
+      sortKeys[keys.length - 1] = order;
+      return nest;
+    },
+    sortValues: function (order) {
+      sortValues = order;
+      return nest;
+    },
+    rollup: function (f) {
+      rollup = f;
+      return nest;
+    }
+  };
+}
+
+function createObject() {
+  return {};
+}
+
+function setObject(object, key, value) {
+  object[key] = value;
+}
+
+function createMap() {
+  return (0, _map.default)();
+}
+
+function setMap(map, key, value) {
+  map.set(key, value);
+}
+},{"./map":"../node_modules/d3-collection/src/map.js"}],"../node_modules/d3-collection/src/set.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _map = _interopRequireWildcard(require("./map"));
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+function Set() {}
+
+var proto = _map.default.prototype;
+Set.prototype = set.prototype = {
+  constructor: Set,
+  has: proto.has,
+  add: function (value) {
+    value += "";
+    this[_map.prefix + value] = value;
+    return this;
+  },
+  remove: proto.remove,
+  clear: proto.clear,
+  values: proto.keys,
+  size: proto.size,
+  empty: proto.empty,
+  each: proto.each
+};
+
+function set(object, f) {
+  var set = new Set(); // Copy constructor.
+
+  if (object instanceof Set) object.each(function (value) {
+    set.add(value);
+  }); // Otherwise, assume it’s an array.
+  else if (object) {
+      var i = -1,
+          n = object.length;
+      if (f == null) while (++i < n) set.add(object[i]);else while (++i < n) set.add(f(object[i], i, object));
+    }
+  return set;
+}
+
+var _default = set;
+exports.default = _default;
+},{"./map":"../node_modules/d3-collection/src/map.js"}],"../node_modules/d3-collection/src/keys.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+function _default(map) {
+  var keys = [];
+
+  for (var key in map) keys.push(key);
+
+  return keys;
+}
+},{}],"../node_modules/d3-collection/src/values.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+function _default(map) {
+  var values = [];
+
+  for (var key in map) values.push(map[key]);
+
+  return values;
+}
+},{}],"../node_modules/d3-collection/src/entries.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = _default;
+
+function _default(map) {
+  var entries = [];
+
+  for (var key in map) entries.push({
+    key: key,
+    value: map[key]
+  });
+
+  return entries;
+}
+},{}],"../node_modules/d3-collection/src/index.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "nest", {
+  enumerable: true,
+  get: function () {
+    return _nest.default;
+  }
+});
+Object.defineProperty(exports, "set", {
+  enumerable: true,
+  get: function () {
+    return _set.default;
+  }
+});
+Object.defineProperty(exports, "map", {
+  enumerable: true,
+  get: function () {
+    return _map.default;
+  }
+});
+Object.defineProperty(exports, "keys", {
+  enumerable: true,
+  get: function () {
+    return _keys.default;
+  }
+});
+Object.defineProperty(exports, "values", {
+  enumerable: true,
+  get: function () {
+    return _values.default;
+  }
+});
+Object.defineProperty(exports, "entries", {
+  enumerable: true,
+  get: function () {
+    return _entries.default;
+  }
+});
+
+var _nest = _interopRequireDefault(require("./nest"));
+
+var _set = _interopRequireDefault(require("./set"));
+
+var _map = _interopRequireDefault(require("./map"));
+
+var _keys = _interopRequireDefault(require("./keys"));
+
+var _values = _interopRequireDefault(require("./values"));
+
+var _entries = _interopRequireDefault(require("./entries"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+},{"./nest":"../node_modules/d3-collection/src/nest.js","./set":"../node_modules/d3-collection/src/set.js","./map":"../node_modules/d3-collection/src/map.js","./keys":"../node_modules/d3-collection/src/keys.js","./values":"../node_modules/d3-collection/src/values.js","./entries":"../node_modules/d3-collection/src/entries.js"}],"../node_modules/mapbox-gl/dist/mapbox-gl.js":[function(require,module,exports) {
 var define;
 var global = arguments[3];
 /* Mapbox GL JS is licensed under the 3-Clause BSD License. Full text of license: https://github.com/mapbox/mapbox-gl-js/blob/v1.5.0/LICENSE.txt */
@@ -66477,10 +66827,9 @@ class Map extends _react.Component {
               'source': 'cafeRating',
               'type': 'fill',
               'maxzoom': this.zoomThreshold,
-              //'filter': ['==', 'isState', true],
               'paint': {
-                'fill-color': ['interpolate', ['linear'], ['get', 'value'], 0, '#F2F12D', 10, '#EED322', 20, '#E6B71E', 30, '#DA9C20', 40, '#CA8323', 50, '#B86B25', 75, '#A25626', 85, '#8B4225', 100, '#723122'],
-                'fill-opacity': 0.3,
+                'fill-color': ['get', 'color'],
+                'fill-opacity': 0,
                 'fill-outline-color': '#000'
               }
             }, 'waterway-label');
@@ -66499,6 +66848,7 @@ class Map extends _react.Component {
 
         createCafePopUp(this.map);
         this.map.on('moveend', () => {
+          this.props.zoomValue(this.map.getZoom());
           const features = this.map.queryRenderedFeatures({
             layers: ['locationsFake']
           });
@@ -85923,6 +86273,35 @@ class CafeCard extends _react.Component {
 
 var _default = CafeCard;
 exports.default = _default;
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js"}],"BarCharts.jsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+var _reactDom = _interopRequireDefault(require("react-dom"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+class BarCharts extends _react.Component {
+  render() {
+    return _reactDom.default.createPortal(_react.default.createElement("div", {
+      className: "barCharts"
+    }, "Bar Charts"), document.getElementById('barCharts'));
+  }
+
+}
+
+var _default = BarCharts;
+exports.default = _default;
 },{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js"}],"Map/index.jsx":[function(require,module,exports) {
 "use strict";
 
@@ -85939,6 +86318,10 @@ var _d3ScaleChromatic = require("d3-scale-chromatic");
 
 var _d3Scale = require("d3-scale");
 
+var _d3Array = require("d3-array");
+
+var _d3Collection = require("d3-collection");
+
 var _Map = _interopRequireDefault(require("./Map"));
 
 var _List = _interopRequireDefault(require("../List"));
@@ -85949,6 +86332,8 @@ var _mo = _interopRequireDefault(require("../data/mo.geojson"));
 
 var _CafeCard = _interopRequireDefault(require("../CafeCard"));
 
+var _BarCharts = _interopRequireDefault(require("../BarCharts"));
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
@@ -85956,6 +86341,8 @@ function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+const getColorMagma = (0, _d3Scale.scaleSequential)([3, 5], d => (0, _d3ScaleChromatic.interpolateMagma)(d / 2 + 0.25)).clamp(true);
 
 class MapContainer extends _react.Component {
   constructor() {
@@ -85968,7 +86355,8 @@ class MapContainer extends _react.Component {
       currentItem: null,
       visiblePoints: null,
       filteredItemsList: [],
-      rawData: []
+      rawData: [],
+      zoomValue: 9
     });
 
     _defineProperty(this, "visiblePointsHandler", value => {
@@ -86012,6 +86400,12 @@ class MapContainer extends _react.Component {
         currentItem: null
       }); //this.searchHandler("")
     });
+
+    _defineProperty(this, "zoomValueHandler", value => {
+      this.setState({
+        zoomValue: value
+      });
+    });
   }
 
   componentDidMount() {
@@ -86020,7 +86414,8 @@ class MapContainer extends _react.Component {
     (0, _d3Fetch.csv)(_data_test.default).then(data => {
       (0, _d3Fetch.json)(_mo.default).then(geoMoscow => {
         const geoJSON = makeGeoJSON(data);
-        addValues(geoMoscow);
+        const regionRating = (0, _d3Collection.nest)().key(d => d['Район города']).rollup(els => (0, _d3Array.mean)(els, d => +d['FlampRating'].replace(',', '.') || NaN)).entries(data);
+        addValues(geoMoscow, regionRating);
         this.setState({
           rawData: data,
           points: geoJSON,
@@ -86037,7 +86432,7 @@ class MapContainer extends _react.Component {
       target: this.state.currentItem,
       all: this.state.rawData,
       closeCard: () => this.handleClose()
-    }) : null, _react.default.createElement(_List.default, {
+    }) : null, this.state.zoomValue < 8 ? _react.default.createElement(_BarCharts.default, null) : null, _react.default.createElement(_List.default, {
       visiblePoints: this.state.visiblePoints,
       activeItem: this.activeItemHandler // to fly on map, it will be null after flight
       ,
@@ -86052,7 +86447,8 @@ class MapContainer extends _react.Component {
       activeItem: this.state.activeItem,
       selectedPoint: this.selectedPointHandler,
       clearActiveItem: this.clearActiveItemHandler,
-      filteredItemsList: this.state.filteredItems
+      filteredItemsList: this.state.filteredItems,
+      zoomValue: this.zoomValueHandler
     }));
   }
 
@@ -86061,7 +86457,6 @@ class MapContainer extends _react.Component {
 function makeGeoJSON(data) {
   const features = data.map((d, i) => {
     let rating = +d['FlampRating'].replace(',', '.') || 0;
-    let x = (0, _d3Scale.scaleSequential)([3, 5], _d3ScaleChromatic.interpolateMagma);
     return {
       type: 'Feature',
       geometry: {
@@ -86074,7 +86469,7 @@ function makeGeoJSON(data) {
         title: d['Наименование организации'],
         description: d['Улица'] + ', ' + d['Номер дома'],
         rating: rating,
-        color: rating ? x(rating) : 'gray'
+        color: rating ? getColorMagma(rating) : 'gray'
       }
     };
   });
@@ -86088,15 +86483,17 @@ function makeGeoJSON(data) {
   return geoJSON;
 }
 
-function addValues(data) {
+function addValues(data, rating) {
   data.features.forEach(feature => {
-    feature.properties.value = +(Math.random() * 100).toFixed(2);
+    const rate = rating.find(el => el.key === feature.properties.NAME);
+    feature.properties.value = rate ? rate.value : undefined;
+    feature.properties.color = rate ? getColorMagma(rate.value) : 'gray';
   });
 }
 
 var _default = MapContainer;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","d3-fetch":"../node_modules/d3-fetch/src/index.js","d3-scale-chromatic":"../node_modules/d3-scale-chromatic/src/index.js","d3-scale":"../node_modules/d3-scale/src/index.js","./Map":"Map/Map.jsx","../List":"List.jsx","../data/data_test.csv":"data/data_test.csv","../data/mo.geojson":"data/mo.geojson","../CafeCard":"CafeCard.jsx"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","d3-fetch":"../node_modules/d3-fetch/src/index.js","d3-scale-chromatic":"../node_modules/d3-scale-chromatic/src/index.js","d3-scale":"../node_modules/d3-scale/src/index.js","d3-array":"../node_modules/d3-array/src/index.js","d3-collection":"../node_modules/d3-collection/src/index.js","./Map":"Map/Map.jsx","../List":"List.jsx","../data/data_test.csv":"data/data_test.csv","../data/mo.geojson":"data/mo.geojson","../CafeCard":"CafeCard.jsx","../BarCharts":"BarCharts.jsx"}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
 var bundleURL = null;
 
 function getBundleURLCached() {
@@ -86233,7 +86630,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50069" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "19481" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

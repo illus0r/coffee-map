@@ -59,13 +59,15 @@ body {
   cursor: pointer;
 }
 
-#cafeCard {
+.cafeCard, .barCharts {
   position: absolute;
   top: 0;
   bottom: 0;
+  left: 0;
+  right: 0;
   background: lavender;
 }
-#cafeCard .closeBtn {
+.cafeCard .closeBtn, .barCharts .closeBtn {
   float: right;
   color: coral;
 }

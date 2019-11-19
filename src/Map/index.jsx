@@ -2,11 +2,16 @@ import React, {Component} from 'react';
 import {csv, json}  from 'd3-fetch';
 import {interpolateMagma} from 'd3-scale-chromatic';
 import {scaleSequential} from 'd3-scale';
+import {sum, mean} from 'd3-array';
+import {nest} from 'd3-collection';
 import Map from './Map';
 import List from '../List';
 import data from '../data/data_test.csv'
 import moscow from '../data/mo.geojson'
 import CafeCard from "../CafeCard";
+import BarCharts from "../BarCharts";
+
+const getColorMagma =  scaleSequential([3, 5], d => interpolateMagma(d/2+0.25)).clamp(true);
 
 class MapContainer extends Component {
     state = {
@@ -17,6 +22,7 @@ class MapContainer extends Component {
         visiblePoints: null,
         filteredItemsList: [],
         rawData:[],
+        zoomValue:9,
     };
 
     componentDidMount() {
@@ -24,8 +30,15 @@ class MapContainer extends Component {
         // async await вроде не нужен
         csv(data).then((data) => {
             json(moscow).then((geoMoscow) => {
+
                 const geoJSON = makeGeoJSON(data);
-                addValues(geoMoscow);
+
+                const regionRating =  nest()
+                    .key(d=>d['Район города'])
+                    .rollup(els => mean(els, d => (+d['FlampRating'].replace(',', '.') || NaN)))
+                    .entries(data);
+                addValues(geoMoscow, regionRating);
+
                 this.setState({
                     rawData: data,
                     points: geoJSON,
@@ -67,6 +80,10 @@ class MapContainer extends Component {
         //this.searchHandler("")
     }
 
+    zoomValueHandler = (value) => {
+        this.setState({zoomValue: value});
+    }
+
 
     render() {
         return (
@@ -76,6 +93,11 @@ class MapContainer extends Component {
                               all = {this.state.rawData}
                               closeCard = {() => this.handleClose()}
                     /> : null}
+
+                {this.state.zoomValue < 8 ?
+                    <BarCharts
+                    /> : null}
+
                 <List visiblePoints={this.state.visiblePoints}
                       activeItem={this.activeItemHandler} // to fly on map, it will be null after flight
                       currentItem={this.currentItemHandler} // to open card
@@ -88,7 +110,8 @@ class MapContainer extends Component {
                      activeItem={this.state.activeItem}
                      selectedPoint={this.selectedPointHandler}
                      clearActiveItem={this.clearActiveItemHandler}
-                     filteredItemsList={this.state.filteredItems}/>
+                     filteredItemsList={this.state.filteredItems}
+                     zoomValue={this.zoomValueHandler}/>
             </div>
         );
     }
@@ -97,7 +120,6 @@ class MapContainer extends Component {
 function makeGeoJSON(data) {
     const features = data.map((d, i) => {
         let rating = +d['FlampRating'].replace(',', '.') || 0
-        let x = scaleSequential([3, 5], interpolateMagma);
         return {
             type: 'Feature',
             geometry: {
@@ -110,7 +132,7 @@ function makeGeoJSON(data) {
                 title: d['Наименование организации'],
                 description: d['Улица'] + ', ' + d['Номер дома'],
                 rating: rating,
-                color: (rating) ? x(rating) : 'gray',
+                color: (rating) ? getColorMagma(rating) : 'gray',
             }
         }
         }
@@ -127,11 +149,16 @@ function makeGeoJSON(data) {
     return geoJSON
 }
 
-function addValues(data) {
+function addValues(data ,rating) {
     data.features.forEach(feature => {
-        feature.properties.value = +(Math.random() * 100).toFixed(2)
-    })
+        const rate = rating.find(el => el.key === feature.properties.NAME)
+        feature.properties.value = rate ? rate.value : undefined
+        feature.properties.color = rate ? getColorMagma(rate.value) : 'gray'
 
+    })
 }
+
+
+
 
 export default MapContainer;
