@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "@mapbox/mapbox-gl-language": "^0.10.1",
+    "classnames": "^2.2.6",
     "d3-array": "^2.4.0",
     "d3-collection": "^1.0.7",
     "d3-dsv": "^1.1.1",
@@ -14,6 +15,7 @@
     "gh-pages": "^2.1.1",
     "lodash": "^4.17.15",
     "mapbox-gl": "^1.5.0",
+    "nouislider-react": "^3.3.5",
     "react": "^16.11.0",
     "react-dom": "^16.11.0",
     "sass": "^1.23.3"
