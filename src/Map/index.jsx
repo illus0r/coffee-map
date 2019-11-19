@@ -94,9 +94,29 @@ class MapContainer extends Component {
     }
 }
 
+const parseWorkTime = (rawData) => {
+    const byDays = rawData.split('|');
+    if (byDays.length < 7) {
+        return new Array(7).fill([]);
+    }
+    return byDays.map((dayStr) => {
+        const regExp = /(\d{1,2}:\d{2}) до (\d{1,2}:\d{2})/ig;
+        const res = dayStr.match(regExp);
+        if (!res) {
+            return [];
+        }
+        return res.map((period) =>
+                period.split(' до ').map(
+                    (time) => {return time.length === 5 ? time : `0${time}`}
+                )
+            );
+    })
+
+};
+
 function makeGeoJSON(data) {
     const features = data.map((d, i) => {
-        let rating = +d['FlampRating'].replace(',', '.') || 0
+        let rating = +d['FlampRating'].replace(',', '.') || 0;
         let x = scaleSequential([3, 5], interpolateMagma);
         return {
             type: 'Feature',
@@ -111,6 +131,7 @@ function makeGeoJSON(data) {
                 description: d['Улица'] + ', ' + d['Номер дома'],
                 rating: rating,
                 color: (rating) ? x(rating) : 'gray',
+                workTime: JSON.stringify(parseWorkTime(d['Время работы']))
             }
         }
         }

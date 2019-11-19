@@ -104,3 +104,75 @@ body {
         padding-left: 0;
     }
 }
+
+
+.filterOpenNow,
+.filterEcoFriendly {
+    border-radius: 10px;
+    display: inline;
+    background: rgba(0,0,0,0.2);
+    padding: 2px 4px;
+    font-size: 12px;
+    cursor: pointer;
+
+    &.__checked {
+        background: rgba(0,0,0,0.5)
+    }
+}
+
+.filterOpenNow {
+    margin-left: 5px;
+}
+
+.filterAverageCheck__slider {
+    position: relative;
+    height: 30px;
+}
+
+.filterAverageCheck__from,
+.filterAverageCheck__to {
+    position: absolute;
+    top: 50%;
+}
+
+.noUi-target {
+    box-shadow: none;
+    background: none;
+    height: 0;
+    top: 50%;
+}
+
+.noUi-handle {
+    top: -3px !important;
+    right: -3px !important;
+    width: 6px !important;
+    height: 6px !important;
+    cursor: pointer;
+    background: black;
+    border-radius: 10px;
+    box-shadow: none;
+
+    &::before {
+        top: -4px;
+        left: -4px;
+        width: 12px !important;
+        height: 12px !important;
+        background: rgba(0, 0, 0, 0.5);
+        border-radius: 20px;
+    }
+
+    &::after {
+        display: none;
+    }
+
+    &:focus {
+        outline: none;
+    }
+}
+
+.noUi-connects,
+.noUi-connect,
+.noUi-pips,
+.noUi-marker {
+    display: none;
+}
