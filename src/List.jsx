@@ -114,8 +114,9 @@ class List extends Component {
             <div className={'sidebar'}>
                 {this.state.clicked ?
                     '1':
-                    <div>
+                    <div className={'sidebar'}>
                         <Search onSearchTextChange={this.onSearchTextChange}/>
+                        <div class={'filters'}>
                         <FilterEcoFriendly
                             isChecked={isEcoChecked}
                             onToggle={this.onEcoFilterToggle}
@@ -124,6 +125,7 @@ class List extends Component {
                             isChecked={isOpenNowChecked}
                             onToggle={this.onOpenNowFilterToggle}
                         />
+                        </div>
                         {/*<FilterAverageCheck
                             averageCheckBounds={averageCheckBounds}
                             onAverageCheckBoundsChange={this.onAverageCheckBoundsChange}
@@ -131,6 +133,7 @@ class List extends Component {
                         <ul className={'scrollable'}>
                             {linesOfList.map((number, i) =>
                                 <li
+                                    style={{color : number.properties.color}}
                                     className={'listItem'}
                                     key={i}
                                     onClick={() => this.handleClick(number) }

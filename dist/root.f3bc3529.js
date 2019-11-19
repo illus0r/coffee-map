@@ -66937,7 +66937,7 @@ const Search = (_ref) => {
   }, _react.default.createElement("input", {
     type: "text",
     className: "form-control",
-    placeholder: "Search...",
+    placeholder: "\u041D\u0430\u0439\u0442\u0438 \u043F\u043E \u043D\u0430\u0437\u0432\u0430\u043D\u0438\u044E \u0438\u043B\u0438 \u0430\u0434\u0440\u0435\u0441\u0443",
     onChange: onSearchTextChange
   }));
 };
@@ -67023,7 +67023,7 @@ const FilterEcoFriendly = (_ref) => {
       '__checked': isChecked
     }),
     onClick: onToggle
-  }, 'Эко');
+  }, 'Эко 🌱');
 };
 
 var _default = FilterEcoFriendly;
@@ -89021,17 +89021,24 @@ class List extends _react.Component {
     } = this.state;
     return _reactDom.default.createPortal(_react.default.createElement("div", {
       className: 'sidebar'
-    }, this.state.clicked ? '1' : _react.default.createElement("div", null, _react.default.createElement(_Search.default, {
+    }, this.state.clicked ? '1' : _react.default.createElement("div", {
+      className: 'sidebar'
+    }, _react.default.createElement(_Search.default, {
       onSearchTextChange: this.onSearchTextChange
-    }), _react.default.createElement(_FilterEcoFriendly.default, {
+    }), _react.default.createElement("div", {
+      class: 'filters'
+    }, _react.default.createElement(_FilterEcoFriendly.default, {
       isChecked: isEcoChecked,
       onToggle: this.onEcoFilterToggle
     }), _react.default.createElement(_FilterOpenNow.default, {
       isChecked: isOpenNowChecked,
       onToggle: this.onOpenNowFilterToggle
-    }), _react.default.createElement("ul", {
+    })), _react.default.createElement("ul", {
       className: 'scrollable'
     }, linesOfList.map((number, i) => _react.default.createElement("li", {
+      style: {
+        color: number.properties.color
+      },
       className: 'listItem',
       key: i,
       onClick: () => this.handleClick(number)
@@ -89067,16 +89074,25 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 class CafeCard extends _react.Component {
-  constructor() {
-    super(...arguments);
+  constructor(props) {
+    super(props);
 
     _defineProperty(this, "handleClose", () => {
       this.props.closeCard();
     });
+
+    _defineProperty(this, "componentDidUpdate", (prevProps, prevState, snapshot) => {
+      this.info = this.props.all.find(el => el['Id карточки'] === this.props.target.properties.rawId);
+    });
+
+    const fullInformation = this.props.all.find(el => el['Id карточки'] === this.props.target.properties.rawId);
+    this.state = {
+      info: fullInformation
+    };
   }
 
   render() {
-    const info = this.props.all.find(el => el['Id карточки'] === this.props.target.properties.rawId);
+    const info = this.state.info;
     return _reactDom.default.createPortal(_react.default.createElement("div", {
       className: "cafeCard"
     }, "Cafe Card", _react.default.createElement("a", {
@@ -89401,7 +89417,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "36469" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "40758" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

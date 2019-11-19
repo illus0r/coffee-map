@@ -309,48 +309,39 @@ body {
   font-family: Arial;
 }
 
-.page {
-  display: grid;
-  grid-template-areas: "header header header" "left content content";
-  grid-template-columns: 200px 1fr 200px;
-  grid-template-rows: auto 1fr auto;
-  grid-gap: 0px;
-  height: 100vh;
+.wrapper {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
 
-.header {
-  grid-area: header;
-  background: black;
-  text-transform: uppercase;
-  color: white;
-  padding: 0.5rem;
-  font-size: 20px;
+.page {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
 }
 
 .left-column {
-  grid-area: left;
   padding: 0.5rem;
   font-size: 16px;
   display: flex;
   flex-direction: column;
   position: relative;
+  background: #020108;
+  box-shadow: 0px 0px 16px rgba(67, 29, 11, 0.19);
+  color: white;
+  width: 354px;
 }
 
 .right-column {
-  grid-area: content;
+  display: flex;
+  flex: 1;
+  align-items: stretch;
+}
+.right-column div {
+  flex: 1;
 }
 
-@media (max-width: 768px) {
-  .page {
-    grid-template-areas: "header" "left" "content";
-    grid-template-columns: 1fr;
-    grid-template-rows: auto minmax(75px, auto) 1fr;
-  }
-
-  .left-column {
-    margin: 0;
-  }
-}
 .marker {
   background-size: cover;
   width: 50px;
@@ -359,7 +350,7 @@ body {
   cursor: pointer;
 }
 
-.cafeCard, .barCharts {
+.barCharts {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -367,65 +358,96 @@ body {
   right: 0;
   background: lavender;
 }
-.cafeCard .closeBtn, .barCharts .closeBtn {
+.barCharts .closeBtn {
   float: right;
   color: coral;
+}
+
+.cafeCard {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #CE556A;
+  box-shadow: 0px -4px 16px rgba(206, 85, 106, 0.4);
+  color: black;
+  min-height: 100px;
+  padding: 22px 17px 7px;
+}
+.cafeCard .closeBtn {
+  float: right;
+  color: coral;
+}
+
+#cafeList {
+  display: flex;
+  flex-grow: 1;
 }
 
 .sidebar {
   display: flex;
   flex-direction: column;
-  align-items: stretch;
   flex-grow: 1;
+  position: relative;
+}
+.sidebar input {
+  background: rgba(196, 196, 196, 0.2);
+  border-radius: 4px;
+  border: none;
+  color: #D0CDC6;
+  font-size: 16px;
+  font-style: italic;
+  padding: 4px 12px;
+  width: 294px;
 }
 .sidebar ul.scrollable {
   position: absolute;
-  top: 2em;
+  top: 64px;
   bottom: 0;
-  left: 0.5em;
+  left: 0;
   right: 0;
   display: block;
   overflow-y: scroll;
   padding-left: 0;
 }
 
-.filterOpenNow,
-.filterEcoFriendly {
-  border-radius: 10px;
+.filters {
+  padding-top: 14px;
+  padding-bottom: 32px;
+}
+.filters .filterOpenNow,
+.filters .filterEcoFriendly {
+  background: rgba(196, 196, 196, 0.2);
+  border-radius: 999px;
+  color: #D0CDC6;
+  padding: 2px 12px 4px;
   display: inline;
-  background: rgba(0, 0, 0, 0.2);
-  padding: 2px 4px;
   font-size: 12px;
   cursor: pointer;
 }
-.filterOpenNow.__checked,
-.filterEcoFriendly.__checked {
+.filters .filterOpenNow.__checked,
+.filters .filterEcoFriendly.__checked {
   background: rgba(0, 0, 0, 0.5);
 }
-
-.filterOpenNow {
+.filters .filterOpenNow {
   margin-left: 5px;
 }
-
-.filterAverageCheck__slider {
+.filters .filterAverageCheck__slider {
   position: relative;
   height: 30px;
 }
-
-.filterAverageCheck__from,
-.filterAverageCheck__to {
+.filters .filterAverageCheck__from,
+.filters .filterAverageCheck__to {
   position: absolute;
   top: 50%;
 }
-
-.noUi-target {
+.filters .noUi-target {
   box-shadow: none;
   background: none;
   height: 0;
   top: 50%;
 }
-
-.noUi-handle {
+.filters .noUi-handle {
   top: -3px !important;
   right: -3px !important;
   width: 6px !important;
@@ -435,7 +457,7 @@ body {
   border-radius: 10px;
   box-shadow: none;
 }
-.noUi-handle::before {
+.filters .noUi-handle::before {
   top: -4px;
   left: -4px;
   width: 12px !important;
@@ -443,18 +465,25 @@ body {
   background: rgba(0, 0, 0, 0.5);
   border-radius: 20px;
 }
-.noUi-handle::after {
+.filters .noUi-handle::after {
   display: none;
 }
-.noUi-handle:focus {
+.filters .noUi-handle:focus {
   outline: none;
 }
-
-.noUi-connects,
-.noUi-connect,
-.noUi-pips,
-.noUi-marker {
+.filters .noUi-connects,
+.filters .noUi-connect,
+.filters .noUi-pips,
+.filters .noUi-marker {
   display: none;
+}
+
+.scrollable {
+  display: flex;
+  flex-direction: column;
+}
+.scrollable .listItem {
+  padding: 10px;
 }
 
 /*# sourceMappingURL=/root.f3bc3529.css.map */

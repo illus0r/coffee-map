@@ -5,7 +5,7 @@ const Search = ({onSearchTextChange}) => (
         <input
             type="text"
             className="form-control"
-            placeholder="Search..."
+            placeholder="Найти по названию или адресу"
             onChange={onSearchTextChange}
         />
     </div>

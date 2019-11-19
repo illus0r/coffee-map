@@ -9,7 +9,7 @@ const FilterEcoFriendly = ({isChecked, onToggle}) => (
 		)}
 		onClick={onToggle}
 	>
-		{'Эко'}
+		{'Эко 🌱'}
 	</div>
 );
 
