@@ -152,7 +152,7 @@ function makeGeoJSON(data) {
                 title: d['Наименование организации'],
                 description: d['Улица'] + ', ' + d['Номер дома'],
                 rating: rating,
-                color: (rating) ? x(rating) : 'gray',
+                color: (rating) ? getColorMagma(rating) : 'gray',
                 workTime: JSON.stringify(parseWorkTime(d['Время работы']))
             }
         }
