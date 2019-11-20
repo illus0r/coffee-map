@@ -96,6 +96,15 @@ class Map extends Component {
                     });
                     this.props.selectedPoint(currentFeature)
                 });
+
+                this.map.on('mouseover', 'locations', (e) => {
+                    if (e.features.length > 0) {
+                        this.props.onHighlightedCafeChange(e.features[0].properties.id)
+                    }
+                });
+                this.map.on('mouseleave', 'locations', () => {
+                    this.props.onHighlightedCafeChange(null);
+                });
             }
 
             if (geojsonConturs) {

@@ -125,6 +125,7 @@ class MapContainer extends Component {
                      filteredItemsList={this.state.filteredItems}
                      zoomValue={this.zoomValueHandler}
                      updateBounds={this.onBoundsUpdate}
+                     onHighlightedCafeChange={this.onHighlightedCafeChange}
                 />
 
                 <ConnectingLineLayer

@@ -66812,6 +66812,14 @@ class Map extends _react.Component {
             });
             this.props.selectedPoint(currentFeature);
           });
+          this.map.on('mouseover', 'locations', e => {
+            if (e.features.length > 0) {
+              this.props.onHighlightedCafeChange(e.features[0].properties.id);
+            }
+          });
+          this.map.on('mouseleave', 'locations', () => {
+            this.props.onHighlightedCafeChange(null);
+          });
         }
 
         if (geojsonConturs) {
@@ -89412,7 +89420,8 @@ class MapContainer extends _react.Component {
       clearActiveItem: this.clearActiveItemHandler,
       filteredItemsList: this.state.filteredItems,
       zoomValue: this.zoomValueHandler,
-      updateBounds: this.onBoundsUpdate
+      updateBounds: this.onBoundsUpdate,
+      onHighlightedCafeChange: this.onHighlightedCafeChange
     }), _react.default.createElement(_ConnectingLineLayer.default, {
       mapBounds: this.state.mapBounds,
       highlightedItemId: this.state.highlightedItemId,
@@ -89553,7 +89562,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63001" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53919" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
