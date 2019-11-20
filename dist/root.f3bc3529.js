@@ -66770,10 +66770,10 @@ class Map extends _react.Component {
                   'stops': [[12, 3], [14, 6]]
                 },
                 'circle-color': ['get', 'color'],
-                "circle-opacity": 1,
-                "circle-stroke-width": 0,
-                "circle-stroke-color": "#00bf7c",
-                "circle-stroke-opacity": 1
+                'circle-opacity': 1,
+                'circle-stroke-width': 0,
+                'circle-stroke-color': '#00bf7c',
+                'circle-stroke-opacity': 1
               }
             });
             this.map.addLayer({
@@ -66783,24 +66783,15 @@ class Map extends _react.Component {
               layout: {
                 'icon-image': 'none',
                 'text-field': ['get', 'title'],
-                'text-font': ["Open Sans Semibold", "Arial Unicode MS Bold"],
+                'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
                 'text-offset': [0, 0.6],
                 'text-anchor': 'top',
-                "text-size": {
-                  "stops": [[0, 0], [14, 0], [14.1, 16], [15, 20]]
+                'text-size': {
+                  'stops': [[0, 0], [14, 0], [14.1, 16], [15, 20]]
                 },
                 'icon-allow-overlap': true,
                 'text-allow-overlap': false,
                 'visibility': 'visible'
-              }
-            }); //faked layer without filtering
-
-            this.map.addLayer({
-              id: 'locationsFake',
-              type: 'circle',
-              source: geojsonPoints,
-              paint: {
-                'circle-radius': 0
               }
             });
           });
@@ -66856,14 +66847,6 @@ class Map extends _react.Component {
         this.map.on('moveend', () => {
           this.props.zoomValue(this.map.getZoom());
           this.props.updateBounds(this.map.getBounds());
-          const features = this.map.queryRenderedFeatures({
-            layers: ['locationsFake']
-          });
-
-          if (features) {
-            //var uniqueFeatures = getUniqueFeatures(features, "iata_code");
-            this.props.visiblePoints(features);
-          }
         });
       }
 
@@ -88969,28 +88952,20 @@ class List extends _react.Component {
     });
   }
 
-  componentDidUpdate(prevProps, prevState, snapshot) {
-    if (!_lodash.default.isEqual(this.props.visiblePoints, prevProps.visiblePoints)) {
+  componentDidUpdate(prevProps) {
+    if (!_lodash.default.isEqual(this.props.mapBounds, prevProps.mapBounds) || !prevProps.rawPoints && this.props.rawPoints) {
       this.updateLinesOfList();
     } else 'nothing to update';
   }
 
   getLinesOfList() {
-    let linesOfList = this.props.visiblePoints;
+    const {
+      rawPoints,
+      mapBounds
+    } = this.props;
+    const sw = mapBounds.getSouthWest();
+    const ne = mapBounds.getNorthEast();
     const searchedText = this.state.searchText.toLowerCase();
-
-    if (searchedText != null && linesOfList) {
-      linesOfList = linesOfList.filter(cafe => {
-        if (cafe) {
-          const cafeName = cafe.properties.title.toLowerCase();
-          const cafeDesc = cafe.properties.description.toLowerCase();
-          return cafeName.includes(searchedText) || cafeDesc.includes(searchedText);
-        }
-      });
-    }
-
-    if (!linesOfList) linesOfList = [];
-    linesOfList = linesOfList.sort((a, b) => b.properties.rating - a.properties.rating);
     const {
       isEcoChecked,
       isOpenNowChecked,
@@ -88999,16 +88974,45 @@ class List extends _react.Component {
     const today = new Date();
     const weekDay = today.getDay();
     const currentTimeStr = "".concat(today.getHours(), ":").concat(today.getMinutes());
-    return linesOfList.filter(item => {
-      const workTime = JSON.parse(item.properties.workTime);
-      const workingPeriods = workTime[weekDay - 1];
-      const isWorkingNowCheck = !isOpenNowChecked || workingPeriods.some((_ref3) => {
-        let [from, to] = _ref3;
-        return to < from && currentTimeStr <= to || from <= currentTimeStr && currentTimeStr <= to;
-      }); // + проверка на эко-френдли и цену
+    return (rawPoints && rawPoints.data && rawPoints.data.features || []).filter((_ref3) => {
+      let {
+        geometry,
+        properties
+      } = _ref3;
+      // Фильтруем по видимой области
+      const [lng, lat] = geometry.coordinates;
 
-      return isWorkingNowCheck;
-    });
+      if (!(sw.lng < lng && lng < ne.lng && sw.lat < lat && lat < ne.lat)) {
+        return false;
+      } // Потом по тексту, если что-то введено в поиск
+
+
+      if (searchedText) {
+        const cafeName = properties.title.toLowerCase();
+        const cafeDesc = properties.description.toLowerCase();
+
+        if (!cafeName.includes(searchedText) && !cafeDesc.includes(searchedText)) {
+          return false;
+        }
+      } // Потом по фильтру 'Открыто сейчас'
+
+
+      if (isOpenNowChecked) {
+        const workTime = properties.workTime;
+        const workingPeriods = workTime[weekDay - 1];
+        const isWorkingNow = workingPeriods.some((_ref4) => {
+          let [from, to] = _ref4;
+          return to < from && currentTimeStr <= to || from <= currentTimeStr && currentTimeStr <= to;
+        });
+
+        if (!isWorkingNow) {
+          return false;
+        }
+      } // + должна быть проверка на эко-френдли и цену
+
+
+      return true;
+    }).sort((a, b) => b.properties.rating - a.properties.rating);
   }
 
   updateLinesOfList() {
@@ -89016,7 +89020,7 @@ class List extends _react.Component {
     this.setState({
       linesOfList
     });
-    this.props.filteredItems(linesOfList);
+    this.props.onFilteredItemsChange(linesOfList);
   }
 
   /*
@@ -89310,17 +89314,10 @@ class MapContainer extends _react.Component {
       activeItem: null,
       currentItem: null,
       highlightedItemId: null,
-      visiblePoints: null,
       filteredItemsList: [],
       rawData: [],
       zoomValue: 9,
       mapBounds: null
-    });
-
-    _defineProperty(this, "visiblePointsHandler", value => {
-      this.setState({
-        visiblePoints: value
-      });
     });
 
     _defineProperty(this, "selectedPointHandler", value => {
@@ -89390,7 +89387,6 @@ class MapContainer extends _react.Component {
           rawData: data,
           points: geoJSON,
           conturs: geoMoscow,
-          visiblePoints: geoJSON.data.features,
           filteredItemsList: geoJSON.data.features
         });
       });
@@ -89403,18 +89399,18 @@ class MapContainer extends _react.Component {
       all: this.state.rawData,
       closeCard: () => this.handleClose()
     }) : null, this.state.zoomValue < 8 ? _react.default.createElement(_BarCharts.default, null) : null, _react.default.createElement(_List.default, {
-      visiblePoints: this.state.visiblePoints,
+      rawPoints: this.state.points,
       activeItem: this.activeItemHandler // to fly on map, it will be null after flight
       ,
       currentItem: this.currentItemHandler // to open card
       ,
-      filteredItems: this.filteredItemsHandler,
+      onFilteredItemsChange: this.filteredItemsHandler,
       filteredItemsList: this.state.filteredItems,
-      onHighlightedCafeChange: this.onHighlightedCafeChange
+      onHighlightedCafeChange: this.onHighlightedCafeChange,
+      mapBounds: this.state.mapBounds
     }), _react.default.createElement(_Map.default, {
       pointsData: this.state.points,
       contursData: this.state.conturs,
-      visiblePoints: this.visiblePointsHandler,
       activeItem: this.state.activeItem,
       selectedPoint: this.selectedPointHandler,
       clearActiveItem: this.clearActiveItemHandler,
@@ -89468,7 +89464,7 @@ function makeGeoJSON(data) {
         description: d['Улица'] + ', ' + d['Номер дома'],
         rating: rating,
         color: rating ? getColorMagma(rating) : 'gray',
-        workTime: JSON.stringify(parseWorkTime(d['Время работы']))
+        workTime: parseWorkTime(d['Время работы'])
       }
     };
   });
@@ -89562,7 +89558,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53919" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63877" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

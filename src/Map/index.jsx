@@ -21,7 +21,6 @@ class MapContainer extends Component {
         activeItem: null,
         currentItem: null,
         highlightedItemId: null,
-        visiblePoints: null,
         filteredItemsList: [],
         rawData:[],
         zoomValue: 9,
@@ -46,17 +45,12 @@ class MapContainer extends Component {
                     rawData: data,
                     points: geoJSON,
                     conturs: geoMoscow,
-                    visiblePoints: geoJSON.data.features,
                     filteredItemsList: geoJSON.data.features
                 })
             })
 
         });
     }
-
-    visiblePointsHandler = (value) => {
-        this.setState({visiblePoints: value})
-    };
 
     selectedPointHandler = (value) => {
         this.setState({currentItem: value})
@@ -108,17 +102,17 @@ class MapContainer extends Component {
                     <BarCharts
                     /> : null}
 
-                <List visiblePoints={this.state.visiblePoints}
+                <List rawPoints={this.state.points}
                       activeItem={this.activeItemHandler} // to fly on map, it will be null after flight
                       currentItem={this.currentItemHandler} // to open card
-                      filteredItems={this.filteredItemsHandler}
+                      onFilteredItemsChange={this.filteredItemsHandler}
                       filteredItemsList={this.state.filteredItems}
                       onHighlightedCafeChange={this.onHighlightedCafeChange}
+                      mapBounds={this.state.mapBounds}
                 />
 
                 <Map pointsData={this.state.points}
                      contursData={this.state.conturs}
-                     visiblePoints={this.visiblePointsHandler}
                      activeItem={this.state.activeItem}
                      selectedPoint={this.selectedPointHandler}
                      clearActiveItem={this.clearActiveItemHandler}
@@ -175,7 +169,7 @@ function makeGeoJSON(data) {
                 description: d['Улица'] + ', ' + d['Номер дома'],
                 rating: rating,
                 color: (rating) ? getColorMagma(rating) : 'gray',
-                workTime: JSON.stringify(parseWorkTime(d['Время работы']))
+                workTime: parseWorkTime(d['Время работы'])
             }
         }
         }

@@ -16,8 +16,11 @@ class List extends Component {
         clicked: false
     };
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        if (!lodash.isEqual(this.props.visiblePoints, prevProps.visiblePoints)) {
+    componentDidUpdate(prevProps) {
+        if (
+            !lodash.isEqual(this.props.mapBounds, prevProps.mapBounds) ||
+            !prevProps.rawPoints && this.props.rawPoints
+        ) {
             this.updateLinesOfList();
         }
         else('nothing to update')
@@ -25,39 +28,53 @@ class List extends Component {
     }
 
     getLinesOfList() {
-        let linesOfList = this.props.visiblePoints;
+        const {rawPoints, mapBounds} = this.props;
+        const sw = mapBounds.getSouthWest();
+        const ne = mapBounds.getNorthEast();
         const searchedText = this.state.searchText.toLowerCase();
-        if (searchedText != null && linesOfList){
-            linesOfList = linesOfList.filter(cafe => {
-                if (cafe) {
-                    const cafeName = cafe.properties.title.toLowerCase();
-                    const cafeDesc = cafe.properties.description.toLowerCase();
-                    return (cafeName.includes(searchedText) || cafeDesc.includes(searchedText))
-                }
-            })
-        }
-        if (!linesOfList) linesOfList = [];
-        linesOfList = linesOfList.sort((a,b) => b.properties.rating - a.properties.rating)
         const {isEcoChecked, isOpenNowChecked, averageCheckBounds} = this.state;
+
         const today = new Date();
         const weekDay = today.getDay();
         const currentTimeStr = `${today.getHours()}:${today.getMinutes()}`;
-        return linesOfList.filter((item) => {
-            const workTime = JSON.parse(item.properties.workTime);
-            const workingPeriods = workTime[weekDay - 1];
-            const isWorkingNowCheck = !isOpenNowChecked || workingPeriods.some(([from, to]) =>
-                to < from && currentTimeStr <= to ||
-                from <= currentTimeStr && currentTimeStr <= to
-            );
-            // + проверка на эко-френдли и цену
-            return isWorkingNowCheck;
-        })
+
+        return (rawPoints && rawPoints.data && rawPoints.data.features || [])
+            .filter(({geometry, properties}) => {
+                // Фильтруем по видимой области
+                const [lng, lat] = geometry.coordinates;
+                if (!(sw.lng < lng && lng < ne.lng && sw.lat < lat && lat < ne.lat)){
+                    return false;
+                }
+                // Потом по тексту, если что-то введено в поиск
+                if (searchedText) {
+                    const cafeName = properties.title.toLowerCase();
+                    const cafeDesc = properties.description.toLowerCase();
+                    if (!cafeName.includes(searchedText) && !cafeDesc.includes(searchedText)) {
+                        return false;
+                    }
+                }
+                // Потом по фильтру 'Открыто сейчас'
+                if (isOpenNowChecked) {
+                    const workTime = properties.workTime;
+                    const workingPeriods = workTime[weekDay - 1];
+                    const isWorkingNow = workingPeriods.some(([from, to]) =>
+                        to < from && currentTimeStr <= to ||
+                        from <= currentTimeStr && currentTimeStr <= to
+                    );
+                    if (!isWorkingNow) {
+                        return false;
+                    }
+                }
+                // + должна быть проверка на эко-френдли и цену
+                return true;
+            })
+            .sort((a,b) => b.properties.rating - a.properties.rating);
     }
 
     updateLinesOfList () {
         const linesOfList = this.getLinesOfList();
         this.setState({linesOfList});
-        this.props.filteredItems(linesOfList)
+        this.props.onFilteredItemsChange(linesOfList)
     }
 
     onSearchTextChange = (e) => {
@@ -94,7 +111,7 @@ class List extends Component {
         this.props.currentItem(number)
         //this.setState({clicked: true, activeItem: number});
         //this.onSearchTextChange(number.properties.title)
-    }
+    };
 /*
     handleClose = () => {
         this.setState({clicked: false});

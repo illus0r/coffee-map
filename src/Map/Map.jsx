@@ -48,10 +48,10 @@ class Map extends Component {
                                 'stops': [[12, 3], [14, 6]]
                             },
                             'circle-color':  ['get','color'],
-                            "circle-opacity": 1,
-                            "circle-stroke-width": 0,
-                            "circle-stroke-color": "#00bf7c",
-                            "circle-stroke-opacity": 1,
+                            'circle-opacity': 1,
+                            'circle-stroke-width': 0,
+                            'circle-stroke-color': '#00bf7c',
+                            'circle-stroke-opacity': 1,
                         },
                     });
                     this.map.addLayer({
@@ -61,11 +61,11 @@ class Map extends Component {
                         layout: {
                             'icon-image': 'none',
                             'text-field': ['get', 'title'],
-                            'text-font': ["Open Sans Semibold", "Arial Unicode MS Bold"],
+                            'text-font': ['Open Sans Semibold', 'Arial Unicode MS Bold'],
                             'text-offset': [0, 0.6],
                             'text-anchor': 'top',
-                            "text-size": {
-                                "stops": [
+                            'text-size': {
+                                'stops': [
                                     [0, 0],
                                     [14, 0],
                                     [14.1, 16],
@@ -75,15 +75,6 @@ class Map extends Component {
                             'icon-allow-overlap': true,
                             'text-allow-overlap': false,
                             'visibility': 'visible'
-                        }
-                    });
-                    //faked layer without filtering
-                    this.map.addLayer({
-                        id: 'locationsFake',
-                        type: 'circle',
-                        source: geojsonPoints,
-                        paint: {
-                            'circle-radius': 0,
                         }
                     });
                 });
@@ -142,11 +133,6 @@ class Map extends Component {
             this.map.on('moveend', () => {
                 this.props.zoomValue(this.map.getZoom());
                 this.props.updateBounds(this.map.getBounds());
-                const features = this.map.queryRenderedFeatures({layers: ['locationsFake']});
-                if (features) {
-                    //var uniqueFeatures = getUniqueFeatures(features, "iata_code");
-                    this.props.visiblePoints(features)
-                }
             });
 
         }
@@ -157,8 +143,8 @@ class Map extends Component {
                 const filterIds = filterNames.map(el => el.properties.id);
 
                 const filter = ['match', ['get', 'id'], filterIds, true, false];
-                this.map.setFilter('locations', filter)
-                this.map.setFilter('locations-text', filter)
+                this.map.setFilter('locations', filter);
+                this.map.setFilter('locations-text', filter);
             }
         }
 
@@ -182,7 +168,7 @@ class Map extends Component {
     }
 
     render() {
-        return (<div id="map"/>)
+        return (<div id='map'/>)
     }
 }
 
