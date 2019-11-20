@@ -37,7 +37,7 @@ class List extends Component {
             })
         }
         if (!linesOfList) linesOfList = [];
-
+        linesOfList = linesOfList.sort((a,b) => b.properties.rating - a.properties.rating)
         const {isEcoChecked, isOpenNowChecked, averageCheckBounds} = this.state;
         const today = new Date();
         const weekDay = today.getDay();
@@ -116,7 +116,7 @@ class List extends Component {
                     '1':
                     <div className={'sidebar'}>
                         <Search onSearchTextChange={this.onSearchTextChange}/>
-                        <div class={'filters'}>
+                        <div className={'filters'}>
                         <FilterEcoFriendly
                             isChecked={isEcoChecked}
                             onToggle={this.onEcoFilterToggle}

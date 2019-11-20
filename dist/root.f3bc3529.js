@@ -66860,10 +66860,13 @@ class Map extends _react.Component {
 
     if (this.map.getLayer('locations')) {
       const filterNames = this.props.filteredItemsList;
-      const filterIds = filterNames.map(el => el.properties.id);
-      const filter = ['match', ['get', 'id'], filterIds, true, false];
-      this.map.setFilter('locations', filter);
-      this.map.setFilter('locations-text', filter);
+
+      if (filterNames.length > 1) {
+        const filterIds = filterNames.map(el => el.properties.id);
+        const filter = ['match', ['get', 'id'], filterIds, true, false];
+        this.map.setFilter('locations', filter);
+        this.map.setFilter('locations-text', filter);
+      }
     }
 
     if (this.props.activeItem) {
@@ -88979,6 +88982,7 @@ class List extends _react.Component {
     }
 
     if (!linesOfList) linesOfList = [];
+    linesOfList = linesOfList.sort((a, b) => b.properties.rating - a.properties.rating);
     const {
       isEcoChecked,
       isOpenNowChecked,
@@ -89026,7 +89030,7 @@ class List extends _react.Component {
     }, _react.default.createElement(_Search.default, {
       onSearchTextChange: this.onSearchTextChange
     }), _react.default.createElement("div", {
-      class: 'filters'
+      className: 'filters'
     }, _react.default.createElement(_FilterEcoFriendly.default, {
       isChecked: isEcoChecked,
       onToggle: this.onEcoFilterToggle
@@ -89417,7 +89421,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "40758" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49619" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

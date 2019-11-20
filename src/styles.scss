@@ -8,6 +8,18 @@ body {
     padding:0;
     font-family:Arial;
 }
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: #3b383a;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+}
 .wrapper{
     display: flex;
     min-height: 100vh;
