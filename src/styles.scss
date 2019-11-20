@@ -95,6 +95,18 @@ body {
         float: right;
         color:coral;
     }
+    .cafeCard--header{
+        font-weight: 800;
+        font-size: 20px;
+        line-height: 110%;
+        margin-bottom: 6px;
+    }
+    .cafeCard--closeBtn{
+        position: absolute;
+        right: 16px;
+        top: 16px;
+        cursor: pointer;
+    }
 }
 
 #cafeList{

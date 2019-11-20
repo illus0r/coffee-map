@@ -89057,6 +89057,8 @@ exports.default = _default;
 module.exports = "/data_test.b42f3e45.csv";
 },{}],"data/mo.geojson":[function(require,module,exports) {
 module.exports = "/mo.43572431.geojson";
+},{}],"img/close.svg":[function(require,module,exports) {
+module.exports = "/close.24fb46be.svg";
 },{}],"CafeCard.jsx":[function(require,module,exports) {
 "use strict";
 
@@ -89068,6 +89070,8 @@ exports.default = void 0;
 var _react = _interopRequireWildcard(require("react"));
 
 var _reactDom = _interopRequireDefault(require("react-dom"));
+
+var _close = _interopRequireDefault(require("./img/close.svg"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -89099,17 +89103,23 @@ class CafeCard extends _react.Component {
     const info = this.state.info;
     return _reactDom.default.createPortal(_react.default.createElement("div", {
       className: "cafeCard"
-    }, "Cafe Card", _react.default.createElement("a", {
-      onClick: this.handleClose,
-      className: 'closeBtn'
-    }, " Close "), _react.default.createElement("br", null), this.props.target.properties.title, this.props.target.properties.description, _react.default.createElement("div", null, info['FlampRating'])), document.getElementById('cafeCard'));
+    }, _react.default.createElement("div", {
+      className: "cafeCard--header"
+    }, this.props.target.properties.title), _react.default.createElement("div", {
+      className: "cafeCard--closeBtn",
+      onClick: this.handleClose
+    }, _react.default.createElement("img", {
+      src: _close.default,
+      width: "19",
+      height: "18"
+    })), this.props.target.properties.description, _react.default.createElement("div", null, info['FlampRating'])), document.getElementById('cafeCard'));
   }
 
 }
 
 var _default = CafeCard;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js"}],"BarCharts.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./img/close.svg":"img/close.svg"}],"BarCharts.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -89421,7 +89431,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49619" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3042" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
