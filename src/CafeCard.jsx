@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ReactDOM from "react-dom";
+import closeBtn from './img/close.svg'
 
 class CafeCard extends Component {
     constructor(props) {
@@ -20,9 +21,10 @@ class CafeCard extends Component {
         const info = this.state.info
         return ReactDOM.createPortal(
             <div className="cafeCard">
-                Cafe Card
-                <a onClick = {this.handleClose} className={'closeBtn'}> Close </a><br />
-                {this.props.target.properties.title}
+                <div className='cafeCard--header'>{this.props.target.properties.title}</div>
+                <div className='cafeCard--closeBtn' onClick = {this.handleClose}><img src={closeBtn} width="19" height="18" /></div>
+
+
                 {this.props.target.properties.description}
                 <div>{info['FlampRating']}</div>
             </div>,

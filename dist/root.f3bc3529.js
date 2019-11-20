@@ -66746,7 +66746,7 @@ class Map extends _react.Component {
     this.translate(map);
     this.map = map;
     this.zoomThreshold = 11;
-    this.props.updateBounds(this.map.getBounds());
+    console.log(this.props);
   }
 
   componentDidUpdate(prevProps) {
@@ -66847,7 +66847,6 @@ class Map extends _react.Component {
         createCafePopUp(this.map);
         this.map.on('moveend', () => {
           this.props.zoomValue(this.map.getZoom());
-          this.props.updateBounds(this.map.getBounds());
           const features = this.map.queryRenderedFeatures({
             layers: ['locationsFake']
           });
@@ -66861,9 +66860,13 @@ class Map extends _react.Component {
 
     if (this.map.getLayer('locations')) {
       const filterNames = this.props.filteredItemsList;
-      const filterIds = filterNames.map(el => el.properties.id);
-      const filter = ['match', ['get', 'id'], filterIds, true, false]; // this.map.setFilter('locations', filter)
-      // this.map.setFilter('locations-text', filter)
+
+      if (filterNames.length > 1) {
+        const filterIds = filterNames.map(el => el.properties.id);
+        const filter = ['match', ['get', 'id'], filterIds, true, false];
+        this.map.setFilter('locations', filter);
+        this.map.setFilter('locations-text', filter);
+      }
     }
 
     if (this.props.activeItem) {
@@ -88917,6 +88920,7 @@ class List extends _react.Component {
 
     _defineProperty(this, "onSearchTextChange", e => {
       const searchText = e.target.value;
+      console.log(searchText);
       this.setState({
         searchText
       }, this.updateLinesOfList);
@@ -88978,6 +88982,7 @@ class List extends _react.Component {
     }
 
     if (!linesOfList) linesOfList = [];
+    linesOfList = linesOfList.sort((a, b) => b.properties.rating - a.properties.rating);
     const {
       isEcoChecked,
       isOpenNowChecked,
@@ -89040,10 +89045,7 @@ class List extends _react.Component {
       },
       className: 'listItem',
       key: i,
-      id: "cafeListItem_".concat(number.properties.id),
-      onClick: () => this.handleClick(number),
-      onMouseOver: () => this.props.onHighlightedCafeChange(number.properties.id),
-      onMouseLeave: () => this.props.onHighlightedCafeChange(null)
+      onClick: () => this.handleClick(number)
     }, number.properties.title))))), document.getElementById('cafeList'));
   }
 
@@ -89055,6 +89057,8 @@ exports.default = _default;
 module.exports = "/data_test.b42f3e45.csv";
 },{}],"data/mo.geojson":[function(require,module,exports) {
 module.exports = "/mo.43572431.geojson";
+},{}],"img/close.svg":[function(require,module,exports) {
+module.exports = "/close.24fb46be.svg";
 },{}],"CafeCard.jsx":[function(require,module,exports) {
 "use strict";
 
@@ -89066,6 +89070,8 @@ exports.default = void 0;
 var _react = _interopRequireWildcard(require("react"));
 
 var _reactDom = _interopRequireDefault(require("react-dom"));
+
+var _close = _interopRequireDefault(require("./img/close.svg"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -89097,17 +89103,23 @@ class CafeCard extends _react.Component {
     const info = this.state.info;
     return _reactDom.default.createPortal(_react.default.createElement("div", {
       className: "cafeCard"
-    }, "Cafe Card", _react.default.createElement("a", {
-      onClick: this.handleClose,
-      className: 'closeBtn'
-    }, " Close "), _react.default.createElement("br", null), this.props.target.properties.title, this.props.target.properties.description, _react.default.createElement("div", null, info['FlampRating'])), document.getElementById('cafeCard'));
+    }, _react.default.createElement("div", {
+      className: "cafeCard--header"
+    }, this.props.target.properties.title), _react.default.createElement("div", {
+      className: "cafeCard--closeBtn",
+      onClick: this.handleClose
+    }, _react.default.createElement("img", {
+      src: _close.default,
+      width: "19",
+      height: "18"
+    })), this.props.target.properties.description, _react.default.createElement("div", null, info['FlampRating'])), document.getElementById('cafeCard'));
   }
 
 }
 
 var _default = CafeCard;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js"}],"BarCharts.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js","./img/close.svg":"img/close.svg"}],"BarCharts.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -89136,104 +89148,7 @@ class BarCharts extends _react.Component {
 
 var _default = BarCharts;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js"}],"ConnectingLineLayer.jsx":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.default = void 0;
-
-var _react = _interopRequireWildcard(require("react"));
-
-function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
-
-function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-class ConnectingLineLayer extends _react.Component {
-  constructor() {
-    super(...arguments);
-
-    _defineProperty(this, "state", {
-      x1: 0,
-      y1: 0,
-      x2: 0,
-      y2: 0
-    });
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.highlightedItemId !== this.props.highlightedItemId) {
-      this.calculateCoordinates();
-    }
-  }
-
-  calculateCoordinates() {
-    const {
-      filteredItemsList,
-      highlightedItemId,
-      mapBounds
-    } = this.props;
-
-    if (highlightedItemId === null) {
-      this.setState({
-        x1: 0,
-        y1: 0,
-        x2: 0,
-        y2: 0
-      });
-      return;
-    }
-
-    const pointData = filteredItemsList.find(item => item.properties.id === highlightedItemId);
-    const coordinates = pointData.geometry.coordinates;
-    const [pointLng, pointLat] = coordinates;
-    console.log(coordinates, mapBounds);
-    const sw = mapBounds.getSouthWest();
-    const ne = mapBounds.getNorthEast();
-    const nw = mapBounds.getNorthWest();
-    const mapWidthInLng = ne.lng - sw.lng;
-    const mapHeightInLat = ne.lat - sw.lat;
-    const mapBBox = document.getElementById('map').getBoundingClientRect();
-    const listItemBBox = document.getElementById("cafeListItem_".concat(pointData.properties.id)).getBoundingClientRect();
-    const xPosition = (pointLng - nw.lng) / mapWidthInLng * mapBBox.width;
-    const yPosition = (nw.lat - pointLat) / mapHeightInLat * mapBBox.height;
-    console.log(mapBBox, listItemBBox);
-    this.setState({
-      x1: xPosition + mapBBox.x,
-      y1: yPosition + mapBBox.y,
-      x2: listItemBBox.x + listItemBBox.width - 5,
-      y2: listItemBBox.y + listItemBBox.height / 2
-    });
-  }
-
-  render() {
-    const {
-      x1,
-      x2,
-      y1,
-      y2
-    } = this.state;
-    return _react.default.createElement("svg", {
-      className: "connectingLineLayerSvg"
-    }, _react.default.createElement("line", {
-      color: "red",
-      stroke: "red",
-      strokeWidth: "2",
-      x1: x1,
-      y1: y1,
-      x2: x2,
-      y2: y2
-    }));
-  }
-
-}
-
-var _default = ConnectingLineLayer;
-exports.default = _default;
-},{"react":"../node_modules/react/index.js"}],"Map/index.jsx":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","react-dom":"../node_modules/react-dom/index.js"}],"Map/index.jsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -89265,8 +89180,6 @@ var _CafeCard = _interopRequireDefault(require("../CafeCard"));
 
 var _BarCharts = _interopRequireDefault(require("../BarCharts"));
 
-var _ConnectingLineLayer = _interopRequireDefault(require("../ConnectingLineLayer"));
-
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function () { return cache; }; return cache; }
@@ -89286,12 +89199,10 @@ class MapContainer extends _react.Component {
       conturs: null,
       activeItem: null,
       currentItem: null,
-      highlightedItemId: null,
       visiblePoints: null,
       filteredItemsList: [],
       rawData: [],
-      zoomValue: 9,
-      mapBounds: null
+      zoomValue: 9
     });
 
     _defineProperty(this, "visiblePointsHandler", value => {
@@ -89341,18 +89252,6 @@ class MapContainer extends _react.Component {
         zoomValue: value
       });
     });
-
-    _defineProperty(this, "onHighlightedCafeChange", highlightedItemId => {
-      this.setState({
-        highlightedItemId
-      });
-    });
-
-    _defineProperty(this, "onBoundsUpdate", mapBounds => {
-      this.setState({
-        mapBounds
-      });
-    });
   }
 
   componentDidMount() {
@@ -89386,8 +89285,7 @@ class MapContainer extends _react.Component {
       currentItem: this.currentItemHandler // to open card
       ,
       filteredItems: this.filteredItemsHandler,
-      filteredItemsList: this.state.filteredItems,
-      onHighlightedCafeChange: this.onHighlightedCafeChange
+      filteredItemsList: this.state.filteredItems
     }), _react.default.createElement(_Map.default, {
       pointsData: this.state.points,
       contursData: this.state.conturs,
@@ -89396,12 +89294,7 @@ class MapContainer extends _react.Component {
       selectedPoint: this.selectedPointHandler,
       clearActiveItem: this.clearActiveItemHandler,
       filteredItemsList: this.state.filteredItems,
-      zoomValue: this.zoomValueHandler,
-      updateBounds: this.onBoundsUpdate
-    }), _react.default.createElement(_ConnectingLineLayer.default, {
-      mapBounds: this.state.mapBounds,
-      highlightedItemId: this.state.highlightedItemId,
-      filteredItemsList: this.state.filteredItems
+      zoomValue: this.zoomValueHandler
     }));
   }
 
@@ -89468,7 +89361,7 @@ function addValues(data, rating) {
 
 var _default = MapContainer;
 exports.default = _default;
-},{"react":"../node_modules/react/index.js","d3-fetch":"../node_modules/d3-fetch/src/index.js","d3-scale-chromatic":"../node_modules/d3-scale-chromatic/src/index.js","d3-scale":"../node_modules/d3-scale/src/index.js","d3-array":"../node_modules/d3-array/src/index.js","d3-collection":"../node_modules/d3-collection/src/index.js","./Map":"Map/Map.jsx","../List":"List.jsx","../data/data_test.csv":"data/data_test.csv","../data/mo.geojson":"data/mo.geojson","../CafeCard":"CafeCard.jsx","../BarCharts":"BarCharts.jsx","../ConnectingLineLayer":"ConnectingLineLayer.jsx"}],"styles.scss":[function(require,module,exports) {
+},{"react":"../node_modules/react/index.js","d3-fetch":"../node_modules/d3-fetch/src/index.js","d3-scale-chromatic":"../node_modules/d3-scale-chromatic/src/index.js","d3-scale":"../node_modules/d3-scale/src/index.js","d3-array":"../node_modules/d3-array/src/index.js","d3-collection":"../node_modules/d3-collection/src/index.js","./Map":"Map/Map.jsx","../List":"List.jsx","../data/data_test.csv":"data/data_test.csv","../data/mo.geojson":"data/mo.geojson","../CafeCard":"CafeCard.jsx","../BarCharts":"BarCharts.jsx"}],"styles.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -89538,7 +89431,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64040" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "3042" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

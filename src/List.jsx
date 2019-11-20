@@ -37,7 +37,7 @@ class List extends Component {
             })
         }
         if (!linesOfList) linesOfList = [];
-
+        linesOfList = linesOfList.sort((a,b) => b.properties.rating - a.properties.rating)
         const {isEcoChecked, isOpenNowChecked, averageCheckBounds} = this.state;
         const today = new Date();
         const weekDay = today.getDay();

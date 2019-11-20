@@ -144,11 +144,13 @@ class Map extends Component {
 
         if (this.map.getLayer('locations')) {
             const filterNames = this.props.filteredItemsList;
-            const filterIds = filterNames.map(el => el.properties.id);
+            if (filterNames.length>1) {
+                const filterIds = filterNames.map(el => el.properties.id);
 
-            const filter = ['match', ['get', 'id'], filterIds, true, false];
-            // this.map.setFilter('locations', filter)
-            // this.map.setFilter('locations-text', filter)
+                const filter = ['match', ['get', 'id'], filterIds, true, false];
+                this.map.setFilter('locations', filter)
+                this.map.setFilter('locations-text', filter)
+            }
         }
 
         if (this.props.activeItem) {
