@@ -62,7 +62,6 @@ class List extends Component {
 
     onSearchTextChange = (e) => {
         const searchText = e.target.value;
-        console.log(searchText)
         this.setState(
             {searchText},
             this.updateLinesOfList
@@ -116,7 +115,7 @@ class List extends Component {
                     '1':
                     <div className={'sidebar'}>
                         <Search onSearchTextChange={this.onSearchTextChange}/>
-                        <div class={'filters'}>
+                        <div className={'filters'}>
                         <FilterEcoFriendly
                             isChecked={isEcoChecked}
                             onToggle={this.onEcoFilterToggle}
@@ -136,7 +135,10 @@ class List extends Component {
                                     style={{color : number.properties.color}}
                                     className={'listItem'}
                                     key={i}
+                                    id={`cafeListItem_${number.properties.id}`}
                                     onClick={() => this.handleClick(number) }
+                                    onMouseOver={() => this.props.onHighlightedCafeChange(number.properties.id)}
+                                    onMouseLeave={() => this.props.onHighlightedCafeChange(null)}
                                 >
                                     {number.properties.title}
                                 </li>

@@ -21,7 +21,7 @@ class Map extends Component {
         this.translate(map);
         this.map = map;
         this.zoomThreshold = 11;
-        console.log(this.props)
+        this.props.updateBounds(this.map.getBounds());
     }
 
     componentDidUpdate(prevProps) {
@@ -131,7 +131,8 @@ class Map extends Component {
             createCafePopUp(this.map);
 
             this.map.on('moveend', () => {
-                this.props.zoomValue(this.map.getZoom())
+                this.props.zoomValue(this.map.getZoom());
+                this.props.updateBounds(this.map.getBounds());
                 const features = this.map.queryRenderedFeatures({layers: ['locationsFake']});
                 if (features) {
                     //var uniqueFeatures = getUniqueFeatures(features, "iata_code");
@@ -146,8 +147,8 @@ class Map extends Component {
             const filterIds = filterNames.map(el => el.properties.id);
 
             const filter = ['match', ['get', 'id'], filterIds, true, false];
-            this.map.setFilter('locations', filter)
-            this.map.setFilter('locations-text', filter)
+            // this.map.setFilter('locations', filter)
+            // this.map.setFilter('locations-text', filter)
         }
 
         if (this.props.activeItem) {

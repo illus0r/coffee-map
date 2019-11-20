@@ -486,4 +486,13 @@ body {
   padding: 10px;
 }
 
+.connectingLineLayerSvg {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+}
+
 /*# sourceMappingURL=/root.f3bc3529.css.map */
