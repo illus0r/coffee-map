@@ -5,7 +5,8 @@ class ConnectingLineLayer extends Component {
 		x1: 0,
 		y1: 0,
 		x2: 0,
-		y2: 0
+		y2: 0,
+		color: ''
 	};
 
 	componentDidUpdate (prevProps) {
@@ -29,7 +30,6 @@ class ConnectingLineLayer extends Component {
 			(item) => item.properties.id === highlightedItemId);
 		const coordinates = pointData.geometry.coordinates;
 		const [pointLng, pointLat] = coordinates;
-		console.log(coordinates, mapBounds);
 		const sw = mapBounds.getSouthWest();
 		const ne = mapBounds.getNorthEast();
 		const nw = mapBounds.getNorthWest();
@@ -39,23 +39,22 @@ class ConnectingLineLayer extends Component {
 		const listItemBBox = document.getElementById(`cafeListItem_${pointData.properties.id}`).getBoundingClientRect();
 		const xPosition = (pointLng - nw.lng) / mapWidthInLng * mapBBox.width;
 		const yPosition = (nw.lat - pointLat) / mapHeightInLat * mapBBox.height;
-		console.log(mapBBox, listItemBBox);
 		this.setState({
 			x1: xPosition + mapBBox.x,
 			y1: yPosition + mapBBox.y,
 			x2: listItemBBox.x + listItemBBox.width - 5,
-			y2: listItemBBox.y + listItemBBox.height / 2
+			y2: listItemBBox.y + listItemBBox.height / 2,
+			color: pointData.properties.color
 		})
 	}
 
 	render () {
-		const {x1, x2, y1, y2} = this.state;
+		const {x1, x2, y1, y2, color} = this.state;
 		return (
 			<svg className="connectingLineLayerSvg">
 				<line
-					color="red"
-					stroke="red"
-					strokeWidth="2"
+					stroke={color}
+					strokeWidth="0.5"
 					x1={x1}
 					y1={y1}
 					x2={x2}
